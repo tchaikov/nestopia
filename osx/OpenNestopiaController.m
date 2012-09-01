@@ -1,8 +1,6 @@
 #import "OpenNestopiaController.h"
 #import "OpenNestopiaPreferences.h"
-#import <MTCoreAudio/MTCoreAudio.h>
 
-MTCoreAudioDevice * globalDevice;
 
 
 @implementation OpenNestopiaController
@@ -19,80 +17,73 @@ MTCoreAudioDevice * globalDevice;
 
 - (IBAction)applyCheats:(id)sender
 {
-	int i;
 	NSArray* codes = [gameSharkCode cells];
 
-	for(i = 0; i < [codes count]; i ++)
-	{
-		[nestopiaView setCode:[[codes objectAtIndex:i] stringValue]];
+	for(int i = 0; i < [codes count]; i ++) {
+        //
 	}
-	//[codes release];
 }
 
 -(IBAction)buttonChanged:(id)sender
 {
-	int row;
-	int i;
+	NSInteger row;
 	
 	[sender getNumberOfRows:&row columns:nil];
 	
-	for(i = 0;i<row;i++)
-	{
+	for (NSInteger i = 0; i<row; i++) {
 		[sender cellAtRow:i column:1];
-		NSPopUpButtonCell* temp = [sender cellAtRow:i column:1];
-		[nestopiaView setDipValuesForDip:i value:[temp indexOfSelectedItem]];
+		// NSPopUpButtonCell* temp = [sender cellAtRow:i column:1];
+        // 
 	}
 }
 
 -(IBAction)testDips:(id)sender
 {	
-	if([nestopiaView numOfDips]>0)
-	{
-		NSTextFieldCell* tempCell;
-		NSPopUpButtonCell* popupCell;
-		NSArray* test;
-		
-		int i;
-		int numOfRows = [dipSwitchLabels numberOfRows];
-		for(i = 0;i<numOfRows;i++)
-		{
-			[dipSwitchLabels removeRow:0];
-		}
-		
-		for(i = 0;i<[nestopiaView numOfDips];i++)
-		{
-			tempCell = [[NSTextFieldCell alloc] initTextCell: [nestopiaView getDipName:i]];
-			//[tempStr release];
-			popupCell = [[NSPopUpButtonCell alloc] init];
-			[popupCell setPullsDown:false];
-			[popupCell setTarget:self];
-			[popupCell setAction:@selector(buttonChanged:)];
-		
-			[popupCell  addItemsWithTitles:[nestopiaView getDipValues:i]];
-			[popupCell selectItemAtIndex:[nestopiaView getSelectedValue:i]];
-			[popupCell setEnabled:YES];	
-			
-			test = [NSArray arrayWithObjects:tempCell,popupCell, nil];
-			[dipSwitchLabels addRowWithCells:test];
-			[tempCell release];
-			[popupCell release];
-		}
-		
-		[dipSwitchLabels sizeToCells];
-		[dipSwitchLabels sizeToFit];
-		NSRect labelFrame = [dipSwitchLabels frame];
-		[dipSwitchPanel setContentSize:NSMakeSize(labelFrame.size.width+40,labelFrame.size.height+40)];
-		[dipSwitchLabels setFrameOrigin:NSMakePoint(20,20)];
-		[dipSwitchPanel makeKeyAndOrderFront:nil];
-	}
-	else
-	{
-		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-		[alert addButtonWithTitle:@"Ok"];
-		[alert setMessageText:@"This game does not have any DIP switches."];
-		[alert setAlertStyle:NSWarningAlertStyle];
-		[alert beginSheetModalForWindow:mainWindow modalDelegate:nil didEndSelector:nil contextInfo:nil];
-	}
+//	if([nestopiaView numOfDips]>0)
+//	{
+//		NSTextFieldCell* tempCell;
+//		NSPopUpButtonCell* popupCell;
+//		NSArray* test;
+//		
+//		int i;
+//		int numOfRows = [dipSwitchLabels numberOfRows];
+//		for(i = 0;i<numOfRows;i++)
+//		{
+//			[dipSwitchLabels removeRow:0];
+//		}
+//		
+//		for(i = 0;i<[nestopiaView numOfDips];i++)
+//		{
+//			tempCell = [[NSTextFieldCell alloc] initTextCell: [nestopiaView getDipName:i]];
+//			//[tempStr release];
+//			popupCell = [[NSPopUpButtonCell alloc] init];
+//			[popupCell setPullsDown:false];
+//			[popupCell setTarget:self];
+//			[popupCell setAction:@selector(buttonChanged:)];
+//		
+//			[popupCell  addItemsWithTitles:[nestopiaView getDipValues:i]];
+//			[popupCell selectItemAtIndex:[nestopiaView getSelectedValue:i]];
+//			[popupCell setEnabled:YES];	
+//			
+//			test = [NSArray arrayWithObjects:tempCell,popupCell, nil];
+//			[dipSwitchLabels addRowWithCells:test];
+//		}
+//		
+//		[dipSwitchLabels sizeToCells];
+//		[dipSwitchLabels sizeToFit];
+//		NSRect labelFrame = [dipSwitchLabels frame];
+//		[dipSwitchPanel setContentSize:NSMakeSize(labelFrame.size.width+40,labelFrame.size.height+40)];
+//		[dipSwitchLabels setFrameOrigin:NSMakePoint(20,20)];
+//		[dipSwitchPanel makeKeyAndOrderFront:nil];
+//	}
+//	else
+//	{
+//		NSAlert *alert = [[NSAlert alloc] init];
+//		[alert addButtonWithTitle:@"Ok"];
+//		[alert setMessageText:@"This game does not have any DIP switches."];
+//		[alert setAlertStyle:NSWarningAlertStyle];
+//		[alert beginSheetModalForWindow:mainWindow modalDelegate:nil didEndSelector:nil contextInfo:nil];
+//	}
 }
 
 
@@ -191,11 +182,6 @@ MTCoreAudioDevice * globalDevice;
 	[item setEnabled:YES];
 	[items setObject:item forKey:name]; // add to toolbar list
 	
-	
-	
-	[item release];
-	[name release];
-
 	toolbar = [[NSToolbar alloc] initWithIdentifier:@"tooltest"];
 	[toolbar setDelegate:self];
 	[toolbar setAllowsUserCustomization:YES];

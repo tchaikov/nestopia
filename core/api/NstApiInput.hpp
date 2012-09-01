@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -48,7 +48,7 @@ namespace Nes
 			enum
 			{
 				NUM_PADS = 4,
-				NUM_CONTROLLERS = 24
+				NUM_CONTROLLERS = 27
 			};
 
 			class Controllers
@@ -84,6 +84,9 @@ namespace Nes
 
 				Controllers() throw();
 
+				/**
+				* Standard NES pad.
+				*/
 				struct Pad
 				{
 					enum
@@ -115,6 +118,9 @@ namespace Nes
 					static PollCaller2<Pad> callback;
 				};
 
+				/**
+				* Standard light gun.
+				*/
 				struct Zapper
 				{
 					uint x;
@@ -129,6 +135,9 @@ namespace Nes
 					static PollCaller1<Zapper> callback;
 				};
 
+				/**
+				* Arkanoid controller.
+				*/
 				struct Paddle
 				{
 					uint x;
@@ -142,6 +151,9 @@ namespace Nes
 					static PollCaller1<Paddle> callback;
 				};
 
+				/**
+				* Power Pad / Family Fun Fittness.
+				*/
 				struct PowerPad
 				{
 					PowerPad() throw();
@@ -160,6 +172,9 @@ namespace Nes
 					static PollCaller1<PowerPad> callback;
 				};
 
+				/**
+				* Power Glove.
+				*/
 				struct PowerGlove
 				{
 					PowerGlove() throw();
@@ -197,6 +212,9 @@ namespace Nes
 					static PollCaller1<PowerGlove> callback;
 				};
 
+				/**
+				* Mouse.
+				*/
 				struct Mouse
 				{
 					uint x;
@@ -211,6 +229,9 @@ namespace Nes
 					static PollCaller1<Mouse> callback;
 				};
 
+				/**
+				* Family Trainer.
+				*/
 				struct FamilyTrainer
 				{
 					FamilyTrainer() throw();
@@ -229,6 +250,9 @@ namespace Nes
 					static PollCaller1<FamilyTrainer> callback;
 				};
 
+				/**
+				* Family Keyboard.
+				*/
 				struct FamilyKeyboard
 				{
 					FamilyKeyboard() throw();
@@ -246,6 +270,9 @@ namespace Nes
 					static PollCaller3<FamilyKeyboard> callback;
 				};
 
+				/**
+				* Subor Keyboard.
+				*/
 				struct SuborKeyboard
 				{
 					SuborKeyboard() throw();
@@ -263,6 +290,9 @@ namespace Nes
 					static PollCaller3<SuborKeyboard> callback;
 				};
 
+				/**
+				* Doremikko Keyboard.
+				*/
 				struct DoremikkoKeyboard
 				{
 					enum
@@ -294,6 +324,9 @@ namespace Nes
 					static PollCaller3<DoremikkoKeyboard> callback;
 				};
 
+				/**
+				* Hori Track.
+				*/
 				struct HoriTrack
 				{
 					enum
@@ -327,6 +360,9 @@ namespace Nes
 					static PollCaller1<HoriTrack> callback;
 				};
 
+				/**
+				* Pachinko.
+				*/
 				struct Pachinko
 				{
 					enum
@@ -358,6 +394,9 @@ namespace Nes
 					static PollCaller1<Pachinko> callback;
 				};
 
+				/**
+				* VS System input.
+				*/
 				struct VsSystem
 				{
 					enum
@@ -376,6 +415,9 @@ namespace Nes
 					static PollCaller1<VsSystem> callback;
 				};
 
+				/**
+				* Oeka Kids Tablet.
+				*/
 				struct OekaKidsTablet
 				{
 					uint x;
@@ -390,7 +432,10 @@ namespace Nes
 					static PollCaller1<OekaKidsTablet> callback;
 				};
 
-				struct HyperShot
+				/**
+				* Konami Hyper Shot.
+				*/
+				struct KonamiHyperShot
 				{
 					enum
 					{
@@ -402,14 +447,35 @@ namespace Nes
 
 					uint buttons;
 
-					HyperShot()
+					KonamiHyperShot()
 					: buttons(0) {}
 
-					typedef bool (NST_CALLBACK *PollCallback) (void*,HyperShot&);
+					typedef bool (NST_CALLBACK *PollCallback) (void*,KonamiHyperShot&);
 
-					static PollCaller1<HyperShot> callback;
+					static PollCaller1<KonamiHyperShot> callback;
 				};
 
+				/**
+				* Bandai Hyper Shot
+				*/
+				struct BandaiHyperShot
+				{
+					uint x;
+					uint y;
+					uint fire;
+					uint move;
+
+					BandaiHyperShot()
+					: x(0), y(0), fire(0), move(0) {}
+
+					typedef bool (NST_CALLBACK *PollCallback) (void*,BandaiHyperShot&);
+
+					static PollCaller1<BandaiHyperShot> callback;
+				};
+
+				/**
+				* Crazy Climber.
+				*/
 				struct CrazyClimber
 				{
 					enum
@@ -431,6 +497,9 @@ namespace Nes
 					static PollCaller1<CrazyClimber> callback;
 				};
 
+				/**
+				* Mahjong.
+				*/
 				struct Mahjong
 				{
 					enum
@@ -472,6 +541,9 @@ namespace Nes
 					static PollCaller2<Mahjong> callback;
 				};
 
+				/**
+				* Konami Exciting Boxing.
+				*/
 				struct ExcitingBoxing
 				{
 					enum
@@ -499,6 +571,9 @@ namespace Nes
 					static PollCaller2<ExcitingBoxing> callback;
 				};
 
+				/**
+				* Top Rider bike.
+				*/
 				struct TopRider
 				{
 					enum
@@ -523,6 +598,9 @@ namespace Nes
 					static PollCaller1<TopRider> callback;
 				};
 
+				/**
+				* Pokkun Moguraa.
+				*/
 				struct PokkunMoguraa
 				{
 					enum
@@ -547,6 +625,9 @@ namespace Nes
 					static PollCaller2<PokkunMoguraa> callback;
 				};
 
+				/**
+				* Party Tap.
+				*/
 				struct PartyTap
 				{
 					enum
@@ -569,6 +650,9 @@ namespace Nes
 					static PollCaller1<PartyTap> callback;
 				};
 
+				/**
+				* Bandai Karaoke Studio.
+				*/
 				struct KaraokeStudio
 				{
 					enum
@@ -602,7 +686,8 @@ namespace Nes
 				Pachinko pachinko;
 				VsSystem vsSystem;
 				OekaKidsTablet oekaKidsTablet;
-				HyperShot hyperShot;
+				KonamiHyperShot konamiHyperShot;
+				BandaiHyperShot bandaiHyperShot;
 				CrazyClimber crazyClimber;
 				Mahjong mahjong;
 				ExcitingBoxing excitingBoxing;
@@ -616,6 +701,9 @@ namespace Nes
 
 	namespace Api
 	{
+		/**
+		* Controller input interface.
+		*/
 		class Input : public Base
 		{
 			struct ControllerCaller;
@@ -623,9 +711,14 @@ namespace Nes
 
 		public:
 
+			/**
+			* Interface constructor.
+			*
+			* @param instance emulator instance
+			*/
 			template<typename T>
-			Input(T& e)
-			: Base(e) {}
+			Input(T& instance)
+			: Base(instance) {}
 
 			enum
 			{
@@ -633,39 +726,138 @@ namespace Nes
 				NUM_PADS = Core::Input::NUM_PADS
 			};
 
+			/**
+			* Adapter type.
+			*/
 			enum Adapter
 			{
+				/**
+				* NES adapter.
+				*/
 				ADAPTER_NES,
+				/**
+				* Famicom adapter.
+				*/
 				ADAPTER_FAMICOM
 			};
 
+			/**
+			* Controller type.
+			*/
 			enum Type
 			{
+				/**
+				* Unconnected.
+				*/
 				UNCONNECTED,
+				/**
+				* Standard pad #1
+				*/
 				PAD1,
+				/**
+				* Standard pad #2
+				*/
 				PAD2,
+				/**
+				* Standard pad #3
+				*/
 				PAD3,
+				/**
+				* Standard pad #4
+				*/
 				PAD4,
+				/**
+				* Zapper.
+				*/
 				ZAPPER,
+				/**
+				* Arkanoid paddle.
+				*/
 				PADDLE,
+				/**
+				* Powerpad.
+				*/
 				POWERPAD,
+				/**
+				* Powerglove.
+				*/
 				POWERGLOVE,
+				/**
+				* Mouse.
+				*/
 				MOUSE,
+				/**
+				* R.O.B.
+				*/
 				ROB,
+				/**
+				* Family Trainer.
+				*/
 				FAMILYTRAINER,
+				/**
+				* Family keyboard.
+				*/
 				FAMILYKEYBOARD,
+				/**
+				* Subor keyboard.
+				*/
 				SUBORKEYBOARD,
+				/**
+				* Doremikko keyboard.
+				*/
 				DOREMIKKOKEYBOARD,
+				/**
+				* Horitrack.
+				*/
 				HORITRACK,
+				/**
+				* Pachinko.
+				*/
 				PACHINKO,
+				/**
+				* Oeka Kids tablet.
+				*/
 				OEKAKIDSTABLET,
-				HYPERSHOT,
+				/**
+				* Konami hypershot.
+				*/
+				KONAMIHYPERSHOT,
+				/**
+				* Bandai hypershot.
+				*/
+				BANDAIHYPERSHOT,
+				/**
+				* Crazy Climber.
+				*/
 				CRAZYCLIMBER,
+				/**
+				* Mahjong.
+				*/
 				MAHJONG,
+				/**
+				* Exciting Boxing.
+				*/
 				EXCITINGBOXING,
+				/**
+				* Top Rider bike.
+				*/
 				TOPRIDER,
+				/**
+				* Pokkun Moguraa.
+				*/
 				POKKUNMOGURAA,
-				PARTYTAP
+				/**
+				* Party Tap.
+				*/
+				PARTYTAP,
+				/**
+				* Turbo File.
+				*/
+				TURBOFILE,
+				/**
+				* Barcode World.
+				*/
+				BARCODEWORLD
 			};
 
 			enum
@@ -678,27 +870,112 @@ namespace Nes
 				NUM_PORTS
 			};
 
+			/**
+			* Controllers context.
+			*/
 			typedef Core::Input::Controllers Controllers;
 
-			Result AutoSelectController(uint) throw();
-			void AutoSelectControllers() throw();
+			/**
+			* Connects the most suited controller for a game into a port.
+			*
+			* @param port controller port
+			* @return result code
+			*/
+			Result AutoSelectController(uint port) throw();
+
+			/**
+			* Connects the most suited controllers for a game into all ports.
+			*
+			* @return result code
+			*/
+			Result AutoSelectControllers() throw();
+
+			/**
+			* Connects the most suited adapter for a game.
+			*/
 			Result AutoSelectAdapter() throw();
 
-			Result ConnectController(uint,Type) throw();
-			Result ConnectAdapter(Adapter) throw();
+			/**
+			* Connects a controller to a port.
+			*
+			* @param port port
+			* @param type controller
+			* @result result code
+			*/
+			Result ConnectController(uint port,Type type) throw();
 
-			Type GetConnectedController(uint) const throw();
+			/**
+			* Connects an adapter.
+			*
+			* @param type adapter
+			* @return result code
+			*/
+			Result ConnectAdapter(Adapter type) throw();
+
+			/**
+			* Returns the current connected controller.
+			*
+			* @param port port
+			* @return controller
+			*/
+			Type GetConnectedController(uint port) const throw();
+
+			/**
+			* Returns the current connected adapter.
+			*
+			* @return adapter
+			*/
 			Adapter GetConnectedAdapter() const throw();
 
-			bool IsControllerConnected(Type) const throw();
+			/**
+			* Checks if a specific controller is connected.
+			*
+			* @param type controller
+			* @return true if connected
+			*/
+			bool IsControllerConnected(Type type) const throw();
 
-			typedef void (NST_CALLBACK *ControllerCallback) (UserData,uint,Type);
-			typedef void (NST_CALLBACK *AdapterCallback) (UserData,Adapter);
+			/**
+			* Controller event callback prototype.
+			*
+			* Will be invoked every time a new controller is connected to a port.
+			*
+			* @param userData optional user data
+			* @param port port
+			* @param type controller
+			*/
+			typedef void (NST_CALLBACK *ControllerCallback) (UserData userData,uint port,Type type);
 
+			/**
+			* Adapter event callback prototype.
+			*
+			* Will be invoked every time a new adapter is connected.
+			*
+			* @param userData optional user data
+			* @param adapter adapter type
+			*/
+			typedef void (NST_CALLBACK *AdapterCallback) (UserData userData,Adapter adapter);
+
+			/**
+			* Controller event callback manager.
+			*
+			* Static object used for adding the user defined callback.
+			*/
 			static ControllerCaller controllerCallback;
+
+			/**
+			* Adapter event callback manager.
+			*
+			* Static object used for adding the user defined callback.
+			*/
 			static AdapterCaller adapterCallback;
 		};
 
+		/**
+		* Controller event callback invoker.
+		*
+		* Used internally by the core.
+		*/
 		struct Input::ControllerCaller : Core::UserCallback<Input::ControllerCallback>
 		{
 			void operator () (uint port,Type type) const
@@ -708,6 +985,11 @@ namespace Nes
 			}
 		};
 
+		/**
+		* Adapter event callback invoker.
+		*
+		* Used internally by the core.
+		*/
 		struct Input::AdapterCaller : Core::UserCallback<Input::AdapterCallback>
 		{
 			void operator () (Adapter adapter) const

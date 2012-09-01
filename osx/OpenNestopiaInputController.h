@@ -23,7 +23,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <DDHidLib/DDHidLib.h>
+#import <DDHidLib/lib/DDHidLib.h>
 
 #include <IOKit/hid/IOHIDUsageTables.h>
 #include "NestopiaView.h"
@@ -36,43 +36,30 @@
     IBOutlet NSArrayController * mKeyboardsController;
     IBOutlet NSArrayController * mKeyboardEventsController;
 	IBOutlet NestopiaView * nestopiaView;
-    NSArray * mKeyboards;
-    unsigned mKeyboardIndex;
-    NSMutableArray * mEvents;
     
     // Don't retain these
     DDHidKeyboard * mCurrentKeyboard;
 	
 	IBOutlet NSArrayController * mJoysticksController;
 	
-    NSArray * mJoysticks;
     NSMutableArray * mJoystickButtons;
     int mXAxis;
     int mYAxis;
-    unsigned mJoystickIndex;
 	
     // Don't retain these
     DDHidJoystick * mCurrentJoystick;
 	
 }
 
-- (NSArray *) joysticks;
-
-- (NSArray *) joystickButtons;
-
-- (unsigned) joystickIndex;
-- (void) setJoystickIndex: (unsigned) theJoystickIndex;
-
-- (NSArray *) keyboards;
-- (void) setKeyboards: (NSArray *) theKeyboards;
-- (void) setJoysticks: (NSArray *) theJoysticks;
-- (unsigned) keyboardIndex;
-- (void) setKeyboardIndex: (unsigned) theKeyboardIndex;
-
-- (NSMutableArray *) events;
-- (void) setEvents: (NSMutableArray *) theEvents;
 - (void) addEvent: (id)theEvent;
 - (void) removeEvent: (id)theEvent;
+
+@property (nonatomic, strong) NSMutableArray *keyboards;
+@property (nonatomic, strong) NSMutableArray *events;
+@property (nonatomic, strong) NSMutableArray *joysticks;
+@property (nonatomic, assign) NSInteger joystickIndex;
+@property (nonatomic, assign) NSInteger keyboardIndex;
+@property (nonatomic, readonly) NSArray *joystickButtons;
 
 @end
 

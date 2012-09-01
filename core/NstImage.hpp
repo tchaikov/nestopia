@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -28,6 +28,8 @@
 #ifdef NST_PRAGMA_ONCE
 #pragma once
 #endif
+
+#include <iosfwd>
 
 namespace Nes
 {
@@ -61,9 +63,7 @@ namespace Nes
 			enum ExternalDeviceType
 			{
 				EXT_DIP_SWITCHES = 1,
-				EXT_DATA_RECORDER,
-				EXT_BARCODE_READER,
-				EXT_TURBO_FILE
+				EXT_BARCODE_READER
 			};
 
 			struct Context
@@ -72,12 +72,17 @@ namespace Nes
 				Cpu& cpu;
 				Apu& apu;
 				Ppu& ppu;
-				StdStream const stream;
+				std::istream& stream;
+				std::istream* const patch;
+				const bool patchBypassChecksum;
+				Result* const patchResult;
+				const FavoredSystem favoredSystem;
+				const bool askProfile;
 				const ImageDatabase* const database;
 				Result result;
 
-				Context(Type t,Cpu& c,Apu& a,Ppu& p,StdStream s,const ImageDatabase* d=NULL)
-				: type(t), cpu(c), apu(a), ppu(p), stream(s), database(d), result(RESULT_OK) {}
+				Context(Type t,Cpu& c,Apu& a,Ppu& p,std::istream& s,std::istream* h,bool k,Result* r,FavoredSystem f,bool b,const ImageDatabase* d)
+				: type(t), cpu(c), apu(a), ppu(p), stream(s), patch(h), patchBypassChecksum(k), patchResult(r), favoredSystem(f), askProfile(b), database(d), result(RESULT_OK) {}
 			};
 
 			static Image* Load(Context&);
@@ -97,9 +102,8 @@ namespace Nes
 
 			virtual uint GetDesiredController(uint) const;
 			virtual uint GetDesiredAdapter() const;
-
-			virtual Region::Type GetRegion() const = 0;
-			virtual void SetRegion(Region::Type) {}
+			virtual Region GetDesiredRegion() const = 0;
+			virtual System GetDesiredSystem(Region,CpuModel* = NULL,PpuModel* = NULL) const;
 
 			virtual dword GetPrgCrc() const
 			{
@@ -109,11 +113,6 @@ namespace Nes
 			virtual ExternalDevice QueryExternalDevice(ExternalDeviceType)
 			{
 				return NULL;
-			}
-
-			virtual Revision::Ppu QueryPpu(bool)
-			{
-				return Revision::PPU_RP2C02;
 			}
 
 		protected:

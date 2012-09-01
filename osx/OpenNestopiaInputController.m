@@ -35,98 +35,60 @@
 
 @implementation OpenNestopiaInputController
 
+@synthesize joystickButtons = mJoystickButtons;
+
 - (id) init;
 {
     self = [super init];
     if (self == nil)
         return nil;
-    
-    mEvents = [[NSMutableArray alloc] init];
-    
-	NSString* test;
-	test = [NSString stringWithString:@"Hello?"];
-	  mPad1Controls = [[NSMutableArray alloc] init];
-	//[mPad1Controls addObject:test];
+    self.events = [[NSMutableArray alloc] init];
     return self;
 }
 
 - (void) awakeFromNib;
 {
     NSArray * keyboards = [DDHidKeyboard allKeyboards];
-    [keyboards makeObjectsPerformSelector: @selector(setDelegate:)
-                               withObject: nestopiaView];
-    [self setKeyboards: keyboards];
-    
-    if ([keyboards count] > 0)
-        [self setKeyboardIndex: 0];
+    for (DDHidKeyboard *kb in keyboards) {
+        kb.delegate = nestopiaView;
+    }
+    self.keyboards = keyboards.mutableCopy;
+    if (keyboards.count > 0)
+        self.keyboardIndex = 0;
     else
-        [self setKeyboardIndex: NSNotFound];
-	
-	
-	NSArray * joysticks = [DDHidJoystick allJoysticks];
-	
+        self.keyboardIndex = NSNotFound;
+
     mJoystickButtons = [[NSMutableArray alloc] init];
-    [joysticks makeObjectsPerformSelector: @selector(setDelegate:)
-                               withObject: self];
-    [self setJoysticks: joysticks];
-    if ([mJoysticks count] > 0)
-        [self setJoystickIndex: 0];
+    NSArray * joysticks = [DDHidJoystick allJoysticks];
+    for (DDHidJoystick *joystick in joysticks) {
+        joystick.delegate = self;
+    }
+    self.joysticks = joysticks.mutableCopy;
+    if (self.joysticks.count > 0)
+        self.joystickIndex = 0;
     else
-        [self setJoystickIndex: NSNotFound];
+        self.joystickIndex = NSNotFound;
 }
 
 //=========================================================== 
 // dealloc
 //=========================================================== 
-- (void) dealloc
-{
-    [mKeyboards release];
-    [mEvents release];
-    
-    mKeyboards = nil;
-    mEvents = nil;
-    [super dealloc];
+- (void) dealloc {
 }
 
-//=========================================================== 
-//  keyboards 
-//=========================================================== 
-- (NSArray *) keyboards
+- (void) setKeyboardIndex: (NSInteger) theKeyboardIndex
 {
-    return mKeyboards; 
-}
-
-- (void) setKeyboards: (NSArray *) theKeyboards
-{
-    if (mKeyboards != theKeyboards)
-    {
-        [mKeyboards release];
-        mKeyboards = [theKeyboards retain];
-    }
-}
-//=========================================================== 
-//  keyboardIndex 
-//=========================================================== 
-- (unsigned) keyboardIndex
-{
-    return mKeyboardIndex;
-}
-
-- (void) setKeyboardIndex: (unsigned) theKeyboardIndex
-{
-    if (mCurrentKeyboard != nil)
-    {
+    if (mCurrentKeyboard != nil) {
         [mCurrentKeyboard stopListening];
         mCurrentKeyboard = nil;
     }
-    mKeyboardIndex = theKeyboardIndex;
-    [mKeyboardsController setSelectionIndex: mKeyboardIndex];
+    _keyboardIndex = theKeyboardIndex;
+    [mKeyboardsController setSelectionIndex: self.keyboardIndex];
     [self willChangeValueForKey: @"events"];
-    [mEvents removeAllObjects];
+    [self.events removeAllObjects];
     [self didChangeValueForKey: @"events"];
-    if (mKeyboardIndex != NSNotFound)
-    {
-        mCurrentKeyboard = [mKeyboards objectAtIndex: mKeyboardIndex];
+    if (self.keyboardIndex != NSNotFound) {
+        mCurrentKeyboard = self.keyboards[self.keyboardIndex];
         [mCurrentKeyboard startListening];
     }
 }
@@ -134,10 +96,6 @@
 //=========================================================== 
 //  joysticks 
 //=========================================================== 
-- (NSArray *) joysticks
-{
-    return mJoysticks; 
-}
 
 - (NSArray *) joystickButtons;
 {
@@ -148,73 +106,42 @@
 //=========================================================== 
 //  joystickIndex 
 //=========================================================== 
-- (unsigned) joystickIndex
-{
-    return mJoystickIndex;
-}
 
-- (void) setJoystickIndex: (unsigned) theJoystickIndex
+- (void) setJoystickIndex: (NSInteger) theJoystickIndex
 {
-    if (mCurrentJoystick != nil)
-    {
+    if (mCurrentJoystick != nil) {
         [mCurrentJoystick stopListening];
         mCurrentJoystick = nil;
     }
-    mJoystickIndex = theJoystickIndex;
-    [mJoysticksController setSelectionIndex: mJoystickIndex];
-    if (mJoystickIndex != NSNotFound)
-    {
-        mCurrentJoystick = [mJoysticks objectAtIndex: mJoystickIndex];
+    _joystickIndex = theJoystickIndex;
+    [mJoysticksController setSelectionIndex: _joystickIndex];
+    if (_joystickIndex != NSNotFound) {
+        mCurrentJoystick = self.joysticks[self.joystickIndex];
         [mCurrentJoystick startListening];
         
         [self willChangeValueForKey: @"joystickButtons"];
         [mJoystickButtons removeAllObjects];
-        NSArray * buttons = [mCurrentJoystick buttonElements];
-        NSEnumerator * e = [buttons objectEnumerator];
-        DDHidElement * element;
-        while (element = [e nextObject])
-        {
+        for (DDHidElement* element in [mCurrentJoystick buttonElements]) {
             ButtonState * state = [[ButtonState alloc] initWithName: [[element usage] usageName]];
-            [state autorelease];
             [mJoystickButtons addObject: state];
         }
         [self didChangeValueForKey: @"joystickButtons"];
     }
 }
 
-
 //=========================================================== 
 //  events 
 //=========================================================== 
-- (NSMutableArray *) events
-{
-    return mEvents; 
-}
-
-- (void) setEvents: (NSMutableArray *) theEvents
-{
-    if (mEvents != theEvents)
-    {
-        [mEvents release];
-        mEvents = [theEvents retain];
-    }
-}
 - (void) addEvent: (id)theEvent
 {
-    [[self events] addObject: theEvent];
+    [self.events addObject: theEvent];
 }
+
 - (void) removeEvent: (id)theEvent
 {
-    [[self events] removeObject: theEvent];
+    [self.events removeObject: theEvent];
 }
-- (void) setJoysticks: (NSArray *) theJoysticks
-{
-    if (mJoysticks != theJoysticks)
-    {
-        [mJoysticks release];
-        mJoysticks = [theJoysticks retain];
-    }
-}
+
 @end
 
 @implementation OpenNestopiaInputController (DDHidJoystickDelegate)
@@ -293,27 +220,19 @@
 @end
 
 
-
 @implementation OpenNestopiaInputController (Private)
 
-
-
-
-
-- (void) addEvent: (NSString *) event usageId: (unsigned) usageId;
+- (void)addEvent:(NSString *)event usageId:(unsigned) usageId;
 {
-	
     DDHidUsageTables * usageTables = [DDHidUsageTables standardUsageTables];
     NSString * description = [NSString stringWithFormat: @"%@ (0x%dne)",
         [usageTables descriptionForUsagePage: kHIDPage_KeyboardOrKeypad
                                        usage: usageId],
         usageId];
-	//printf("%d\n",usageId);
-	//NSLog(event);
-    NSLog(description);
+    NSLog(@"addEvent: %@", description);
     NSMutableDictionary * row = [mKeyboardEventsController newObject];
-    [row setObject: event forKey: @"event"];
-    [row setObject: description forKey: @"description"];
+    row[@"event"] = event;
+    row[@"description"] = description;
     [mKeyboardEventsController addObject: row];
 }
 

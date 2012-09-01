@@ -3,51 +3,43 @@
 #import <OpenGL/OpenGL.h>
 #import <OpenGL/gl.h>
 #import <Cocoa/Cocoa.h>
-	
+
+#import "RenderDelegate.h"
+
 NSLock *soundLock;
 
-@interface NestopiaView : NSOpenGLView
+@class NESGameCore;
+@class OEGameAudio;
+
+@interface NestopiaView : NSOpenGLView<RenderDelegate>
 {
 	
 	IBOutlet NSWindow *mainWindow;
 	IBOutlet NSPanel *dipSwitchPanel;
 	
 	NSOpenGLContext *fullScreenGLContext;
-	
-	NSTimer *gameTimer;
+    GLuint           gameTexture;      // this is the texture that is defined by the gameCores pixelFormat and type
 
+    NSThread    *gameCoreThread;
+    NESGameCore *gameCore;
+    OEGameAudio *gameAudio;
+    BOOL         hasStartedAudio;
 }
 
-- (int)getSelectedValue:(int)num;
-- (void)setDipValuesForDip:(int)dip value:(int)value;
-- (NSArray*)getDipValues:(int)num;
-- (NSString*)getDipName:(int)num;
-- (int)numOfDips;
-- (void) saveState;
-- (void) dealloc;
+@property (assign) BOOL loadedRom;
+
+- (void)saveState;
 - (void)drawRect:(NSRect)frameRect;
 - (void)setFrame:(NSRect)frame;
 - (void)copyGLToBackingStore;
-- (void)setupGL;
-- (void)setCode:(NSString*)code;
 - (void)awakeFromNib;
 - (id)initWithFrame:(NSRect)frame;
 - (void)resetGame;
 - (void)powerOff;
-- (void)loadDatabase;
-- (void)startTimer:(float)fps;
-- (void)testBarcode;
-- (void)executeFrame;
+
 - (IBAction)startLoad:(id)sender;
 - (IBAction)fullscreenToggle:(id)sender;
 
 - (void)resetVideo;
-- (int)getHeight;
-- (int)getWidth;
-
-- (void)setupSound;
-- (void)setupVideo;
-- (void)setupInput;
-
 
 @end

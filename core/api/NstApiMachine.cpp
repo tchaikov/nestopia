@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -53,7 +53,7 @@ namespace Nes
 		#pragma optimize("s", on)
 		#endif
 
-		Result Machine::Load(std::istream& stream,uint type)
+		Result Machine::Load(std::istream& stream,FavoredSystem system,AskProfile ask,Patch* patch,uint type)
 		{
 			Result result;
 
@@ -61,7 +61,16 @@ namespace Nes
 
 			try
 			{
-				result = emulator.Load( &stream, type );
+				result = emulator.Load
+				(
+					stream,
+					static_cast<Core::FavoredSystem>(system),
+					ask == ASK_PROFILE,
+					patch ? &patch->stream : NULL,
+					patch ? patch->bypassChecksum : false,
+					patch ? &patch->result : NULL,
+					type
+				);
 			}
 			catch (Result r)
 			{
@@ -82,24 +91,34 @@ namespace Nes
 			return result;
 		}
 
-		Result Machine::Load(std::istream& stream) throw()
+		Result Machine::Load(std::istream& stream,FavoredSystem system,AskProfile ask) throw()
 		{
-			return Load( stream, Core::Image::UNKNOWN );
+			return Load( stream, system, ask, NULL, Core::Image::UNKNOWN );
 		}
 
-		Result Machine::LoadCartridge(std::istream& stream) throw()
+		Result Machine::Load(std::istream& stream,FavoredSystem system,Patch& patch,AskProfile ask) throw()
 		{
-			return Load( stream, Core::Image::CARTRIDGE );
+			return Load( stream, system, ask, &patch, Core::Image::UNKNOWN );
 		}
 
-		Result Machine::LoadDisk(std::istream& stream) throw()
+		Result Machine::LoadCartridge(std::istream& stream,FavoredSystem system,AskProfile ask) throw()
 		{
-			return Load( stream, Core::Image::DISK );
+			return Load( stream, system, ask, NULL, Core::Image::CARTRIDGE );
 		}
 
-		Result Machine::LoadSound(std::istream& stream) throw()
+		Result Machine::LoadCartridge(std::istream& stream,FavoredSystem system,Patch& patch,AskProfile ask) throw()
 		{
-			return Load( stream, Core::Image::SOUND );
+			return Load( stream, system, ask, &patch, Core::Image::CARTRIDGE );
+		}
+
+		Result Machine::LoadDisk(std::istream& stream,FavoredSystem system) throw()
+		{
+			return Load( stream, system, DONT_ASK_PROFILE, NULL, Core::Image::DISK );
+		}
+
+		Result Machine::LoadSound(std::istream& stream,FavoredSystem system) throw()
+		{
+			return Load( stream, system, DONT_ASK_PROFILE, NULL, Core::Image::SOUND );
 		}
 
 		Result Machine::Unload() throw()
@@ -142,6 +161,16 @@ namespace Nes
 			}
 		}
 
+		void Machine::PokeNmt(uint address, uint data) throw()
+		{
+			emulator.ppu.GetNmtMem().Poke( address & 0xFFF, data );
+		}
+		
+		void Machine::PokeChr(uint address, uint data) throw()
+		{
+			emulator.ppu.GetChrMem().Poke( address & 0x4000, data );
+		}
+		
 		Result Machine::Reset(const bool hard) throw()
 		{
 			if (!Is(ON) || IsLocked())
@@ -174,21 +203,25 @@ namespace Nes
 
 		Machine::Mode Machine::GetDesiredMode() const throw()
 		{
-			return (!emulator.image || emulator.image->GetRegion() == Core::Region::NTSC) ? NTSC : PAL;
+			return (!emulator.image || emulator.image->GetDesiredRegion() == Core::REGION_NTSC) ? NTSC : PAL;
 		}
 
 		Result Machine::SetMode(const Mode mode) throw()
 		{
-			if (emulator.tracker.IsActive())
-				return RESULT_ERR_NOT_READY;
-
 			if (mode == GetMode())
 				return RESULT_NOP;
 
-			emulator.tracker.Resync();
-			emulator.SwitchMode();
+			Result result = Power( false );
 
-			return RESULT_OK;
+			if (NES_SUCCEEDED(result))
+			{
+				emulator.SwitchMode();
+
+				if (result != RESULT_NOP)
+					result = Power( true );
+			}
+
+			return result;
 		}
 
 		Result Machine::LoadState(std::istream& stream) throw()

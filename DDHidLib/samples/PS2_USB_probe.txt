@@ -1,0 +1,960 @@
+Full Speed device @ 1 (0x1D000000): .............................................   Hub device: "UHCI Root Hub Simulation"
+    Device Descriptor   
+        Descriptor Version Number:   0x0100
+        Device Class:   9   (Hub)
+        Device Subclass:   0
+        Device Protocol:   0   (Full/Low Speed)
+        Device MaxPacketSize:   8
+        Device VendorID/ProductID:   0x05AC/0x8005   (Apple Inc.)
+        Device Version Number:   0x0110
+        Number of Configurations:   1
+        Manufacturer String:   2 "Apple Inc."
+        Product String:   1 "UHCI Root Hub Simulation"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   27
+            Raw Descriptor (hex)    0000: 0A 02 1B 00 01 01 00 60  00 BA 09 04 00 00 01 09  
+            Raw Descriptor (hex)    0010: 00 00 00 08 05 81 03 08  00 20 00 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0x60 (self-powered, remote wakeup)
+        MaxPower:   0 ma
+        Interface #0 - Hub   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   9   (Hub)
+            Interface Subclass;   0
+            Interface Protocol:   0
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   32 ms
+    Hub Descriptor   
+        Number of Ports:   0x02
+        Hub Characteristics:   0x12 (Non-switched standalone hub with no overcurrent protection)
+        PowerOnToGood time:   100 ms
+        Controller current:   0 mA
+        Device Removable (byte):   0x0
+        Port Power Control Mask (byte):   0xff
+Full Speed device @ 1 (0x3D000000): .............................................   Hub device: "UHCI Root Hub Simulation"
+    Device Descriptor   
+        Descriptor Version Number:   0x0100
+        Device Class:   9   (Hub)
+        Device Subclass:   0
+        Device Protocol:   0   (Full/Low Speed)
+        Device MaxPacketSize:   8
+        Device VendorID/ProductID:   0x05AC/0x8005   (Apple Inc.)
+        Device Version Number:   0x0110
+        Number of Configurations:   1
+        Manufacturer String:   2 "Apple Inc."
+        Product String:   1 "UHCI Root Hub Simulation"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   27
+            Raw Descriptor (hex)    0000: 0A 02 1B 00 01 01 00 60  00 BA 09 04 00 00 01 09  
+            Raw Descriptor (hex)    0010: 00 00 00 08 05 81 03 08  00 20 00 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0x60 (self-powered, remote wakeup)
+        MaxPower:   0 ma
+        Interface #0 - Hub   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   9   (Hub)
+            Interface Subclass;   0
+            Interface Protocol:   0
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   32 ms
+    Hub Descriptor   
+        Number of Ports:   0x02
+        Hub Characteristics:   0x12 (Non-switched standalone hub with no overcurrent protection)
+        PowerOnToGood time:   100 ms
+        Controller current:   0 mA
+        Device Removable (byte):   0x0
+        Port Power Control Mask (byte):   0xff
+Full Speed device @ 1 (0x5D000000): .............................................   Hub device: "UHCI Root Hub Simulation"
+    Device Descriptor   
+        Descriptor Version Number:   0x0100
+        Device Class:   9   (Hub)
+        Device Subclass:   0
+        Device Protocol:   0   (Full/Low Speed)
+        Device MaxPacketSize:   8
+        Device VendorID/ProductID:   0x05AC/0x8005   (Apple Inc.)
+        Device Version Number:   0x0110
+        Number of Configurations:   1
+        Manufacturer String:   2 "Apple Inc."
+        Product String:   1 "UHCI Root Hub Simulation"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   27
+            Raw Descriptor (hex)    0000: 0A 02 1B 00 01 01 00 60  00 BA 09 04 00 00 01 09  
+            Raw Descriptor (hex)    0010: 00 00 00 08 05 81 03 08  00 20 00 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0x60 (self-powered, remote wakeup)
+        MaxPower:   0 ma
+        Interface #0 - Hub   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   9   (Hub)
+            Interface Subclass;   0
+            Interface Protocol:   0
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   32 ms
+    Hub Descriptor   
+        Number of Ports:   0x02
+        Hub Characteristics:   0x12 (Non-switched standalone hub with no overcurrent protection)
+        PowerOnToGood time:   100 ms
+        Controller current:   0 mA
+        Device Removable (byte):   0x0
+        Port Power Control Mask (byte):   0xff
+Low Speed device @ 2 (0x5D100000): .............................................   Composite device: "IR Receiver" (Suspended)
+    Device Descriptor   
+        Descriptor Version Number:   0x0200
+        Device Class:   0   (Composite)
+        Device Subclass:   0
+        Device Protocol:   0
+        Device MaxPacketSize:   8
+        Device VendorID/ProductID:   0x05AC/0x8242   (Apple Inc.)
+        Device Version Number:   0x0016
+        Number of Configurations:   1
+        Manufacturer String:   1 "Apple Computer, Inc."
+        Product String:   2 "IR Receiver"
+        Serial Number String:   0 (none)
+    Configuration Descriptor: .......................................   "Apple Computer, Inc."
+        Length (and contents):   34
+            Raw Descriptor (hex)    0000: 09 02 22 00 01 01 01 A0  32 09 04 00 00 01 03 00  
+            Raw Descriptor (hex)    0010: 00 00 09 21 11 01 00 01  22 2A 00 07 05 82 03 08  
+            Raw Descriptor (hex)    0020: 00 0A 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0xA0 (bus-powered, remote wakeup)
+        MaxPower:   100 ma
+        Interface #0 - HID   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   3   (HID)
+            Interface Subclass;   0
+            Interface Protocol:   0
+            HID Descriptor   
+                Descriptor Version Number:   0x0111
+                Country Code:   0
+                Descriptor Count:   1
+                Descriptor 1   
+                    Type:   0x22  (Report Descriptor)
+                    Length (and contents):   42
+                        Raw Descriptor (hex)    0000: 05 0C 09 01 A1 01 15 00  26 FF 00 75 08 95 04 85  
+                        Raw Descriptor (hex)    0010: 24 09 00 81 22 75 08 95  04 85 25 09 00 81 22 75  
+                        Raw Descriptor (hex)    0020: 08 95 04 85 26 09 00 81  22 C0 
+                    Parsed Report Descriptor:   
+                          Usage Page    (Consumer) 
+                          Usage 1 (0x1)    
+                              Collection (Application)    
+                                Logical Minimum.........    (0)  
+                                Logical Maximum.........    (255)  
+                                Report Size.............    (8)  
+                                Report Count............    (4)  
+                                ReportID................    (36)  
+                                Usage 0 (0x0)    
+                                Input...................   (Data, Variable, Absolute, No Wrap, Linear, No Preferred, No Null Position, Bitfield) 
+                                Report Size.............    (8)  
+                                Report Count............    (4)  
+                                ReportID................    (37)  
+                                Usage 0 (0x0)    
+                                Input...................   (Data, Variable, Absolute, No Wrap, Linear, No Preferred, No Null Position, Bitfield) 
+                                Report Size.............    (8)  
+                                Report Count............    (4)  
+                                ReportID................    (38)  
+                                Usage 0 (0x0)    
+                                Input...................   (Data, Variable, Absolute, No Wrap, Linear, No Preferred, No Null Position, Bitfield) 
+                              End Collection     
+            Endpoint 0x82 - Interrupt Input   
+                Address:   0x82  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   10 ms
+Full Speed device @ 3 (0x5D200000): .............................................   Composite device: "Apple Internal Keyboard / Trackpad"
+    Device Descriptor   
+        Descriptor Version Number:   0x0200
+        Device Class:   0   (Composite)
+        Device Subclass:   0
+        Device Protocol:   0
+        Device MaxPacketSize:   8
+        Device VendorID/ProductID:   0x05AC/0x022A   (Apple Inc.)
+        Device Version Number:   0x0007
+        Number of Configurations:   1
+        Manufacturer String:   1 "Apple Computer"
+        Product String:   2 "Apple Internal Keyboard / Trackpad"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   84
+            Raw Descriptor (hex)    0000: 09 02 54 00 03 01 00 A0  14 09 04 00 00 01 03 01  
+            Raw Descriptor (hex)    0010: 01 03 09 21 11 01 0D 01  22 49 00 07 05 83 03 08  
+            Raw Descriptor (hex)    0020: 00 08 09 04 01 00 01 03  01 02 04 09 21 11 01 00  
+            Raw Descriptor (hex)    0030: 01 22 59 00 07 05 81 03  40 00 08 09 04 02 00 01  
+            Raw Descriptor (hex)    0040: 03 00 00 03 09 21 11 01  00 01 22 14 00 07 05 84  
+            Raw Descriptor (hex)    0050: 03 01 00 08 
+        Number of Interfaces:   3
+        Configuration Value:   1
+        Attributes:   0xA0 (bus-powered, remote wakeup)
+        MaxPower:   40 ma
+        Interface #0 - HID/Boot Interface   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   3   (HID)
+            Interface Subclass;   1   (Boot Interface)
+            Interface Protocol:   1
+            HID Descriptor   
+                Descriptor Version Number:   0x0111
+                Country Code:   13
+                Descriptor Count:   1
+                Descriptor 1   
+                    Type:   0x22  (Report Descriptor)
+                    Length (and contents):   73
+                        Raw Descriptor (hex)    0000: 05 01 09 06 A1 01 05 07  19 E0 29 E7 15 00 25 01  
+                        Raw Descriptor (hex)    0010: 75 01 95 08 81 02 95 01  75 08 81 01 95 05 75 01  
+                        Raw Descriptor (hex)    0020: 05 08 19 01 29 05 91 02  95 01 75 03 91 01 95 05  
+                        Raw Descriptor (hex)    0030: 75 08 15 00 25 65 05 07  19 00 29 65 81 00 05 FF  
+                        Raw Descriptor (hex)    0040: 09 03 75 08 95 01 81 02  C0 
+                    Parsed Report Descriptor:   
+                          Usage Page    (Generic Desktop) 
+                          Usage (Keyboard)    
+                              Collection (Application)    
+                                Usage Page    (Keyboard/Keypad) 
+                                Usage Minimum...........    (224)  
+                                Usage Maximum...........    (231)  
+                                Logical Minimum.........    (0)  
+                                Logical Maximum.........    (1)  
+                                Report Size.............    (1)  
+                                Report Count............    (8)  
+                                Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                Report Count............    (1)  
+                                Report Size.............    (8)  
+                                Input...................   (Constant, Array, Absolute) 
+                                Report Count............    (5)  
+                                Report Size.............    (1)  
+                                Usage Page    (LED) 
+                                Usage Minimum...........    (1)  
+                                Usage Maximum...........    (5)  
+                                Output..................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Nonvolatile, Bitfield) 
+                                Report Count............    (1)  
+                                Report Size.............    (3)  
+                                Output..................   (Constant, Array, Absolute, No Wrap, Linear, Preferred State, No Null Position, Nonvolatile, Bitfield) 
+                                Report Count............    (5)  
+                                Report Size.............    (8)  
+                                Logical Minimum.........    (0)  
+                                Logical Maximum.........    (101)  
+                                Usage Page    (Keyboard/Keypad) 
+                                Usage Minimum...........    (0)  
+                                Usage Maximum...........    (101)  
+                                Input...................   (Data, Array, Absolute) 
+                                Usage Page    (Vendor Defined) 
+                                Usage 3 (0x3)    
+                                Report Size.............    (8)  
+                                Report Count............    (1)  
+                                Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                              End Collection     
+            Endpoint 0x83 - Interrupt Input   
+                Address:   0x83  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   8 ms
+        Interface #1 - HID/Boot Interface   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   3   (HID)
+            Interface Subclass;   1   (Boot Interface)
+            Interface Protocol:   2
+            HID Descriptor   
+                Descriptor Version Number:   0x0111
+                Country Code:   0
+                Descriptor Count:   1
+                Descriptor 1   
+                    Type:   0x22  (Report Descriptor)
+                    Length (and contents):   89
+                        Raw Descriptor (hex)    0000: 05 01 09 02 A1 01 09 01  A1 00 05 09 19 01 29 03  
+                        Raw Descriptor (hex)    0010: 15 00 25 01 85 02 95 03  75 01 81 02 95 01 75 05  
+                        Raw Descriptor (hex)    0020: 81 01 05 01 09 30 09 31  15 81 25 7F 75 08 95 02  
+                        Raw Descriptor (hex)    0030: 81 06 C0 C0 05 FF 09 01  A1 00 09 02 15 01 25 41  
+                        Raw Descriptor (hex)    0040: 35 00 45 FF 85 05 75 08  95 3F 81 00 09 04 15 80  
+                        Raw Descriptor (hex)    0050: 25 7F 75 08 95 10 B1 02  C0 
+                    Parsed Report Descriptor:   
+                          Usage Page    (Generic Desktop) 
+                          Usage (Mouse)    
+                              Collection (Application)    
+                                Usage (Pointer)    
+                                    Collection (Physical)    
+                                      Usage Page    (Button) 
+                                      Usage Minimum...........    (1)  
+                                      Usage Maximum...........    (3)  
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (1)  
+                                      ReportID................    (2)  
+                                      Report Count............    (3)  
+                                      Report Size.............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Report Count............    (1)  
+                                      Report Size.............    (5)  
+                                      Input...................   (Constant, Array, Absolute) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (X)    
+                                      Usage (Y)    
+                                      Logical Minimum.........    (-127)  
+                                      Logical Maximum.........    (127)  
+                                      Report Size.............    (8)  
+                                      Report Count............    (2)  
+                                      Input...................   (Data, Variable, Relative, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                    End Collection     
+                              End Collection     
+                          Usage Page    (Vendor Defined) 
+                          Usage 1 (0x1)    
+                              Collection (Physical)    
+                                Usage 2 (0x2)    
+                                Logical Minimum.........    (1)  
+                                Logical Maximum.........    (65)  
+                                Physical Minimum........    (0)  
+                                Physical Maximum........    (-1)  
+                                ReportID................    (5)  
+                                Report Size.............    (8)  
+                                Report Count............    (63)  
+                                Input...................   (Data, Array, Absolute) 
+                                Usage 4 (0x4)    
+                                Logical Minimum.........    (128)  
+                                Logical Maximum.........    (127)  
+                                Report Size.............    (8)  
+                                Report Count............    (16)  
+                                Feature.................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Nonvolatile, Bitfield) 
+                              End Collection     
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   64
+                Polling Interval:   8 ms
+        Interface #2 - HID   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   3   (HID)
+            Interface Subclass;   0
+            Interface Protocol:   0
+            HID Descriptor   
+                Descriptor Version Number:   0x0111
+                Country Code:   0
+                Descriptor Count:   1
+                Descriptor 1   
+                    Type:   0x22  (Report Descriptor)
+                    Length (and contents):   20
+                        Raw Descriptor (hex)    0000: 05 0C 09 01 A1 01 75 08  95 01 09 B8 15 00 26 FF  
+                        Raw Descriptor (hex)    0010: 00 81 02 C0 
+                    Parsed Report Descriptor:   
+                          Usage Page    (Consumer) 
+                          Usage 1 (0x1)    
+                              Collection (Application)    
+                                Report Size.............    (8)  
+                                Report Count............    (1)  
+                                Usage 184 (0xb8)    
+                                Logical Minimum.........    (0)  
+                                Logical Maximum.........    (255)  
+                                Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                              End Collection     
+            Endpoint 0x84 - Interrupt Input   
+                Address:   0x84  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   1
+                Polling Interval:   8 ms
+Full Speed device @ 1 (0x1A000000): .............................................   Hub device: "UHCI Root Hub Simulation"
+    Device Descriptor   
+        Descriptor Version Number:   0x0100
+        Device Class:   9   (Hub)
+        Device Subclass:   0
+        Device Protocol:   0   (Full/Low Speed)
+        Device MaxPacketSize:   8
+        Device VendorID/ProductID:   0x05AC/0x8005   (Apple Inc.)
+        Device Version Number:   0x0110
+        Number of Configurations:   1
+        Manufacturer String:   2 "Apple Inc."
+        Product String:   1 "UHCI Root Hub Simulation"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   27
+            Raw Descriptor (hex)    0000: 0A 02 1B 00 01 01 00 60  00 BA 09 04 00 00 01 09  
+            Raw Descriptor (hex)    0010: 00 00 00 08 05 81 03 08  00 20 00 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0x60 (self-powered, remote wakeup)
+        MaxPower:   0 ma
+        Interface #0 - Hub   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   9   (Hub)
+            Interface Subclass;   0
+            Interface Protocol:   0
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   32 ms
+    Hub Descriptor   
+        Number of Ports:   0x02
+        Hub Characteristics:   0x12 (Non-switched standalone hub with no overcurrent protection)
+        PowerOnToGood time:   100 ms
+        Controller current:   0 mA
+        Device Removable (byte):   0x0
+        Port Power Control Mask (byte):   0xff
+Low Speed device @ 3 (0x1A200000): .............................................   Composite device: "MP-8800 Quad USB Joypad"
+    Device Descriptor   
+        Descriptor Version Number:   0x0100
+        Device Class:   0   (Composite)
+        Device Subclass:   0
+        Device Protocol:   0
+        Device MaxPacketSize:   8
+        Device VendorID/ProductID:   0x0925/0x8800   (unknown vendor)
+        Device Version Number:   0x0288
+        Number of Configurations:   1
+        Manufacturer String:   1 "WiseGroup.,Ltd"
+        Product String:   2 "MP-8800 Quad USB Joypad"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   34
+            Raw Descriptor (hex)    0000: 09 02 22 00 01 01 00 80  64 09 04 00 00 01 03 00  
+            Raw Descriptor (hex)    0010: 00 00 09 21 00 01 00 01  22 A0 01 07 05 81 03 08  
+            Raw Descriptor (hex)    0020: 00 0A 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0x80 (bus-powered)
+        MaxPower:   200 ma
+        Interface #0 - HID   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   3   (HID)
+            Interface Subclass;   0
+            Interface Protocol:   0
+            HID Descriptor   
+                Descriptor Version Number:   0x0100
+                Country Code:   0
+                Descriptor Count:   1
+                Descriptor 1   
+                    Type:   0x22  (Report Descriptor)
+                    Length (and contents):   416
+                        Raw Descriptor (hex)    0000: 05 01 09 04 A1 01 85 01  09 01 A1 00 05 09 19 01  
+                        Raw Descriptor (hex)    0010: 29 0C 15 00 25 01 35 00  45 01 75 01 95 0C 81 02  
+                        Raw Descriptor (hex)    0020: 05 01 09 39 15 00 25 07  35 00 46 3B 01 65 14 75  
+                        Raw Descriptor (hex)    0030: 04 95 01 81 42 05 01 09  30 09 31 09 32 09 35 15  
+                        Raw Descriptor (hex)    0040: 00 26 FF 00 35 00 46 FF  00 66 00 00 75 08 95 04  
+                        Raw Descriptor (hex)    0050: 81 02 06 00 FF 09 01 95  01 81 02 06 00 FF 09 01  
+                        Raw Descriptor (hex)    0060: 75 08 95 03 91 02 C0 C0  05 01 09 04 A1 01 85 02  
+                        Raw Descriptor (hex)    0070: 09 01 A1 00 05 09 19 01  29 0C 15 00 25 01 35 00  
+                        Raw Descriptor (hex)    0080: 45 01 75 01 95 0C 81 02  05 01 09 39 15 00 25 07  
+                        Raw Descriptor (hex)    0090: 35 00 46 3B 01 65 14 75  04 95 01 81 42 05 01 09  
+                        Raw Descriptor (hex)    00a0: 30 09 31 09 32 09 35 15  00 26 FF 00 35 00 46 FF  
+                        Raw Descriptor (hex)    00b0: 00 66 00 00 75 08 95 04  81 02 06 00 FF 09 01 95  
+                        Raw Descriptor (hex)    00c0: 01 81 02 06 00 FF 09 01  75 08 95 03 91 02 C0 C0  
+                        Raw Descriptor (hex)    00d0: 05 01 09 04 A1 01 85 03  09 01 A1 00 05 09 19 01  
+                        Raw Descriptor (hex)    00e0: 29 0C 15 00 25 01 35 00  45 01 75 01 95 0C 81 02  
+                        Raw Descriptor (hex)    00f0: 05 01 09 39 15 00 25 07  35 00 46 3B 01 65 14 75  
+                        Raw Descriptor (hex)    0100: 04 95 01 81 42 05 01 09  30 09 31 09 32 09 35 15  
+                        Raw Descriptor (hex)    0110: 00 26 FF 00 35 00 46 FF  00 66 00 00 75 08 95 04  
+                        Raw Descriptor (hex)    0120: 81 02 06 00 FF 09 01 95  01 81 02 06 00 FF 09 01  
+                        Raw Descriptor (hex)    0130: 75 08 95 03 91 02 C0 C0  05 01 09 04 A1 01 85 04  
+                        Raw Descriptor (hex)    0140: 09 01 A1 00 05 09 19 01  29 0C 15 00 25 01 35 00  
+                        Raw Descriptor (hex)    0150: 45 01 75 01 95 0C 81 02  05 01 09 39 15 00 25 07  
+                        Raw Descriptor (hex)    0160: 35 00 46 3B 01 65 14 75  04 95 01 81 42 05 01 09  
+                        Raw Descriptor (hex)    0170: 30 09 31 09 32 09 35 15  00 26 FF 00 35 00 46 FF  
+                        Raw Descriptor (hex)    0180: 00 66 00 00 75 08 95 04  81 02 06 00 FF 09 01 95  
+                        Raw Descriptor (hex)    0190: 01 81 02 06 00 FF 09 01  75 08 95 03 91 02 C0 C0  
+                        Unknown Descriptor   01a0: 
+                    Parsed Report Descriptor:   
+                          Usage Page    (Generic Desktop) 
+                          Usage (Joystick)    
+                              Collection (Application)    
+                                ReportID................    (1)  
+                                Usage (Pointer)    
+                                    Collection (Physical)    
+                                      Usage Page    (Button) 
+                                      Usage Minimum...........    (1)  
+                                      Usage Maximum...........    (12)  
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (1)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (1)  
+                                      Report Size.............    (1)  
+                                      Report Count............    (12)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (Hat Switch)    
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (7)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (315)  
+                                      Unit....................    (20)  
+                                      Report Size.............    (4)  
+                                      Report Count............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, Null State, Bitfield) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (X)    
+                                      Usage (Y)    
+                                      Usage (Z)    
+                                      Usage (Rz)    
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (255)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (255)  
+                                      Unit....................    (0)  
+                                      Report Size.............    (8)  
+                                      Report Count............    (4)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (65280) 
+                                      Usage 1 (0x1)    
+                                      Report Count............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (65280) 
+                                      Usage 1 (0x1)    
+                                      Report Size.............    (8)  
+                                      Report Count............    (3)  
+                                      Output..................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Nonvolatile, Bitfield) 
+                                    End Collection     
+                              End Collection     
+                          Usage Page    (Generic Desktop) 
+                          Usage (Joystick)    
+                              Collection (Application)    
+                                ReportID................    (2)  
+                                Usage (Pointer)    
+                                    Collection (Physical)    
+                                      Usage Page    (Button) 
+                                      Usage Minimum...........    (1)  
+                                      Usage Maximum...........    (12)  
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (1)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (1)  
+                                      Report Size.............    (1)  
+                                      Report Count............    (12)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (Hat Switch)    
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (7)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (315)  
+                                      Unit....................    (20)  
+                                      Report Size.............    (4)  
+                                      Report Count............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, Null State, Bitfield) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (X)    
+                                      Usage (Y)    
+                                      Usage (Z)    
+                                      Usage (Rz)    
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (255)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (255)  
+                                      Unit....................    (0)  
+                                      Report Size.............    (8)  
+                                      Report Count............    (4)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (65280) 
+                                      Usage 1 (0x1)    
+                                      Report Count............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (65280) 
+                                      Usage 1 (0x1)    
+                                      Report Size.............    (8)  
+                                      Report Count............    (3)  
+                                      Output..................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Nonvolatile, Bitfield) 
+                                    End Collection     
+                              End Collection     
+                          Usage Page    (Generic Desktop) 
+                          Usage (Joystick)    
+                              Collection (Application)    
+                                ReportID................    (3)  
+                                Usage (Pointer)    
+                                    Collection (Physical)    
+                                      Usage Page    (Button) 
+                                      Usage Minimum...........    (1)  
+                                      Usage Maximum...........    (12)  
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (1)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (1)  
+                                      Report Size.............    (1)  
+                                      Report Count............    (12)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (Hat Switch)    
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (7)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (315)  
+                                      Unit....................    (20)  
+                                      Report Size.............    (4)  
+                                      Report Count............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, Null State, Bitfield) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (X)    
+                                      Usage (Y)    
+                                      Usage (Z)    
+                                      Usage (Rz)    
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (255)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (255)  
+                                      Unit....................    (0)  
+                                      Report Size.............    (8)  
+                                      Report Count............    (4)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (65280) 
+                                      Usage 1 (0x1)    
+                                      Report Count............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (65280) 
+                                      Usage 1 (0x1)    
+                                      Report Size.............    (8)  
+                                      Report Count............    (3)  
+                                      Output..................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Nonvolatile, Bitfield) 
+                                    End Collection     
+                              End Collection     
+                          Usage Page    (Generic Desktop) 
+                          Usage (Joystick)    
+                              Collection (Application)    
+                                ReportID................    (4)  
+                                Usage (Pointer)    
+                                    Collection (Physical)    
+                                      Usage Page    (Button) 
+                                      Usage Minimum...........    (1)  
+                                      Usage Maximum...........    (12)  
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (1)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (1)  
+                                      Report Size.............    (1)  
+                                      Report Count............    (12)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (Hat Switch)    
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (7)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (315)  
+                                      Unit....................    (20)  
+                                      Report Size.............    (4)  
+                                      Report Count............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, Null State, Bitfield) 
+                                      Usage Page    (Generic Desktop) 
+                                      Usage (X)    
+                                      Usage (Y)    
+                                      Usage (Z)    
+                                      Usage (Rz)    
+                                      Logical Minimum.........    (0)  
+                                      Logical Maximum.........    (255)  
+                                      Physical Minimum........    (0)  
+                                      Physical Maximum........    (255)  
+                                      Unit....................    (0)  
+                                      Report Size.............    (8)  
+                                      Report Count............    (4)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (65280) 
+                                      Usage 1 (0x1)    
+                                      Report Count............    (1)  
+                                      Input...................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Bitfield) 
+                                      Usage Page    (65280) 
+                                      Usage 1 (0x1)    
+                                      Report Size.............    (8)  
+                                      Report Count............    (3)  
+                                      Output..................   (Data, Variable, Absolute, No Wrap, Linear, Preferred State, No Null Position, Nonvolatile, Bitfield) 
+                                    End Collection     
+                              End Collection     
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   10 ms
+Full Speed device @ 2 (0x1A100000): .............................................   Bluetooth USB Host Controller (did not respond to inquiry - 0xe00002c5, might be Suspended)
+Full Speed device @ 1 (0x3A000000): .............................................   Hub device: "UHCI Root Hub Simulation"
+    Device Descriptor   
+        Descriptor Version Number:   0x0100
+        Device Class:   9   (Hub)
+        Device Subclass:   0
+        Device Protocol:   0   (Full/Low Speed)
+        Device MaxPacketSize:   8
+        Device VendorID/ProductID:   0x05AC/0x8005   (Apple Inc.)
+        Device Version Number:   0x0110
+        Number of Configurations:   1
+        Manufacturer String:   2 "Apple Inc."
+        Product String:   1 "UHCI Root Hub Simulation"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   27
+            Raw Descriptor (hex)    0000: 0A 02 1B 00 01 01 00 60  00 BA 09 04 00 00 01 09  
+            Raw Descriptor (hex)    0010: 00 00 00 08 05 81 03 08  00 20 00 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0x60 (self-powered, remote wakeup)
+        MaxPower:   0 ma
+        Interface #0 - Hub   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   9   (Hub)
+            Interface Subclass;   0
+            Interface Protocol:   0
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   32 ms
+    Hub Descriptor   
+        Number of Ports:   0x02
+        Hub Characteristics:   0x12 (Non-switched standalone hub with no overcurrent protection)
+        PowerOnToGood time:   100 ms
+        Controller current:   0 mA
+        Device Removable (byte):   0x0
+        Port Power Control Mask (byte):   0xff
+High Speed device @ 1 (0xFD000000): .............................................   Hub device: "EHCI Root Hub Simulation"
+    Device Descriptor   
+        Descriptor Version Number:   0x0200
+        Device Class:   9   (Hub)
+        Device Subclass:   0
+        Device Protocol:   1   (High Speed Single Transaction Translator)
+        Device MaxPacketSize:   64
+        Device VendorID/ProductID:   0x05AC/0x8006   (Apple Inc.)
+        Device Version Number:   0x0200
+        Number of Configurations:   1
+        Manufacturer String:   2 "Apple Inc."
+        Product String:   1 "EHCI Root Hub Simulation"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   27
+            Raw Descriptor (hex)    0000: 0A 02 1B 00 01 01 00 60  00 BA 09 04 00 00 01 09  
+            Raw Descriptor (hex)    0010: 00 01 00 08 05 81 03 08  00 09 00 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0x60 (self-powered, remote wakeup)
+        MaxPower:   0 ma
+        Interface #0 - Hub   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   9   (Hub)
+            Interface Subclass;   0
+            Interface Protocol:   1   (Multi TT Hub configured as a Single TT Hub)
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8  (8 x 1  transactions opportunities per microframe)
+                Polling Interval:   9 (256 microframes (32 msecs) )
+    Hub Descriptor   
+        Number of Ports:   0x06
+        Hub Characteristics:   0x0 (Gang switched standalone hub with global overcurrent protection requiring 8 FS bit times and  no port indicators)
+        PowerOnToGood time:   100 ms
+        Controller current:   0 mA
+        Device Removable (byte):   0x0
+        Port Power Control Mask (byte):   0xff
+High Speed device @ 2 (0xFD400000): .............................................   Vendor-specific device: "Built-in iSight" (Suspended)
+    Device Descriptor   
+        Descriptor Version Number:   0x0200
+        Device Class:   255   (Vendor-specific)
+        Device Subclass:   255   (Vendor-specific)
+        Device Protocol:   255
+        Device MaxPacketSize:   64
+        Device VendorID/ProductID:   0x05AC/0x8501   (Apple Inc.)
+        Device Version Number:   0x0184
+        Number of Configurations:   1
+        Manufacturer String:   1 "Micron"
+        Product String:   2 "Built-in iSight"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   267
+            Raw Descriptor (hex)    0000: 09 02 0B 01 02 01 00 80  32 08 24 00 02 FF FF FF  
+            Raw Descriptor (hex)    0010: 00 09 04 00 00 01 FF FF  FF 00 0D 24 01 00 01 31  
+            Raw Descriptor (hex)    0020: 00 60 FE CD 00 01 01 10  24 02 01 01 02 00 00 00  
+            Raw Descriptor (hex)    0030: 00 00 00 00 00 01 00 0B  24 05 02 01 00 00 02 39  
+            Raw Descriptor (hex)    0040: 00 00 09 24 03 03 01 01  00 02 00 07 05 81 03 08  
+            Raw Descriptor (hex)    0050: 00 0A 05 25 03 10 00 09  04 01 00 00 FF FF FF 00  
+            Raw Descriptor (hex)    0060: 0E 24 01 01 9B 00 82 00  03 00 00 00 01 00 1B 24  
+            Raw Descriptor (hex)    0070: 04 01 03 55 59 56 59 00  00 10 00 80 00 00 AA 00  
+            Raw Descriptor (hex)    0080: 38 9B 71 10 01 00 00 00  00 26 24 05 01 00 80 02  
+            Raw Descriptor (hex)    0090: E0 01 00 06 E3 16 00 06  E3 16 00 60 09 00 15 16  
+            Raw Descriptor (hex)    00a0: 05 00 00 15 16 05 00 15  16 05 00 00 00 00 00 26  
+            Raw Descriptor (hex)    00b0: 24 05 02 00 60 01 20 01  00 06 E3 16 00 06 E3 16  
+            Raw Descriptor (hex)    00c0: 00 18 03 00 15 16 05 00  00 15 16 05 00 15 16 05  
+            Raw Descriptor (hex)    00d0: 00 00 00 00 00 26 24 05  03 00 40 01 F0 00 00 06  
+            Raw Descriptor (hex)    00e0: E3 16 00 06 E3 16 00 58  02 00 15 16 05 00 00 15  
+            Raw Descriptor (hex)    00f0: 16 05 00 15 16 05 00 00  00 00 00 09 04 01 01 01  
+            Raw Descriptor (hex)    0100: 0E 02 00 00 07 05 82 05  00 14 01 
+        Number of Interfaces:   2
+        Configuration Value:   1
+        Attributes:   0x80 (bus-powered)
+        MaxPower:   100 ma
+        Raw Descriptor (hex)   0000: 08 24 00 02 FF FF FF 00  
+        Interface #0 - Vendor-specific   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   255   (Vendor-specific)
+            Interface Subclass;   255   (Vendor-specific)
+            Interface Protocol:   255
+        Raw Descriptor (hex)   0000: 0D 24 01 00 01 31 00 60  FE CD 00 01 01 
+        Raw Descriptor (hex)    0000: 10 24 02 01 01 02 00 00  00 00 00 00 00 00 01 00  
+        Unknown Descriptor   0010: 
+        Raw Descriptor (hex)   0000: 0B 24 05 02 01 00 00 02  39 00 00 
+        Raw Descriptor (hex)   0000: 09 24 03 03 01 01 00 02  00 
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8  (8 x 1  transactions opportunities per microframe)
+                Polling Interval:   10 (512 microframes (64 msecs) )
+        Raw Descriptor (hex)   0000: 05 25 03 10 00 
+        Interface #1 - Vendor-specific   
+            Alternate Setting   0
+            Number of Endpoints   0
+            Interface Class:   255   (Vendor-specific)
+            Interface Subclass;   255   (Vendor-specific)
+            Interface Protocol:   255
+        Raw Descriptor (hex)   0000: 0E 24 01 01 9B 00 82 00  03 00 00 00 01 00 
+        Raw Descriptor (hex)    0000: 1B 24 04 01 03 55 59 56  59 00 00 10 00 80 00 00  
+        Raw Descriptor (hex)    0010: AA 00 38 9B 71 10 01 00  00 00 00 
+        Raw Descriptor (hex)    0000: 26 24 05 01 00 80 02 E0  01 00 06 E3 16 00 06 E3  
+        Raw Descriptor (hex)    0010: 16 00 60 09 00 15 16 05  00 00 15 16 05 00 15 16  
+        Raw Descriptor (hex)    0020: 05 00 00 00 00 00 
+        Raw Descriptor (hex)    0000: 26 24 05 02 00 60 01 20  01 00 06 E3 16 00 06 E3  
+        Raw Descriptor (hex)    0010: 16 00 18 03 00 15 16 05  00 00 15 16 05 00 15 16  
+        Raw Descriptor (hex)    0020: 05 00 00 00 00 00 
+        Raw Descriptor (hex)    0000: 26 24 05 03 00 40 01 F0  00 00 06 E3 16 00 06 E3  
+        Raw Descriptor (hex)    0010: 16 00 58 02 00 15 16 05  00 00 15 16 05 00 15 16  
+        Raw Descriptor (hex)    0020: 05 00 00 00 00 00 
+        Interface #1 - Video/Streaming (#1)   
+            Alternate Setting   1
+            Number of Endpoints   1
+            Interface Class:   14   (Video)
+            Interface Subclass;   2   (Streaming)
+            Interface Protocol:   0
+            Endpoint 0x82 - Isochronous Input   
+                Address:   0x82  (IN)
+                Attributes:   0x05  (Isochronous asynchronous data endpoint)
+                Max Packet Size:   5120  (1024 x 3  transactions opportunities per microframe)
+                Polling Interval:   1 (1 microframe (125 microsecs) )
+    Device Qualifier Descriptor   
+        Descriptor Version Number:   0x0200
+        Device Class   255   (Vendor-specific)
+        Device Subclass   255   (Vendor-specific)
+        Device Protocol   255
+        Device MaxPacketSize:   8
+        Number of Configurations:   1
+        bReserved:   0
+    Other Speed Configuration Descriptor   
+        Length (and contents):   267
+            Raw Descriptor (hex)    0000: 09 02 0B 01 02 01 00 80  32 08 24 00 02 FF FF FF  
+            Raw Descriptor (hex)    0010: 00 09 04 00 00 01 FF FF  FF 00 0D 24 01 00 01 31  
+            Raw Descriptor (hex)    0020: 00 60 FE CD 00 01 01 10  24 02 01 01 02 00 00 00  
+            Raw Descriptor (hex)    0030: 00 00 00 00 00 01 00 0B  24 05 02 01 00 00 02 39  
+            Raw Descriptor (hex)    0040: 00 00 09 24 03 03 01 01  00 02 00 07 05 81 03 08  
+            Raw Descriptor (hex)    0050: 00 0A 05 25 03 10 00 09  04 01 00 00 FF FF FF 00  
+            Raw Descriptor (hex)    0060: 0E 24 01 01 9B 00 82 00  03 00 00 00 01 00 1B 24  
+            Raw Descriptor (hex)    0070: 04 01 03 55 59 56 59 00  00 10 00 80 00 00 AA 00  
+            Raw Descriptor (hex)    0080: 38 9B 71 10 01 00 00 00  00 26 24 05 01 00 80 02  
+            Raw Descriptor (hex)    0090: E0 01 00 06 E3 16 00 06  E3 16 00 60 09 00 15 16  
+            Raw Descriptor (hex)    00a0: 05 00 00 15 16 05 00 15  16 05 00 00 00 00 00 26  
+            Raw Descriptor (hex)    00b0: 24 05 02 00 60 01 20 01  00 06 E3 16 00 06 E3 16  
+            Raw Descriptor (hex)    00c0: 00 18 03 00 15 16 05 00  00 15 16 05 00 15 16 05  
+            Raw Descriptor (hex)    00d0: 00 00 00 00 00 26 24 05  03 00 40 01 F0 00 00 06  
+            Raw Descriptor (hex)    00e0: E3 16 00 06 E3 16 00 58  02 00 15 16 05 00 00 15  
+            Raw Descriptor (hex)    00f0: 16 05 00 15 16 05 00 00  00 00 00 09 04 01 01 01  
+            Raw Descriptor (hex)    0100: 0E 02 00 00 07 05 82 05  00 14 01 
+        Number of Interfaces:   2
+        Configuration Value:   1
+        Attributes:   0x80 (bus-powered)
+        MaxPower:   100 ma
+            VDC (Streaming) Unknown Header   
+                Length (and contents):   8
+                    Raw Descriptor (hex)   0000: 08 24 00 02 FF FF FF 00  
+                bDescriptorType:   0x24
+                bDescriptorSubType:   0x0
+        Interface #0 - Vendor-specific   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   255   (Vendor-specific)
+            Interface Subclass;   255   (Vendor-specific)
+            Interface Protocol:   255
+        Raw Descriptor (hex)   0000: 0D 24 01 00 01 31 00 60  FE CD 00 01 01 
+        Raw Descriptor (hex)    0000: 10 24 02 01 01 02 00 00  00 00 00 00 00 00 01 00  
+        Unknown Descriptor   0010: 
+        Raw Descriptor (hex)   0000: 0B 24 05 02 01 00 00 02  39 00 00 
+        Raw Descriptor (hex)   0000: 09 24 03 03 01 01 00 02  00 
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8
+                Polling Interval:   10 ms
+        Raw Descriptor (hex)   0000: 05 25 03 10 00 
+        Interface #1 - Vendor-specific   
+            Alternate Setting   0
+            Number of Endpoints   0
+            Interface Class:   255   (Vendor-specific)
+            Interface Subclass;   255   (Vendor-specific)
+            Interface Protocol:   255
+        Raw Descriptor (hex)   0000: 0E 24 01 01 9B 00 82 00  03 00 00 00 01 00 
+        Raw Descriptor (hex)    0000: 1B 24 04 01 03 55 59 56  59 00 00 10 00 80 00 00  
+        Raw Descriptor (hex)    0010: AA 00 38 9B 71 10 01 00  00 00 00 
+        Raw Descriptor (hex)    0000: 26 24 05 01 00 80 02 E0  01 00 06 E3 16 00 06 E3  
+        Raw Descriptor (hex)    0010: 16 00 60 09 00 15 16 05  00 00 15 16 05 00 15 16  
+        Raw Descriptor (hex)    0020: 05 00 00 00 00 00 
+        Raw Descriptor (hex)    0000: 26 24 05 02 00 60 01 20  01 00 06 E3 16 00 06 E3  
+        Raw Descriptor (hex)    0010: 16 00 18 03 00 15 16 05  00 00 15 16 05 00 15 16  
+        Raw Descriptor (hex)    0020: 05 00 00 00 00 00 
+        Raw Descriptor (hex)    0000: 26 24 05 03 00 40 01 F0  00 00 06 E3 16 00 06 E3  
+        Raw Descriptor (hex)    0010: 16 00 58 02 00 15 16 05  00 00 15 16 05 00 15 16  
+        Raw Descriptor (hex)    0020: 05 00 00 00 00 00 
+        Interface #1 - Video/Streaming (#1)   
+            Alternate Setting   1
+            Number of Endpoints   1
+            Interface Class:   14   (Video)
+            Interface Subclass;   2   (Streaming)
+            Interface Protocol:   0
+            Endpoint 0x82 - Isochronous Input   
+                Address:   0x82  (IN)
+                Attributes:   0x05  (Isochronous asynchronous data endpoint)
+                Max Packet Size:   5120
+                Polling Interval:   1 ms
+High Speed device @ 1 (0xFA000000): .............................................   Hub device: "EHCI Root Hub Simulation"
+    Device Descriptor   
+        Descriptor Version Number:   0x0200
+        Device Class:   9   (Hub)
+        Device Subclass:   0
+        Device Protocol:   1   (High Speed Single Transaction Translator)
+        Device MaxPacketSize:   64
+        Device VendorID/ProductID:   0x05AC/0x8006   (Apple Inc.)
+        Device Version Number:   0x0200
+        Number of Configurations:   1
+        Manufacturer String:   2 "Apple Inc."
+        Product String:   1 "EHCI Root Hub Simulation"
+        Serial Number String:   0 (none)
+    Configuration Descriptor   
+        Length (and contents):   27
+            Raw Descriptor (hex)    0000: 0A 02 1B 00 01 01 00 60  00 BA 09 04 00 00 01 09  
+            Raw Descriptor (hex)    0010: 00 01 00 08 05 81 03 08  00 09 00 
+        Number of Interfaces:   1
+        Configuration Value:   1
+        Attributes:   0x60 (self-powered, remote wakeup)
+        MaxPower:   0 ma
+        Interface #0 - Hub   
+            Alternate Setting   0
+            Number of Endpoints   1
+            Interface Class:   9   (Hub)
+            Interface Subclass;   0
+            Interface Protocol:   1   (Multi TT Hub configured as a Single TT Hub)
+            Endpoint 0x81 - Interrupt Input   
+                Address:   0x81  (IN)
+                Attributes:   0x03  (Interrupt no synchronization data endpoint)
+                Max Packet Size:   8  (8 x 1  transactions opportunities per microframe)
+                Polling Interval:   9 (256 microframes (32 msecs) )
+    Hub Descriptor   
+        Number of Ports:   0x04
+        Hub Characteristics:   0x0 (Gang switched standalone hub with global overcurrent protection requiring 8 FS bit times and  no port indicators)
+        PowerOnToGood time:   100 ms
+        Controller current:   0 mA
+        Device Removable (byte):   0x0
+        Port Power Control Mask (byte):   0xff

@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -40,6 +40,8 @@ namespace Nes
 		template<typename T>
 		class Vector;
 
+		typedef void* StdStream;
+
 		namespace Stream
 		{
 			class In
@@ -47,6 +49,7 @@ namespace Nes
 				StdStream const stream;
 
 				void SafeRead(byte*,dword);
+				void Clear();
 
 			public:
 
@@ -66,10 +69,12 @@ namespace Nes
 				dword Read32();
 				qword Read64();
 				uint  SafeRead8();
+				void  Peek(byte*,dword);
 				uint  Peek8();
 				uint  Peek16();
 				dword Peek32();
 				void  Seek(idword);
+				ulong Length();
 				bool  Eof();
 
 				template<dword N>
