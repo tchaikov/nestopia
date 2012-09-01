@@ -1,0 +1,57 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {fullscreenToggle = id; startLoad = id; }; 
+            CLASS = NestopiaView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {dipSwitchPanel = NSPanel; mainWindow = NSWindow; }; 
+            SUPERCLASS = NSOpenGLView; 
+        }, 
+        {
+            ACTIONS = {
+                applyCheats = id; 
+                buttonChanged = id; 
+                openPreferencesWindow = id; 
+                testDips = id; 
+                toolbaritemclicked = id; 
+            }; 
+            CLASS = OpenNestopiaController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                dipSwitchChoices = NSMatrix; 
+                dipSwitchLabels = NSMatrix; 
+                dipSwitchPanel = NSPanel; 
+                gameSharkCode = NSMatrix; 
+                mainWindow = NSWindow; 
+                nestopiaView = NestopiaView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = OpenNestopiaInputController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                mJoysticksController = NSArrayController; 
+                mKeyboardEventsController = NSArrayController; 
+                mKeyboardsController = NSArrayController; 
+                mPad1Controls = NSArrayController; 
+                nestopiaView = NestopiaView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = OpenNestopiaView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {ggCodes = NSMatrix; mainWindow = NSWindow; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            ACTIONS = {checkForUpdates = id; }; 
+            CLASS = SUUpdater; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
