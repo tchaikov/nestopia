@@ -25,14 +25,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ButtonState : NSObject
-{
-    NSString * mName;
-    BOOL mPressed;
-}
 
-- (NSString *) name;
-
-- (BOOL) pressed;
-- (void) setPressed: (BOOL) flag;
+- (id) initWithName: (NSString *) name;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) BOOL pressed;
 
 @end

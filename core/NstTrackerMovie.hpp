@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -43,8 +43,8 @@ namespace Nes
 			Movie(Machine&,EmuLoadState,EmuSaveState,Cpu&,dword);
 			~Movie();
 
-			bool Play(StdStream);
-			bool Record(StdStream,bool);
+			bool Play(std::istream&);
+			bool Record(std::iostream&,bool);
 			void Stop();
 			void Resync();
 			void Reset();

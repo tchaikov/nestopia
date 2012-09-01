@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -28,6 +28,7 @@
 #include "NstImage.hpp"
 #include "NstClock.hpp"
 #include "NstFile.hpp"
+#include "NstChecksum.hpp"
 #include "api/NstApiFds.hpp"
 
 #ifdef NST_PRAGMA_ONCE
@@ -50,8 +51,8 @@ namespace Nes
 			Result EjectDisk();
 			Result GetDiskData(uint,Api::Fds::DiskData&) const;
 
-			static void SetBios(StdStream);
-			static Result GetBios(StdStream);
+			static void SetBios(std::istream*);
+			static Result GetBios(std::ostream&);
 			static bool HasBios();
 
 			class Sound : public Apu::Channel
@@ -226,6 +227,8 @@ namespace Nes
 			void VSync();
 			uint GetDesiredController(uint) const;
 			uint GetDesiredAdapter() const;
+			Region GetDesiredRegion() const;
+			System GetDesiredSystem(Region,CpuModel*,PpuModel*) const;
 			void LoadState(State::Loader&);
 			void SaveState(State::Saver&,dword) const;
 			bool PowerOff();
@@ -263,7 +266,7 @@ namespace Nes
 
 			struct Disks
 			{
-				explicit Disks(StdStream);
+				explicit Disks(std::istream&);
 
 				enum
 				{
@@ -275,18 +278,15 @@ namespace Nes
 				{
 				public:
 
-					explicit Sides(StdStream);
+					explicit Sides(std::istream&);
 					~Sides();
 
 					inline byte* operator [] (uint) const;
-					inline void Cache() const;
 					void Save() const;
 
 					uint count;
 
 				private:
-
-					NST_NO_INLINE void Load() const;
 
 					enum
 					{
@@ -294,7 +294,6 @@ namespace Nes
 					};
 
 					byte* data;
-					mutable ibool dirty;
 					File file;
 
 				public:
@@ -376,7 +375,7 @@ namespace Nes
 						BYTES_GAP_INIT = CLK_HEAD/8UL * 398 / 1000,
 						BYTES_GAP_NEXT = CLK_HEAD/8UL * 10  / 1000,
 
-						CLK_BYTE = Clocks::NTSC_CLK / (CLK_HEAD/8UL * Clocks::RP2A03_CC * Clocks::NTSC_DIV),
+						CLK_BYTE = CLK_NTSC / (CLK_HEAD/8UL * CPU_RP2A03_CC * CLK_NTSC_DIV),
 
 						CLK_MOTOR  = CLK_HEAD/8UL * 100 * CLK_BYTE / 1000,
 						CLK_REWIND = CLK_HEAD/8UL * 135 * CLK_BYTE / 1000,
@@ -413,7 +412,6 @@ namespace Nes
 					byte out;
 					byte ctrl;
 					byte status;
-					mutable bool dirty;
 					const Disks::Sides& sides;
 				};
 
@@ -440,7 +438,6 @@ namespace Nes
 				void Reset(Cpu&,byte*,bool=false);
 				void LoadState(State::Loader&,dword,Ppu&);
 				void SaveState(State::Saver&) const;
-				bool Dirty() const;
 
 				inline void Mount(byte*,bool=false);
 
@@ -476,16 +473,12 @@ namespace Nes
 			Ppu& ppu;
 			Ram ram;
 			Sound sound;
+			mutable Checksum checksum;
 
 			class Bios;
 			static Bios bios;
 
 		public:
-
-			Region::Type GetRegion() const
-			{
-				return Region::NTSC;
-			}
 
 			bool IsAnyDiskInserted() const
 			{

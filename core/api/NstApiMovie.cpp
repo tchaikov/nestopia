@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -39,12 +39,12 @@ namespace Nes
 		Result Movie::Play(std::istream& stream) throw()
 		{
 			Api::TapeRecorder(emulator).Stop();
-			return emulator.tracker.PlayMovie( emulator, &stream );
+			return emulator.tracker.PlayMovie( emulator, stream );
 		}
 
 		Result Movie::Record(std::iostream& stream,How how) throw()
 		{
-			return emulator.tracker.RecordMovie( emulator, &stream, how == APPEND );
+			return emulator.tracker.RecordMovie( emulator, stream, how == APPEND );
 		}
 
 		void Movie::Stop() throw()

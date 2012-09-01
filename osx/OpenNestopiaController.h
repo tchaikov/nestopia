@@ -3,7 +3,7 @@
 #import <Cocoa/Cocoa.h>
 #import "NestopiaView.h"
 
-@interface OpenNestopiaController : NSObject
+@interface OpenNestopiaController : NSObject <NSToolbarDelegate>
 {
 	
 	
@@ -25,8 +25,5 @@
 - (IBAction)openPreferencesWindow:(id)sender;
 - (IBAction)testDips:(id)sender;
 - (IBAction)buttonChanged:(id)sender;
-
-void TestDefaultAU();
-void CreateDefaultAU();
 
 @end

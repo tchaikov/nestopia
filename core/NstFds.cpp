@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -83,7 +83,7 @@ namespace Nes
 			{
 			}
 
-			void Set(StdStream stdStream)
+			void Set(std::istream* const stdStream)
 			{
 				available = false;
 
@@ -111,11 +111,11 @@ namespace Nes
 				}
 			}
 
-			Result Get(StdStream stream) const
+			Result Get(std::ostream& stream) const
 			{
 				if (available)
 				{
-					Stream::Out(stream).Write( rom, SIZE_8K );
+					Stream::Out(&stream).Write( rom, SIZE_8K );
 					return RESULT_OK;
 				}
 				else
@@ -155,12 +155,6 @@ namespace Nes
 		#pragma optimize("s", on)
 		#endif
 
-		inline void Fds::Disks::Sides::Cache() const
-		{
-			if (!dirty)
-				Load();
-		}
-
 		inline void Fds::Adapter::Mount(byte* io,bool protect)
 		{
 			unit.drive.Mount( io, protect );
@@ -178,7 +172,10 @@ namespace Nes
 			if (!bios.Available())
 				throw RESULT_ERR_MISSING_BIOS;
 
-			ppu.GetChrMem().Source().Set( SIZE_8K, true, true );
+			if (context.patch && context.patchResult)
+				*context.patchResult = RESULT_ERR_UNSUPPORTED;
+
+			ppu.GetChrMem().Source().Set( Core::Ram::RAM, true, true, SIZE_8K );
 		}
 
 		Fds::~Fds()
@@ -241,12 +238,12 @@ namespace Nes
 			return true;
 		}
 
-		void Fds::SetBios(StdStream stream)
+		void Fds::SetBios(std::istream* stream)
 		{
 			bios.Set( stream );
 		}
 
-		Result Fds::GetBios(StdStream stream)
+		Result Fds::GetBios(std::ostream& stream)
 		{
 			return bios.Get( stream );
 		}
@@ -254,6 +251,29 @@ namespace Nes
 		bool Fds::HasBios()
 		{
 			return bios.Available();
+		}
+
+		Region Fds::GetDesiredRegion() const
+		{
+			return REGION_NTSC;
+		}
+
+		System Fds::GetDesiredSystem(Region region,CpuModel* cpu,PpuModel* ppu) const
+		{
+			if (region == REGION_NTSC)
+			{
+				if (cpu)
+					*cpu = CPU_RP2A03;
+
+				if (ppu)
+					*ppu = PPU_RP2C02;
+
+				return SYSTEM_FAMICOM;
+			}
+			else
+			{
+				return Image::GetDesiredSystem( region, cpu, ppu );
+			}
 		}
 
 		uint Fds::GetDesiredController(const uint port) const
@@ -387,8 +407,6 @@ namespace Nes
 						{
 							if (chunk == AsciiId<'D','0','A'>::R( 0, i / 2, i % 2 ))
 							{
-								disks.sides.Cache();
-
 								byte* const data = disks.sides[i];
 								state.Uncompress( data, SIDE_SIZE );
 
@@ -430,6 +448,10 @@ namespace Nes
 			);
 		}
 
+		#ifdef NST_MSVC_OPTIMIZE
+		#pragma optimize("", on)
+		#endif
+
 		void Fds::SaveState(State::Saver& state,const dword baseChunk) const
 		{
 			state.Begin( baseChunk );
@@ -463,7 +485,22 @@ namespace Nes
 				state.Begin( AsciiId<'D','S','K'>::V ).Write( data ).End();
 			}
 
-			if (adapter.Dirty() || !state.Internal())
+			bool saveData = true;
+
+			if (state.Internal())
+			{
+				Checksum recentChecksum;
+
+				for (uint i=0; i < disks.sides.count; ++i)
+					recentChecksum.Compute( disks.sides[i], SIDE_SIZE );
+
+				if (checksum == recentChecksum)
+					saveData = false;
+				else
+					checksum = recentChecksum;
+			}
+
+			if (saveData)
 			{
 				struct Dst
 				{
@@ -490,10 +527,6 @@ namespace Nes
 
 			state.End();
 		}
-
-		#ifdef NST_MSVC_OPTIMIZE
-		#pragma optimize("", on)
-		#endif
 
 		NES_PEEK(Fds,Nop)
 		{
@@ -594,10 +627,9 @@ namespace Nes
 		#pragma optimize("s", on)
 		#endif
 
-		Fds::Disks::Sides::Sides(StdStream stdStream)
-		: dirty(false)
+		Fds::Disks::Sides::Sides(std::istream& stdStream)
 		{
-			Stream::In stream( stdStream );
+			Stream::In stream( &stdStream );
 
 			dword size;
 			uint header;
@@ -639,6 +671,7 @@ namespace Nes
 			try
 			{
 				stream.Read( data - header, header + size );
+				file.Load( data - header, header + size, File::DISK );
 			}
 			catch (...)
 			{
@@ -652,32 +685,20 @@ namespace Nes
 			delete [] (data - HEADER_SIZE);
 		}
 
-		NST_NO_INLINE void Fds::Disks::Sides::Load() const
-		{
-			NST_ASSERT( !dirty );
-
-			dirty = true;
-			const uint header = HasHeader() ? HEADER_SIZE : 0;
-			file.Load( data - header, header + count * dword(SIDE_SIZE) );
-		}
-
 		void Fds::Disks::Sides::Save() const
 		{
-			if (dirty)
+			try
 			{
-				try
-				{
-					const uint header = HasHeader() ? HEADER_SIZE : 0;
-					file.Save( File::SAVE_FDS, data - header, header + count * dword(SIDE_SIZE), false );
-				}
-				catch (...)
-				{
-					NST_DEBUG_MSG("fds save failure!");
-				}
+				const uint header = HasHeader() ? HEADER_SIZE : 0;
+				file.Save( File::DISK, data - header, header + count * dword(SIDE_SIZE) );
+			}
+			catch (...)
+			{
+				NST_DEBUG_MSG("fds save failure!");
 			}
 		}
 
-		Fds::Disks::Disks(StdStream stream)
+		Fds::Disks::Disks(std::istream& stream)
 		:
 		sides          (stream),
 		crc            (Crc32::Compute( sides[0], sides.count * dword(SIDE_SIZE) )),
@@ -771,7 +792,7 @@ namespace Nes
 		#endif
 
 		Fds::Unit::Drive::Drive(const Disks::Sides& s)
-		: dirty(false), sides(s)
+		: sides(s)
 		{
 			Reset();
 		}
@@ -939,7 +960,7 @@ namespace Nes
 				count = 0;
 				status |= uint(STATUS_UNREADY);
 			}
-			else if (!(reg & CTRL_STOP | count) && io)
+			else if (!((reg & CTRL_STOP) | count) && io)
 			{
 				count = CLK_MOTOR;
 				headPos = 0;
@@ -1066,10 +1087,6 @@ namespace Nes
 					if (length-- > 3)
 					{
 						++dataPos;
-
-						dirty = true;
-						sides.Cache();
-
 						*stream = data;
 					}
 					else if (length == 2)
@@ -1088,9 +1105,6 @@ namespace Nes
 							NST_VERIFY( ctrl & uint(CTRL_IO_MODE) );
 
 							++dataPos;
-
-							dirty = true;
-							sides.Cache();
 
 							switch (*stream = data)
 							{
@@ -1115,7 +1129,9 @@ namespace Nes
 									NST_VERIFY( length > 3 );
 									break;
 
-								NST_UNREACHABLE
+								default:
+
+									NST_UNREACHABLE();
 							}
 						}
 					}
@@ -1281,17 +1297,10 @@ namespace Nes
 					if (unit.drive.headPos < unit.drive.dataPos)
 						unit.drive.headPos = unit.drive.dataPos;
 
-					ppu.SetMirroring( (unit.drive.ctrl & uint(CTRL1_NMT_HORIZONTAL)) ? Ppu::NMT_HORIZONTAL : Ppu::NMT_VERTICAL );
+					ppu.SetMirroring( (unit.drive.ctrl & uint(CTRL1_NMT_HORIZONTAL)) ? Ppu::NMT_H : Ppu::NMT_V );
 					break;
 				}
 			}
-		}
-
-		bool Fds::Adapter::Dirty() const
-		{
-			bool dirty = unit.drive.dirty;
-			unit.drive.dirty = false;
-			return dirty;
 		}
 
 		#ifdef NST_MSVC_OPTIMIZE
@@ -1454,7 +1463,7 @@ namespace Nes
 		NES_POKE_D(Fds,4025)
 		{
 			adapter.Write( data );
-			ppu.SetMirroring( (data & CTRL1_NMT_HORIZONTAL) ? Ppu::NMT_HORIZONTAL : Ppu::NMT_VERTICAL );
+			ppu.SetMirroring( (data & CTRL1_NMT_HORIZONTAL) ? Ppu::NMT_H : Ppu::NMT_V );
 		}
 
 		NES_PEEK(Fds,4031)
@@ -1615,8 +1624,8 @@ namespace Nes
 		{
 			envelopes.clock =
 			(
-				(GetRegion() == Region::NTSC) ? (Clocks::RP2A03_CC * Envelopes::PULSE) :
-												(Clocks::RP2A07_CC * Envelopes::PULSE)
+				GetModel() == CPU_RP2A03 ? (CPU_RP2A03_CC * Envelopes::PULSE) :
+                                           (CPU_RP2A07_CC * Envelopes::PULSE)
 			);
 
 			Cycle rate;
@@ -1630,15 +1639,15 @@ namespace Nes
 
 			wave.rate = GetSampleRate();
 
-			if (GetRegion() == Region::NTSC)
+			if (GetModel() == CPU_RP2A03)
 			{
-				wave.frame = Clocks::NTSC_CLK;
-				wave.clock = 0x10000UL * Clocks::RP2A03_CC * Clocks::NTSC_DIV;
+				wave.frame = CLK_NTSC;
+				wave.clock = 0x10000UL * CPU_RP2A03_CC * CLK_NTSC_DIV;
 			}
 			else
 			{
-				wave.frame = Clocks::PAL_CLK;
-				wave.clock = 0x10000UL * Clocks::RP2A07_CC * Clocks::PAL_DIV;
+				wave.frame = CLK_PAL;
+				wave.clock = 0x10000UL * CPU_RP2A07_CC * CLK_PAL_DIV;
 			}
 
 			amp = 0;

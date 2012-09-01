@@ -2,7 +2,7 @@
 //
 // Nestopia - NES/Famicom emulator written in C++
 //
-// Copyright (C) 2003-2007 Martin Freij
+// Copyright (C) 2003-2008 Martin Freij
 //
 // This file is part of Nestopia.
 //
@@ -23,8 +23,11 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 
 #include <cstring>
+#include <new>
+#include "NstStream.hpp"
 #include "NstVector.hpp"
-#include "NstZlib.hpp"
+#include "NstChecksum.hpp"
+#include "NstPatcher.hpp"
 #include "NstFile.hpp"
 #include "api/NstApiUser.hpp"
 
@@ -36,185 +39,483 @@ namespace Nes
 		#pragma optimize("s", on)
 		#endif
 
-		class File::Buffer
+		struct File::Context
 		{
-			dword uncompressed;
+			Checksum checksum;
 			Vector<byte> data;
-
-		public:
-
-			void Load(const byte* NST_RESTRICT,dword);
-			bool Save(Type,const byte* NST_RESTRICT,dword) const;
-
-			Buffer()
-			: uncompressed(0) {}
 		};
 
 		File::File()
-		: buffer(*new Buffer)
+		: context( *new Context )
 		{
-			NST_COMPILE_ASSERT
-			(
-				LOAD_BATTERY   - Api::User::FILE_LOAD_BATTERY   == 0 &&
-				SAVE_BATTERY   - Api::User::FILE_SAVE_BATTERY   == 0 &&
-				SAVE_FDS       - Api::User::FILE_SAVE_FDS       == 0 &&
-				LOAD_EEPROM    - Api::User::FILE_LOAD_EEPROM    == 0 &&
-				SAVE_EEPROM    - Api::User::FILE_SAVE_EEPROM    == 0 &&
-				LOAD_TAPE      - Api::User::FILE_LOAD_TAPE      == 0 &&
-				SAVE_TAPE      - Api::User::FILE_SAVE_TAPE      == 0 &&
-				LOAD_TURBOFILE - Api::User::FILE_LOAD_TURBOFILE == 0 &&
-				SAVE_TURBOFILE - Api::User::FILE_SAVE_TURBOFILE == 0
-			);
 		}
 
 		File::~File()
 		{
-			delete &buffer;
+			delete &context;
 		}
 
-		void File::Load(const byte* const NST_RESTRICT data,const dword size) const
+		void File::Load(const byte* data,dword size) const
 		{
 			NST_ASSERT( data && size );
 
-			buffer.Load( data, size );
+			context.checksum.Clear();
+			context.checksum.Compute( data, size );
+			context.data.Destroy();
 		}
 
-		bool File::Load(const Type type,byte* const NST_RESTRICT data,const dword size) const
+		void File::Load(byte* data,dword size,Type type) const
 		{
 			NST_ASSERT( data && size );
 
-			bool matched = true;
+			context.data.Assign( data, size );
 
+			bool altered = false;
+
+			const LoadBlock loadBlock = {data,size};
+			Load( type, &loadBlock, 1, &altered );
+
+			if (altered)
+				context.checksum.Clear();
+		}
+
+		void File::Load(Type type,byte* data,dword size) const
+		{
+			const LoadBlock loadBlock = {data,size};
+			Load( type, &loadBlock, 1 );
+		}
+
+		void File::Load(const Type type,const LoadBlock* const loadBlock,const uint loadBlockCount,bool* const altered) const
+		{
+			class Loader : public Api::User::File
 			{
-				Api::User::FileData file;
-				Api::User::fileIoCallback( static_cast<Api::User::File>(type), file );
+				const Action action;
+				const LoadBlock* const loadBlock;
+				const uint loadBlockCount;
+				bool* const altered;
 
-				if (Api::User::FileData::size_type filesize = file.size())
+				Action GetAction() const throw()
 				{
-					if (filesize != size)
-					{
-						matched = false;
+					return action;
+				}
 
-						if (filesize > size)
-							filesize = size;
+				ulong GetMaxSize() const throw()
+				{
+					dword maxsize = 0;
+
+					for (const LoadBlock* NST_RESTRICT it=loadBlock, *const end=loadBlock+loadBlockCount; it != end; ++it)
+						maxsize += it->size;
+
+					return maxsize;
+				}
+
+				Result SetContent(const void* data,ulong filesize) throw()
+				{
+					if (altered)
+						*altered = true;
+
+					if (!data || !filesize)
+						return RESULT_ERR_INVALID_PARAM;
+
+					const byte* NST_RESTRICT filedata = static_cast<const byte*>(data);
+
+					for (const LoadBlock* NST_RESTRICT it=loadBlock, *const end=loadBlock+loadBlockCount; it != end; ++it)
+					{
+						if (const dword size = NST_MIN(filesize,it->size))
+						{
+							std::memcpy( it->data, filedata, size );
+							filedata += size;
+							filesize -= size;
+						}
 					}
 
-					std::memcpy( data, &file.front(), filesize );
+					return RESULT_OK;
 				}
-			}
 
-			buffer.Load( data, size );
-
-			return matched;
-		}
-
-		bool File::Load(const Type type,Vector<byte>& vector,const dword maxsize) const
-		{
-			NST_ASSERT( maxsize );
-
-			bool matched = true;
-
-			{
-				Api::User::FileData file;
-				Api::User::fileIoCallback( static_cast<Api::User::File>(type), file );
-
-				if (Api::User::FileData::size_type filesize = file.size())
+				Result SetContent(std::istream& stdStream) throw()
 				{
-					if (filesize > maxsize)
+					if (altered)
+						*altered = true;
+
+					try
 					{
-						filesize = maxsize;
-						matched = false;
+						Stream::In stream( &stdStream );
+
+						if (ulong length = stream.Length())
+						{
+							for (const LoadBlock* NST_RESTRICT it=loadBlock, *const end=loadBlock+loadBlockCount; it != end; ++it)
+							{
+								if (const dword size = NST_MIN(length,it->size))
+								{
+									stream.Read( it->data, size );
+									length -= size;
+								}
+							}
+						}
+						else
+						{
+							return RESULT_ERR_INVALID_PARAM;
+						}
+					}
+					catch (Result result)
+					{
+						return result;
+					}
+					catch (const std::bad_alloc&)
+					{
+						return RESULT_ERR_OUT_OF_MEMORY;
+					}
+					catch (...)
+					{
+						return RESULT_ERR_GENERIC;
 					}
 
-					vector.Resize( filesize );
-					std::memcpy( vector.Begin(), &file.front(), filesize );
+					return RESULT_OK;
 				}
-				else
+
+				Result SetPatchContent(std::istream& stream) throw()
 				{
-					vector.Destroy();
-					return true;
-				}
-			}
+					if (altered)
+						*altered = true;
 
-			buffer.Load( vector.Begin(), vector.Size() );
+					Patcher patcher;
 
-			return matched;
-		}
+					Result result = patcher.Load( stream );
 
-		void File::Save(const Type type,const byte* const NST_RESTRICT data,const dword size,const bool cache) const
-		{
-			if (buffer.Save( type, data, size ))
-				buffer.Load( data, cache ? size : 0 );
-		}
+					if (NES_FAILED(result))
+						return result;
 
-		void File::Buffer::Load(const byte* const NST_RESTRICT input,dword size)
-		{
-			try
-			{
-				uncompressed = 0;
-				data.Resize( size );
-
-				if (size)
-				{
-					NST_ASSERT( input );
-
-					size = Zlib::Compress( input, size, data.Begin(), size, Zlib::BEST_COMPRESSION );
-
-					if (size-1 < data.Size()-1)
+					if (loadBlockCount > 1)
 					{
-						uncompressed = data.Size();
-						data.SetTo( size );
+						Patcher::Block* const patchBlocks = new (std::nothrow) Patcher::Block [loadBlockCount];
+
+						if (!patchBlocks)
+							return RESULT_ERR_OUT_OF_MEMORY;
+
+						for (uint i=0; i < loadBlockCount; ++i)
+						{
+							patchBlocks[i].data = loadBlock[i].data;
+							patchBlocks[i].size = loadBlock[i].size;
+						}
+
+						result = patcher.Test( patchBlocks, loadBlockCount );
+
+						delete [] patchBlocks;
 					}
 					else
 					{
-						std::memcpy( data.Begin(), input, data.Size() );
+						result = patcher.Test( loadBlockCount ? loadBlock->data : NULL, loadBlockCount ? loadBlock->size : 0 );
 					}
+
+					if (NES_SUCCEEDED(result))
+					{
+						for (dword i=0, offset=0; i < loadBlockCount; offset += loadBlock[i].size, ++i)
+							patcher.Patch( loadBlock[i].data, loadBlock[i].data, loadBlock[i].size, offset );
+					}
+
+					return result;
 				}
 
-				data.Defrag();
-			}
-			catch (...)
+			public:
+
+				Loader(Type t,const LoadBlock* l,uint c,bool* a)
+				:
+				action
+				(
+					t == EEPROM    ? LOAD_EEPROM :
+					t == TAPE      ? LOAD_TAPE :
+					t == TURBOFILE ? LOAD_TURBOFILE :
+					t == DISK      ? LOAD_FDS :
+                                     LOAD_BATTERY
+				),
+				loadBlock      (l),
+				loadBlockCount (c),
+				altered        (a)
+				{
+					if (altered)
+						*altered = false;
+				}
+			};
+
 			{
-				data.Destroy();
+				Loader loader( type, loadBlock, loadBlockCount, altered );
+				Api::User::fileIoCallback( loader );
 			}
+
+			context.checksum.Clear();
+
+			for (const LoadBlock* NST_RESTRICT it=loadBlock, *const end=loadBlock+loadBlockCount; it != end; ++it)
+				context.checksum.Compute( it->data, it->size );
 		}
 
-		bool File::Buffer::Save(const Type type,const byte* const NST_RESTRICT input,const dword size) const
+		void File::Load(const Type type,Vector<byte>& buffer,const dword maxsize) const
 		{
-			NST_ASSERT( input && size );
+			NST_ASSERT( maxsize && type != DISK );
 
-			Api::User::FileData file( size );
-
-			bool dirty = (uncompressed ? uncompressed : data.Size()) != size;
-
-			if (!dirty)
+			class Loader : public Api::User::File
 			{
-				dirty = uncompressed && Zlib::Uncompress( data.Begin(), data.Size(), &file.front(), size ) != size;
+				const Action action;
+				Vector<byte>& buffer;
+				const dword maxsize;
 
-				if (!dirty)
+				Action GetAction() const throw()
 				{
-					const byte* const NST_RESTRICT old = (uncompressed ? &file.front() : data.Begin());
-					dword i = 0;
+					return action;
+				}
 
-					do
+				ulong GetMaxSize() const throw()
+				{
+					return maxsize;
+				}
+
+				Result SetContent(const void* filedata,ulong filesize) throw()
+				{
+					if (!filedata || !filesize)
+						return RESULT_ERR_INVALID_PARAM;
+
+					try
 					{
-						if (old[i] != input[i])
+						buffer.Assign( static_cast<const byte*>(filedata), NST_MIN(filesize,maxsize) );
+					}
+					catch (const std::bad_alloc&)
+					{
+						return RESULT_ERR_OUT_OF_MEMORY;
+					}
+					catch (...)
+					{
+						return RESULT_ERR_GENERIC;
+					}
+
+					return RESULT_OK;
+				}
+
+				Result SetContent(std::istream& stdStream) throw()
+				{
+					try
+					{
+						Stream::In stream( &stdStream );
+
+						if (const ulong length = stream.Length())
 						{
-							dirty = true;
-							break;
+							buffer.Resize( NST_MIN(length,maxsize) );
+
+							try
+							{
+								stream.Read( buffer.Begin(), buffer.Size() );
+							}
+							catch (...)
+							{
+								buffer.Destroy();
+								throw;
+							}
+						}
+						else
+						{
+							return RESULT_ERR_INVALID_PARAM;
 						}
 					}
-					while (++i < size);
+					catch (Result result)
+					{
+						return result;
+					}
+					catch (const std::bad_alloc&)
+					{
+						return RESULT_ERR_OUT_OF_MEMORY;
+					}
+					catch (...)
+					{
+						return RESULT_ERR_GENERIC;
+					}
+
+					return RESULT_OK;
 				}
-			}
 
-			if (dirty)
+			public:
+
+				Loader(Type t,Vector<byte>& b,dword m)
+				:
+				action
+				(
+					t == EEPROM    ? LOAD_EEPROM :
+					t == TAPE      ? LOAD_TAPE :
+					t == TURBOFILE ? LOAD_TURBOFILE :
+                                     LOAD_BATTERY
+				),
+				buffer  (b),
+				maxsize (m)
+				{
+				}
+			};
+
 			{
-				std::memcpy( &file.front(), input, size );
-				Api::User::fileIoCallback( static_cast<Api::User::File>(type), file );
+				Loader loader( type, buffer, maxsize );
+				Api::User::fileIoCallback( loader );
 			}
 
-			return dirty;
+			if (buffer.Size())
+				Load( buffer.Begin(), buffer.Size() );
+		}
+
+		void File::Save(Type type,const byte* data,dword size) const
+		{
+			const SaveBlock saveBlock = {data,size};
+			Save( type, &saveBlock, 1 );
+		}
+
+		void File::Save(const Type type,const SaveBlock* const saveBlock,const uint saveBlockCount) const
+		{
+			NST_ASSERT( saveBlock && saveBlockCount );
+
+			Checksum checksum;
+
+			for (const SaveBlock *NST_RESTRICT it=saveBlock, *const end=saveBlock+saveBlockCount; it != end; ++it)
+				checksum.Compute( it->data, it->size );
+
+			if (checksum != context.checksum)
+			{
+				class Saver : public Api::User::File
+				{
+					const Action action;
+					const SaveBlock* const saveBlock;
+					const uint saveBlockCount;
+					mutable Vector<byte> buffer;
+					const Vector<byte> original;
+
+					Action GetAction() const throw()
+					{
+						return action;
+					}
+
+					ulong GetMaxSize() const throw()
+					{
+						dword size = 0;
+
+						for (const SaveBlock* NST_RESTRICT it=saveBlock, *const end=saveBlock+saveBlockCount; it != end; ++it)
+							size += it->size;
+
+						return size;
+					}
+
+					Result GetContent(const void*& filedata,ulong& filesize) const throw()
+					{
+						if (saveBlockCount <= 1)
+						{
+							filedata = saveBlock->data;
+							filesize = saveBlock->size;
+						}
+						else
+						{
+							if (!buffer.Size())
+							{
+								try
+								{
+									buffer.Resize( Saver::GetMaxSize() );
+								}
+								catch (...)
+								{
+									filedata = NULL;
+									filesize = 0;
+									return RESULT_ERR_OUT_OF_MEMORY;
+								}
+
+								dword offset = 0;
+
+								for (const SaveBlock* NST_RESTRICT it=saveBlock, *const end=saveBlock+saveBlockCount; it != end; ++it)
+								{
+									std::memcpy( &buffer[offset], it->data, it->size );
+									offset += it->size;
+								}
+							}
+
+							filedata = buffer.Begin();
+							filesize = buffer.Size();
+						}
+
+						return RESULT_OK;
+					}
+
+					Result GetContent(std::ostream& stdStream) const throw()
+					{
+						try
+						{
+							Stream::Out stream( &stdStream );
+
+							for (const SaveBlock* NST_RESTRICT it=saveBlock, *const end=saveBlock+saveBlockCount; it != end; ++it)
+							{
+								if (it->size)
+									stream.Write( it->data, it->size );
+							}
+						}
+						catch (Result result)
+						{
+							return result;
+						}
+						catch (const std::bad_alloc&)
+						{
+							return RESULT_ERR_OUT_OF_MEMORY;
+						}
+						catch (...)
+						{
+							return RESULT_ERR_GENERIC;
+						}
+
+						return RESULT_OK;
+					}
+
+					Result GetPatchContent(Patch format,std::ostream& stream) const throw()
+					{
+						if (!original.Size() || (format != PATCH_UPS && format != PATCH_IPS))
+							return RESULT_ERR_UNSUPPORTED;
+
+						const void* data;
+						ulong size;
+
+						Result result = Saver::GetContent( data, size );
+
+						if (NES_FAILED(result))
+							return result;
+
+						if (size != original.Size())
+							return RESULT_ERR_UNSUPPORTED;
+
+						Patcher patcher;
+
+						result = patcher.Create
+						(
+							format == PATCH_UPS ? Patcher::UPS : Patcher::IPS,
+							original.Begin(),
+							static_cast<const byte*>(data),
+							size
+						);
+
+						if (NES_FAILED(result))
+							return result;
+
+						return patcher.Save( stream );
+					}
+
+				public:
+
+					Saver(Type t,const SaveBlock* s,uint c,const Vector<byte>& o)
+					:
+					action
+					(
+						t == EEPROM    ? SAVE_EEPROM :
+						t == TAPE      ? SAVE_TAPE :
+						t == TURBOFILE ? SAVE_TURBOFILE :
+						t == DISK      ? SAVE_FDS :
+                                         SAVE_BATTERY
+					),
+					saveBlock      (s),
+					saveBlockCount (c),
+					original       (o)
+					{
+					}
+				};
+
+				Saver saver( type, saveBlock, saveBlockCount, context.data );
+				Api::User::fileIoCallback( saver );
+			}
 		}
 
 		#ifdef NST_MSVC_OPTIMIZE

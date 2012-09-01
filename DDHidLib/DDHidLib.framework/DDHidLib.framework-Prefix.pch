@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'DDHidLib.framework' target in the 'DDHidLib.framework' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
