@@ -401,13 +401,13 @@ NSString* fName;
 
 -(void) loadState
 {
-    NSOpenPanel* oPanel = [NSOpenPanel openPanel]; 
-    [oPanel setCanChooseDirectories:NO]; 
-    [oPanel setCanChooseFiles:YES]; 
-    [oPanel setCanCreateDirectories:NO]; 
-    [oPanel setAllowsMultipleSelection:NO]; 
-    [oPanel setAlphaValue:0.95];
-    oPanel.allowedFileTypes = @[@"sav"];
+    NSOpenPanel* oPanel = [NSOpenPanel openPanel];
+    oPanel.canChooseDirectories = NO;
+    oPanel.canChooseFiles = YES;
+    oPanel.canCreateDirectories = NO;
+    oPanel.allowsMultipleSelection = NO;
+    oPanel.alphaValue = 0.95;
+    oPanel.allowedFileTypes = @[@"save"];
     oPanel.title = @"Load State";
 
     if ([oPanel runModal] == NSOKButton) {
@@ -419,8 +419,8 @@ NSString* fName;
 - (void)saveState
 {
     NSSavePanel* sPanel = [NSSavePanel savePanel];
-    [sPanel setCanCreateDirectories:YES];
-    [sPanel setAlphaValue:0.95];
+    sPanel.canCreateDirectories = YES;
+    sPanel.alphaValue = 0.95;
     sPanel.title = @"Save State";
     sPanel.allowedFileTypes = @[@"sav"];
 
