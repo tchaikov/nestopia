@@ -26,6 +26,7 @@ NSLock *soundLock;
     BOOL         hasStartedAudio;
 }
 
+@property (nonatomic, readonly) void* emu;
 @property (assign) BOOL loadedRom;
 
 - (void)saveState;

@@ -422,10 +422,10 @@ namespace Nes
 
 				const byte data[4] =
 				{
-					ctrl,
-					clock & 0xFF,
-					clock >> 8,
-					cycles.frameDivider
+					static_cast<byte>(ctrl),
+					static_cast<byte>(clock & 0xFF),
+					static_cast<byte>(clock >> 8),
+					static_cast<byte>(cycles.frameDivider)
 				};
 
 				state.Begin( AsciiId<'F','R','M'>::V ).Write( data ).End();

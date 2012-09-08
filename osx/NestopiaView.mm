@@ -25,8 +25,12 @@ NSString* fName;
 
 //NSConditionLock cLock;
 
+- (void *)emu
+{
+    return gameCore.nesEmu;
+}
 
--(void)resetVideo
+- (void)resetVideo
 {
     if (fGLSetup) {
         NSRect f;

@@ -42,6 +42,10 @@
 #include <iostream>
 #include <fstream>
 
+#define emu      ((Nes::Api::Emulator *)_emu)
+#define nesSound ((Nes::Api::Sound::Output *)_nesSound)
+#define nesVideo ((Nes::Api::Video::Output *) _nesVideo)
+#define controls ((Nes::Api::Input::Controllers *)_controls)
 
 #pragma mark --NES-specific features--
 @implementation NESGameCore (NesAdditions)

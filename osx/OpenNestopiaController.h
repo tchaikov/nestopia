@@ -3,6 +3,8 @@
 #import <Cocoa/Cocoa.h>
 #import "NestopiaView.h"
 
+@class DebuggerWindowController;
+
 @interface OpenNestopiaController : NSObject <NSToolbarDelegate>
 {
 	
@@ -17,12 +19,14 @@
 	IBOutlet NSPanel *dipSwitchPanel;
 	
 	IBOutlet NSWindow *mainWindow;
-	IBOutlet NestopiaView *nestopiaView;
+	IBOutlet NestopiaView *nesView;
+    IBOutlet DebuggerWindowController *debugerWindowController;
 }
 
 
 - (IBAction)applyCheats:(id)sender;
 - (IBAction)openPreferencesWindow:(id)sender;
+- (IBAction)openDebugConsole:(id)sender;
 - (IBAction)testDips:(id)sender;
 - (IBAction)buttonChanged:(id)sender;
 

@@ -33,11 +33,6 @@
 #import "osx/ResponderClient.h"
 #import "util.h"
 
-#define emu      ((Nes::Api::Emulator *)_emu)
-#define nesSound ((Nes::Api::Sound::Output *)_nesSound)
-#define nesVideo ((Nes::Api::Video::Output *) _nesVideo)
-#define controls ((Nes::Api::Input::Controllers *)_controls)
-
 extern NSString *const NESNTSC;
 extern NSString *const NESBrightness;
 extern NSString *const NESSaturation;
@@ -89,6 +84,7 @@ extern NSString *const NESUnlimitedSprites;
 @property(copy) NSString *romPath;
 @property(readonly) NSString *batterySavesDirectoryPath;
 @property(readonly) OERingBuffer *ringBuffer;
+@property(readonly) void *nesEmu;
 @property(readonly) NSUInteger audioBufferSize;
 @property(readonly) double audioSampleRate;
 @property(readonly) NSUInteger channelCount;

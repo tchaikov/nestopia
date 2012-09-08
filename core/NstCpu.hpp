@@ -25,6 +25,8 @@
 #ifndef NST_CPU_H
 #define NST_CPU_H
 
+#include <string>
+
 #include "NstAssert.hpp"
 #include "NstIoMap.hpp"
 #include "NstApu.hpp"
@@ -32,6 +34,11 @@
 #ifdef NST_PRAGMA_ONCE
 #pragma once
 #endif
+
+namespace Debug {
+    template <class Addr_> struct Addr;
+    class Debugger;
+}
 
 namespace Nes
 {
@@ -41,6 +48,9 @@ namespace Nes
 
 		class Cpu
 		{
+            template <class Addr_> friend struct ::Debug::Addr;
+            friend class ::Debug::Debugger;
+
 		public:
 
 			Cpu();

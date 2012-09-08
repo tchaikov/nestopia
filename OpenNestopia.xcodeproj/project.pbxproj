@@ -58,6 +58,11 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		941BA82116059FA4008D96D2 /* Breakpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82016059FA4008D96D2 /* Breakpoint.m */; };
+		941BA8251605BABE008D96D2 /* WatchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA8241605BABE008D96D2 /* WatchTableView.m */; };
+		941BA8281605BC02008D96D2 /* DisassembledTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA8271605BC02008D96D2 /* DisassembledTableView.m */; };
+		941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */; };
+		941BA83816063D79008D96D2 /* DebugConsoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA83716063D79008D96D2 /* DebugConsoleView.m */; };
 		946494D815F21161002B488B /* NstBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934615F21160002B488B /* NstBoard.cpp */; };
 		946494D915F21161002B488B /* NstBoardAe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934815F21160002B488B /* NstBoardAe.cpp */; };
 		946494DA15F21161002B488B /* NstBoardAgci.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934A15F21160002B488B /* NstBoardAgci.cpp */; };
@@ -323,10 +328,16 @@
 		946496EA15F25FB9002B488B /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 946496E815F25FB9002B488B /* TPCircularBuffer.c */; };
 		946496ED15F25FCF002B488B /* OERingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 946496EC15F25FCF002B488B /* OERingBuffer.m */; };
 		946496F215F279D4002B488B /* OETimingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 946496F115F279D1002B488B /* OETimingUtils.m */; };
+		9468703815F6418A0049AA2C /* DebuggerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468703615F6418A0049AA2C /* DebuggerWindowController.m */; };
+		9468703915F6418A0049AA2C /* DebuggerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9468703715F6418A0049AA2C /* DebuggerWindowController.xib */; };
 		94E8D1E115F380A9000234E4 /* NstApiRam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1DF15F380A9000234E4 /* NstApiRam.cpp */; };
 		94E8D1FF15F38802000234E4 /* NESGameCore+NESFeatures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */; };
 		94E8D27315F397E3000234E4 /* DDHidLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E8D1FB15F382C2000234E4 /* DDHidLib.framework */; };
 		94E8D29E15F39952000234E4 /* DDHidLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94E8D1FB15F382C2000234E4 /* DDHidLib.framework */; };
+		94EB6C4F15FCC47300E8C11A /* NstOpcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C4D15FCC47300E8C11A /* NstOpcode.cpp */; };
+		94EB6C5A15FCCA9F00E8C11A /* NstOperator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C5615FCC55100E8C11A /* NstOperator.cpp */; };
+		94EB6C5B15FCCAA700E8C11A /* NstAddressing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C5815FCC55A00E8C11A /* NstAddressing.cpp */; };
+		94EB6C6215FCD6C900E8C11A /* NstDebugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C6015FCD6C900E8C11A /* NstDebugger.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -461,6 +472,18 @@
 		32CA4F630368D1EE00C91783 /* OpenNestopia_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenNestopia_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* OpenNestopia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenNestopia.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		941BA81E16057122008D96D2 /* DebuggerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerDelegate.h; sourceTree = "<group>"; };
+		941BA81F16059FA4008D96D2 /* Breakpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Breakpoint.h; sourceTree = "<group>"; };
+		941BA82016059FA4008D96D2 /* Breakpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Breakpoint.m; sourceTree = "<group>"; };
+		941BA8231605BABE008D96D2 /* WatchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WatchTableView.h; path = osx/WatchTableView.h; sourceTree = "<group>"; };
+		941BA8241605BABE008D96D2 /* WatchTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WatchTableView.m; path = osx/WatchTableView.m; sourceTree = "<group>"; };
+		941BA8261605BC02008D96D2 /* DisassembledTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisassembledTableView.h; path = osx/DisassembledTableView.h; sourceTree = "<group>"; };
+		941BA8271605BC02008D96D2 /* DisassembledTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisassembledTableView.m; path = osx/DisassembledTableView.m; sourceTree = "<group>"; };
+		941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerBridge.h; sourceTree = "<group>"; };
+		941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DebuggerBridge.mm; sourceTree = "<group>"; };
+		941BA83516062C5B008D96D2 /* NstBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstBreakpoint.h; path = debug/NstBreakpoint.h; sourceTree = "<group>"; };
+		941BA83616063D79008D96D2 /* DebugConsoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugConsoleView.h; path = osx/DebugConsoleView.h; sourceTree = "<group>"; };
+		941BA83716063D79008D96D2 /* DebugConsoleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugConsoleView.m; path = osx/DebugConsoleView.m; sourceTree = "<group>"; };
 		9464934615F21160002B488B /* NstBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstBoard.cpp; sourceTree = "<group>"; };
 		9464934715F21160002B488B /* NstBoard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NstBoard.hpp; sourceTree = "<group>"; };
 		9464934815F21160002B488B /* NstBoardAe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstBoardAe.cpp; sourceTree = "<group>"; };
@@ -1013,9 +1036,9 @@
 		9464964215F21273002B488B /* NstXml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NstXml.hpp; sourceTree = "<group>"; };
 		9464964315F21273002B488B /* NstZlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstZlib.cpp; sourceTree = "<group>"; };
 		9464964415F21273002B488B /* NstZlib.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NstZlib.hpp; sourceTree = "<group>"; };
-		946496AC15F22F7A002B488B /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
-		946496B715F257D3002B488B /* NESGameCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NESGameCore.h; sourceTree = "<group>"; };
-		946496B815F257D4002B488B /* NESGameCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NESGameCore.mm; sourceTree = "<group>"; };
+		946496AC15F22F7A002B488B /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = util.h; path = ../util.h; sourceTree = "<group>"; };
+		946496B715F257D3002B488B /* NESGameCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NESGameCore.h; path = ../NESGameCore.h; sourceTree = "<group>"; };
+		946496B815F257D4002B488B /* NESGameCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NESGameCore.mm; path = ../NESGameCore.mm; sourceTree = "<group>"; };
 		946496E415F25F74002B488B /* OEGameAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEGameAudio.h; sourceTree = "<group>"; };
 		946496E515F25F75002B488B /* OEGameAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEGameAudio.m; sourceTree = "<group>"; };
 		946496E815F25FB9002B488B /* TPCircularBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TPCircularBuffer.c; sourceTree = "<group>"; };
@@ -1023,14 +1046,26 @@
 		946496EB15F25FCF002B488B /* OERingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OERingBuffer.h; sourceTree = "<group>"; };
 		946496EC15F25FCF002B488B /* OERingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OERingBuffer.m; sourceTree = "<group>"; };
 		946496EF15F26EA1002B488B /* ResponderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResponderClient.h; sourceTree = "<group>"; };
-		946496F015F279CF002B488B /* OETimingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OETimingUtils.h; sourceTree = "<group>"; };
-		946496F115F279D1002B488B /* OETimingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OETimingUtils.m; sourceTree = "<group>"; };
-		946496F415F280DB002B488B /* RenderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderDelegate.h; sourceTree = "<group>"; };
+		946496F015F279CF002B488B /* OETimingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OETimingUtils.h; path = ../OETimingUtils.h; sourceTree = "<group>"; };
+		946496F115F279D1002B488B /* OETimingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OETimingUtils.m; path = ../OETimingUtils.m; sourceTree = "<group>"; };
+		946496F415F280DB002B488B /* RenderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RenderDelegate.h; path = ../RenderDelegate.h; sourceTree = "<group>"; };
+		9468703515F6418A0049AA2C /* DebuggerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebuggerWindowController.h; path = osx/DebuggerWindowController.h; sourceTree = "<group>"; };
+		9468703615F6418A0049AA2C /* DebuggerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebuggerWindowController.m; path = osx/DebuggerWindowController.m; sourceTree = "<group>"; };
+		9468703715F6418A0049AA2C /* DebuggerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DebuggerWindowController.xib; path = osx/DebuggerWindowController.xib; sourceTree = "<group>"; };
 		94E8D1DF15F380A9000234E4 /* NstApiRam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstApiRam.cpp; sourceTree = "<group>"; };
 		94E8D1E015F380A9000234E4 /* NstApiRam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NstApiRam.h; sourceTree = "<group>"; };
 		94E8D1E715F382C2000234E4 /* DDHidLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDHidLib.xcodeproj; path = DDHidLib/DDHidLib.xcodeproj; sourceTree = "<group>"; };
-		94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NESGameCore+NESFeatures.mm"; sourceTree = "<group>"; };
+		94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "NESGameCore+NESFeatures.mm"; path = "../NESGameCore+NESFeatures.mm"; sourceTree = "<group>"; };
 		94E8D25115F38D7B000234E4 /* DDHidLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DDHidLib.framework; path = DDHidLib/DDHidLib.framework; sourceTree = "<group>"; };
+		94EB6C4D15FCC47300E8C11A /* NstOpcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NstOpcode.cpp; path = debug/NstOpcode.cpp; sourceTree = "<group>"; };
+		94EB6C4E15FCC47300E8C11A /* NstOpcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NstOpcode.h; path = debug/NstOpcode.h; sourceTree = "<group>"; };
+		94EB6C5615FCC55100E8C11A /* NstOperator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NstOperator.cpp; path = debug/NstOperator.cpp; sourceTree = "<group>"; };
+		94EB6C5715FCC55100E8C11A /* NstOperator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstOperator.h; path = debug/NstOperator.h; sourceTree = "<group>"; };
+		94EB6C5815FCC55A00E8C11A /* NstAddressing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NstAddressing.cpp; path = debug/NstAddressing.cpp; sourceTree = "<group>"; };
+		94EB6C5915FCC55A00E8C11A /* NstAddressing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstAddressing.h; path = debug/NstAddressing.h; sourceTree = "<group>"; };
+		94EB6C5C15FCCBD900E8C11A /* NstRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstRegister.h; path = debug/NstRegister.h; sourceTree = "<group>"; };
+		94EB6C6015FCD6C900E8C11A /* NstDebugger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NstDebugger.cpp; path = debug/NstDebugger.cpp; sourceTree = "<group>"; };
+		94EB6C6115FCD6C900E8C11A /* NstDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NstDebugger.h; path = debug/NstDebugger.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1054,13 +1089,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				946496AC15F22F7A002B488B /* util.h */,
-				946496B715F257D3002B488B /* NESGameCore.h */,
-				946496B815F257D4002B488B /* NESGameCore.mm */,
-				94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */,
-				946496F015F279CF002B488B /* OETimingUtils.h */,
-				946496F115F279D1002B488B /* OETimingUtils.m */,
-				946496F415F280DB002B488B /* RenderDelegate.h */,
 				0DECB3660C3E24C3000279A6 /* osx */,
 				0DECAF820C3E2420000279A6 /* core */,
 				0DECB2110C3E2422000279A6 /* nes_ntsc */,
@@ -1071,6 +1099,7 @@
 		0DECAF820C3E2420000279A6 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				94EB6C4C15FCC3DB00E8C11A /* debug */,
 				0DECAF830C3E2420000279A6 /* api */,
 				0DECAFA40C3E2420000279A6 /* board */,
 				0DECAFFB0C3E2420000279A6 /* database */,
@@ -1727,6 +1756,8 @@
 		0DECB3660C3E24C3000279A6 /* osx */ = {
 			isa = PBXGroup;
 			children = (
+				941BA81D1605708C008D96D2 /* core */,
+				941BA81C16057026008D96D2 /* debug */,
 				946496EE15F26E7D002B488B /* Input */,
 				946496E715F25F7D002B488B /* Audio */,
 				0DECB4790C3E2C28000279A6 /* ButtonState.h */,
@@ -1806,6 +1837,9 @@
 		29B97314FDCFA39411CA2CEA /* OpenNestopia */ = {
 			isa = PBXGroup;
 			children = (
+				941BA8291605DDB2008D96D2 /* Model */,
+				941BA8221605BA7E008D96D2 /* Views */,
+				9468703215F63FA20049AA2C /* Controllers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				94E8D25315F38EB4000234E4 /* Dependencies */,
@@ -1847,6 +1881,52 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		941BA81C16057026008D96D2 /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */,
+				941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */,
+				941BA81E16057122008D96D2 /* DebuggerDelegate.h */,
+				941BA81F16059FA4008D96D2 /* Breakpoint.h */,
+				941BA82016059FA4008D96D2 /* Breakpoint.m */,
+			);
+			name = debug;
+			sourceTree = "<group>";
+		};
+		941BA81D1605708C008D96D2 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				946496AC15F22F7A002B488B /* util.h */,
+				946496B715F257D3002B488B /* NESGameCore.h */,
+				946496B815F257D4002B488B /* NESGameCore.mm */,
+				94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */,
+				946496F015F279CF002B488B /* OETimingUtils.h */,
+				946496F115F279D1002B488B /* OETimingUtils.m */,
+				946496F415F280DB002B488B /* RenderDelegate.h */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		941BA8221605BA7E008D96D2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				941BA8231605BABE008D96D2 /* WatchTableView.h */,
+				941BA8241605BABE008D96D2 /* WatchTableView.m */,
+				941BA8261605BC02008D96D2 /* DisassembledTableView.h */,
+				941BA8271605BC02008D96D2 /* DisassembledTableView.m */,
+				941BA83616063D79008D96D2 /* DebugConsoleView.h */,
+				941BA83716063D79008D96D2 /* DebugConsoleView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		941BA8291605DDB2008D96D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		946496E715F25F7D002B488B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -1868,6 +1948,16 @@
 			name = Input;
 			sourceTree = "<group>";
 		};
+		9468703215F63FA20049AA2C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9468703515F6418A0049AA2C /* DebuggerWindowController.h */,
+				9468703615F6418A0049AA2C /* DebuggerWindowController.m */,
+				9468703715F6418A0049AA2C /* DebuggerWindowController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		94E8D1E815F382C2000234E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1885,6 +1975,23 @@
 				94E8D1E715F382C2000234E4 /* DDHidLib.xcodeproj */,
 			);
 			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		94EB6C4C15FCC3DB00E8C11A /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				941BA83516062C5B008D96D2 /* NstBreakpoint.h */,
+				94EB6C5C15FCCBD900E8C11A /* NstRegister.h */,
+				94EB6C4E15FCC47300E8C11A /* NstOpcode.h */,
+				94EB6C4D15FCC47300E8C11A /* NstOpcode.cpp */,
+				94EB6C5715FCC55100E8C11A /* NstOperator.h */,
+				94EB6C5615FCC55100E8C11A /* NstOperator.cpp */,
+				94EB6C5915FCC55A00E8C11A /* NstAddressing.h */,
+				94EB6C5815FCC55A00E8C11A /* NstAddressing.cpp */,
+				94EB6C6115FCD6C900E8C11A /* NstDebugger.h */,
+				94EB6C6015FCD6C900E8C11A /* NstDebugger.cpp */,
+			);
+			name = debug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1996,6 +2103,7 @@
 				0DECB3990C3E250C000279A6 /* Preferences.nib in Resources */,
 				9464959615F21185002B488B /* NstDatabase.xml in Resources */,
 				9464966415F21273002B488B /* NstSoundRenderer.inl in Resources */,
+				9468703915F6418A0049AA2C /* DebuggerWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2006,6 +2114,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EB6C5B15FCCAA700E8C11A /* NstAddressing.cpp in Sources */,
+				94EB6C5A15FCCA9F00E8C11A /* NstOperator.cpp in Sources */,
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				0DECB2330C3E2422000279A6 /* NstApiBarcodeReader.cpp in Sources */,
 				0DECB2340C3E2422000279A6 /* NstApiCartridge.cpp in Sources */,
@@ -2297,6 +2407,14 @@
 				946496F215F279D4002B488B /* OETimingUtils.m in Sources */,
 				94E8D1E115F380A9000234E4 /* NstApiRam.cpp in Sources */,
 				94E8D1FF15F38802000234E4 /* NESGameCore+NESFeatures.mm in Sources */,
+				9468703815F6418A0049AA2C /* DebuggerWindowController.m in Sources */,
+				94EB6C4F15FCC47300E8C11A /* NstOpcode.cpp in Sources */,
+				94EB6C6215FCD6C900E8C11A /* NstDebugger.cpp in Sources */,
+				941BA82116059FA4008D96D2 /* Breakpoint.m in Sources */,
+				941BA8251605BABE008D96D2 /* WatchTableView.m in Sources */,
+				941BA8281605BC02008D96D2 /* DisassembledTableView.m in Sources */,
+				941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */,
+				941BA83816063D79008D96D2 /* DebugConsoleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2340,7 +2458,10 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2357,7 +2478,10 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2389,6 +2513,7 @@
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2418,6 +2543,7 @@
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				SDKROOT = macosx;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

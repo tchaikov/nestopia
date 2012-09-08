@@ -54,15 +54,21 @@ extern "C" {
 
 #define SAMPLERATE 48000
 
+#define emu      ((Nes::Api::Emulator *)_emu)
+#define nesSound ((Nes::Api::Sound::Output *)_nesSound)
+#define nesVideo ((Nes::Api::Video::Output *) _nesVideo)
+#define controls ((Nes::Api::Input::Controllers *)_controls)
+
+
 NSUInteger NESControlValues[] = { Nes::Api::Input::Controllers::Pad::UP, Nes::Api::Input::Controllers::Pad::DOWN, Nes::Api::Input::Controllers::Pad::LEFT, Nes::Api::Input::Controllers::Pad::RIGHT, Nes::Api::Input::Controllers::Pad::A, Nes::Api::Input::Controllers::Pad::B, Nes::Api::Input::Controllers::Pad::START, Nes::Api::Input::Controllers::Pad::SELECT
 };
 
 @implementation NESGameCore
 
 @synthesize videoBuffer = videoBuffer;
+@synthesize nesEmu = _emu;
 @synthesize romPath;
 
-UInt32 bufInPos, bufOutPos, bufUsed;
 
 static bool NST_CALLBACK VideoLock(void* userData, Nes::Api::Video::Output& video)
 {
@@ -584,7 +590,7 @@ static int Heights[2] =
 {
     Nes::Api::Video video( *emu );
     NSInteger value = [aValue integerValue];
-    if([NESNTSC isEqualToString:keyName])
+    if ([NESNTSC isEqualToString:keyName])
     {
         if(value)
             [self setupVideo:emu withFilter:1];
@@ -789,7 +795,7 @@ static int Heights[2] =
     else
         return NO;
     
-    if(NES_FAILED(result)) {
+    if (NES_FAILED(result)) {
         NSString *errorDescription = nil;
         switch(result) {
             case Nes::RESULT_ERR_NOT_READY:

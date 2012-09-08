@@ -1,18 +1,18 @@
 #import "OpenNestopiaController.h"
 #import "OpenNestopiaPreferences.h"
-
+#import "DebuggerWindowController.h"
 
 
 @implementation OpenNestopiaController
 
 - (void)windowWillMiniaturize:(NSNotification *)aNotification 
 { 
-    [nestopiaView copyGLToBackingStore]; 
+    [nesView copyGLToBackingStore]; 
 } 
 
 - (void)windowWillClose:(NSNotification *)aNotification
 {
-	[nestopiaView powerOff];
+	[nesView powerOff];
 }
 
 - (IBAction)applyCheats:(id)sender
@@ -132,7 +132,7 @@
 	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
 	[item setLabel:name]; // name for the item in the toolbar
 	[item setToolTip:[NSString stringWithFormat:@"This is the reset button"]]; // tooltip
-	[item setTarget:nestopiaView]; // what should happen when it's clicked
+	[item setTarget:nesView]; // what should happen when it's clicked
 	[item setAction:@selector(resetGame)];
 	[item setImage:[NSImage imageNamed:name]];
 	[item setEnabled:YES];
@@ -143,7 +143,7 @@
 	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
 	[item setLabel:name]; // name for the item in the toolbar
 	[item setToolTip:[NSString stringWithFormat:@"Switch to fullscreen"]]; // tooltip
-	[item setTarget:nestopiaView]; // what should happen when it's clicked
+	[item setTarget:nesView]; // what should happen when it's clicked
 	[item setAction:@selector(fullscreenToggle:)];
 	[item setImage:[NSImage imageNamed:name]];
 	[item setEnabled:YES];
@@ -154,7 +154,7 @@
 	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
 	[item setLabel:name]; // name for the item in the toolbar
 	[item setToolTip:[NSString stringWithFormat:@"This is the reset button"]]; // tooltip
-	[item setTarget:nestopiaView]; // what should happen when it's clicked
+	[item setTarget:nesView]; // what should happen when it's clicked
 	[item setAction:@selector(saveState)];
 	[item setImage:[NSImage imageNamed:name]];
 	[item setEnabled:YES];
@@ -165,7 +165,7 @@
 	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
 	[item setLabel:name]; // name for the item in the toolbar
 	[item setToolTip:[NSString stringWithFormat:@"This is the reset button"]]; // tooltip
-	[item setTarget:nestopiaView]; // what should happen when it's clicked
+	[item setTarget:nesView]; // what should happen when it's clicked
 	[item setAction:@selector(loadState)];
 	[item setImage:[NSImage imageNamed:name]];
 	[item setEnabled:YES];
@@ -202,8 +202,15 @@
 	[[OpenNestopiaPreferences sharedPrefsWindowController] showWindow:nil];
 }
 
+- (IBAction)openDebugConsole:(id)sender
+{
+    DebuggerWindowController *debuggerWindowController = [[DebuggerWindowController alloc] initWithEmu:nesView.emu];
+    if (debuggerWindowController) {
+        [debuggerWindowController showWindow:self];
+    }
+}
 
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar 
+- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
 	 itemForItemIdentifier:(NSString *)itemIdentifier
 		willBeInsertedIntoToolbar:(BOOL)flag 
 {

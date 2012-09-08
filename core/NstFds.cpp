@@ -476,10 +476,10 @@ namespace Nes
 			{
 				const byte data[4] =
 				{
-					disks.sides.count,
-					(disks.current != Disks::EJECTED) | (disks.writeProtected ? 0x2U : 0x0U),
-					disks.current != Disks::EJECTED ? disks.current : 0xFF,
-					disks.current != Disks::EJECTED ? disks.mounting : 0
+					static_cast<byte>(disks.sides.count),
+					static_cast<byte>((disks.current != Disks::EJECTED) | (disks.writeProtected ? 0x2U : 0x0U)),
+					static_cast<byte>(disks.current != Disks::EJECTED ? disks.current : 0xFF),
+					static_cast<byte>(disks.current != Disks::EJECTED ? disks.mounting : 0)
 				};
 
 				state.Begin( AsciiId<'D','S','K'>::V ).Write( data ).End();
@@ -1282,7 +1282,7 @@ namespace Nes
 					State::Loader::Data<16> data( state );
 
 					unit.drive.ctrl = data[0];
-					unit.drive.status = data[1] & (Unit::Drive::STATUS_EJECTED|Unit::Drive::STATUS_UNREADY|Unit::Drive::STATUS_PROTECTED) | OPEN_BUS;
+					unit.drive.status = (data[1] & (Unit::Drive::STATUS_EJECTED|Unit::Drive::STATUS_UNREADY|Unit::Drive::STATUS_PROTECTED)) | OPEN_BUS;
 					unit.drive.in = data[2] | (data[15] << 8 & 0x100);
 					unit.drive.out = data[3];
 					unit.drive.headPos = data[4] | data[5] << 8;
