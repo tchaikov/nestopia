@@ -230,17 +230,17 @@ namespace Nes
 
 						const byte data[] =
 						{
-							status,
-							in,
-							out,
-							p >>  0 & 0xFF,
-							p >>  8 & 0xFF,
-							p >> 16 & 0xFF,
-							p >> 24 & 0xFF,
-							c >>  0 & 0xFF,
-							c >>  8 & 0xFF,
-							c >> 16 & 0xFF,
-							c >> 24 & 0xFF
+							static_cast<byte>(status),
+							static_cast<byte>(in),
+							static_cast<byte>(out),
+							static_cast<byte>(p >>  0 & 0xFF),
+							static_cast<byte>(p >>  8 & 0xFF),
+							static_cast<byte>(p >> 16 & 0xFF),
+							static_cast<byte>(p >> 24 & 0xFF),
+							static_cast<byte>(c >>  0 & 0xFF),
+							static_cast<byte>(c >>  8 & 0xFF),
+							static_cast<byte>(c >> 16 & 0xFF),
+							static_cast<byte>(c >> 24 & 0xFF)
 						};
 
 						state.Begin( AsciiId<'R','E','G'>::V ).Write( data ).End();

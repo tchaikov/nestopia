@@ -719,10 +719,10 @@ namespace Nes
 		{
 			const byte bytes[] =
 			{
-				id >>  0 & 0xFF,
-				id >>  8 & 0xFF,
-				id >> 16 & 0xFF,
-				id >> 24 & 0xFF,
+				static_cast<byte>(id >>  0 & 0xFF),
+				static_cast<byte>(id >>  8 & 0xFF),
+				static_cast<byte>(id >> 16 & 0xFF),
+				static_cast<byte>(id >> 24 & 0xFF),
 				0
 			};
 

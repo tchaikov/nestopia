@@ -446,9 +446,9 @@ namespace Nes
 
 				const byte data[3] =
 				{
-					clock & 0xFF,
-					clock >> 8,
-					cycles.frameIrqRepeat % 3
+					static_cast<byte>(clock & 0xFF),
+					static_cast<byte>(clock >> 8),
+					static_cast<byte>(cycles.frameIrqRepeat % 3)
 				};
 
 				state.Begin( AsciiId<'I','R','Q'>::V ).Write( data ).End();
@@ -1025,7 +1025,7 @@ namespace Nes
 			const byte data[3] =
 			{
 				count,
-				regs[0] | (reset ? 0x80U : 0x00U),
+				static_cast<byte>(regs[0] | (reset ? 0x80U : 0x00U)),
 				regs[1]
 			};
 
@@ -1545,9 +1545,9 @@ namespace Nes
 			{
 				const byte data[4] =
 				{
-					waveLength & 0xFFU,
-					waveLength >> 8,
-					linearCounter | (uint(status) << 7),
+					static_cast<byte>(waveLength & 0xFFU),
+					static_cast<byte>(waveLength >> 8),
+					static_cast<byte>(linearCounter | (uint(status) << 7)),
 					linearCtrl
 				};
 
@@ -1969,21 +1969,21 @@ namespace Nes
 
 			byte data[12] =
 			{
-				dmcClock & 0xFF,
-				dmcClock >> 8,
-				(
+				static_cast<byte>(dmcClock & 0xFF),
+				static_cast<byte>(dmcClock >> 8),
+				static_cast<byte>((
 					( ( regs.ctrl & REG0_FREQUENCY  )              ) |
 					( ( regs.ctrl & REG0_LOOP       ) ? 0x10U : 0U ) |
 					( ( regs.ctrl & REG0_IRQ_ENABLE ) ? 0x20U : 0U ) |
 					( ( dma.lengthCounter           ) ? 0x40U : 0U )
-				),
-				(regs.address - 0xC000U) >> 6,
-				(regs.lengthCounter - 1U) >> 4,
-				(dma.address >> 0 & 0xFFU),
-				(dma.address >> 8 & 0x7FU) | (dma.buffered ? 0x80 : 0x00),
-				dma.lengthCounter ? (dma.lengthCounter - 1U) >> 4 : 0,
-				dma.buffer,
-				7 - out.shifter,
+				)),
+				static_cast<byte>((regs.address - 0xC000U) >> 6),
+				static_cast<byte>((regs.lengthCounter - 1U) >> 4),
+				static_cast<byte>((dma.address >> 0 & 0xFFU)),
+				static_cast<byte>((dma.address >> 8 & 0x7FU) | (dma.buffered ? 0x80 : 0x00)),
+				static_cast<byte>(dma.lengthCounter ? (dma.lengthCounter - 1U) >> 4 : 0),
+				static_cast<byte>(dma.buffer),
+				static_cast<byte>(7 - out.shifter),
 				out.buffer,
 				out.dac
 			};
