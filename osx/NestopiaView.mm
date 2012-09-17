@@ -144,7 +144,22 @@ NSString* fName;
     return self;
 }
 
--(IBAction)startLoad:(id)sender
+#pragma mark -
+#pragma mark emulation control
+
+- (IBAction)play:(id)sender
+{}
+
+- (IBAction)pause:(id)sender
+{}
+
+- (IBAction)reset:(id)sender
+{}
+
+- (IBAction)stop:(id)sender
+{}
+
+- (IBAction)loadRom:(id)sender
 {
     NSOpenPanel* oPanel = [NSOpenPanel openPanel];
     oPanel.canChooseDirectories = NO;
@@ -173,6 +188,40 @@ NSString* fName;
         [self setupEmulation];
     }
 }
+
+
+- (void)loadState:(id)sender
+{
+    NSOpenPanel* oPanel = [NSOpenPanel openPanel];
+    oPanel.canChooseDirectories = NO;
+    oPanel.canChooseFiles = YES;
+    oPanel.canCreateDirectories = NO;
+    oPanel.allowsMultipleSelection = NO;
+    oPanel.alphaValue = 0.95;
+    oPanel.allowedFileTypes = @[@"save"];
+    oPanel.title = @"Load State";
+    
+    if ([oPanel runModal] == NSOKButton) {
+        NSLog(@"load state from: %@", oPanel.URL.path);
+        [gameCore loadStateFromFileAtPath:oPanel.URL.path];
+    }
+}
+
+- (void)saveState:(id)sender
+{
+    NSSavePanel* sPanel = [NSSavePanel savePanel];
+    sPanel.canCreateDirectories = YES;
+    sPanel.alphaValue = 0.95;
+    sPanel.title = @"Save State";
+    sPanel.allowedFileTypes = @[@"sav"];
+    
+    if ([sPanel runModal] == NSOKButton) {
+        [gameCore saveStateToFileAtPath:sPanel.URL.path];
+    }
+}
+
+#pragma mark -
+#pragma mark emulation life cycle
 
 - (void)setupEmulation {
     NSLog(@"Setting up emulation");
@@ -232,7 +281,7 @@ NSString* fName;
 
 -(void)awakeFromNib
 {
-    [self startLoad:nil];
+    [self loadRom:nil];
     
     NSRect oldFrame = [mainWindow frame];
     NSRect newFrame = [self frame];
@@ -289,7 +338,7 @@ NSString* fName;
     fGLSetup = true;
 }
 
-- (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
+- (void)ddhidKeyboard: (DDHidKeyboard *) keyboard
                  keyUp: (unsigned) usageId;
 {
     if ([mainWindow isKeyWindow]) {
@@ -324,8 +373,8 @@ NSString* fName;
     //   [self addEvent: @"Key Down" usageId: usageId];
 }
 
-- (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-               keyDown: (unsigned) usageId;
+- (void)ddhidKeyboard: (DDHidKeyboard *) keyboard
+              keyDown: (unsigned) usageId;
 {
     if([mainWindow isKeyWindow])
     {
@@ -388,7 +437,7 @@ NSString* fName;
 - (void)mouseDown:(NSEvent *)theEvent  {
 }
 
--(void)mouseUp:(NSEvent *)theEvent {
+- (void)mouseUp:(NSEvent *)theEvent {
 }
 
 // this is called whenever the view changes (is unhidden or resized)
@@ -401,36 +450,6 @@ NSString* fName;
 - (BOOL)acceptsFirstResponder
 {
     return YES;
-}
-
--(void) loadState
-{
-    NSOpenPanel* oPanel = [NSOpenPanel openPanel];
-    oPanel.canChooseDirectories = NO;
-    oPanel.canChooseFiles = YES;
-    oPanel.canCreateDirectories = NO;
-    oPanel.allowsMultipleSelection = NO;
-    oPanel.alphaValue = 0.95;
-    oPanel.allowedFileTypes = @[@"save"];
-    oPanel.title = @"Load State";
-
-    if ([oPanel runModal] == NSOKButton) {
-        NSLog(@"load state from: %@", oPanel.URL.path);
-        [gameCore loadStateFromFileAtPath:oPanel.URL.path];
-    }
-}
-
-- (void)saveState
-{
-    NSSavePanel* sPanel = [NSSavePanel savePanel];
-    sPanel.canCreateDirectories = YES;
-    sPanel.alphaValue = 0.95;
-    sPanel.title = @"Save State";
-    sPanel.allowedFileTypes = @[@"sav"];
-
-    if( [sPanel runModal] == NSOKButton) {
-        [gameCore saveStateToFileAtPath:sPanel.URL.path];
-    }
 }
 
 - (void)keyDown:(NSEvent *)theEvent 

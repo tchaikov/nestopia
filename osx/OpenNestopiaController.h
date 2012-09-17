@@ -5,7 +5,7 @@
 
 @class DebuggerWindowController;
 
-@interface OpenNestopiaController : NSObject <NSToolbarDelegate>
+@interface OpenNestopiaController : NSObject
 {
 	
 	
@@ -23,11 +23,7 @@
     IBOutlet DebuggerWindowController *debugerWindowController;
 }
 
-
-- (IBAction)applyCheats:(id)sender;
 - (IBAction)openPreferencesWindow:(id)sender;
 - (IBAction)openDebugConsole:(id)sender;
-- (IBAction)testDips:(id)sender;
-- (IBAction)buttonChanged:(id)sender;
 
 @end

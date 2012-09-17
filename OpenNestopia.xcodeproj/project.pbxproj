@@ -36,16 +36,8 @@
 		0DECB35C0C3E2422000279A6 /* nes_ntsc.inl in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB2160C3E2422000279A6 /* nes_ntsc.inl */; };
 		0DECB35D0C3E2422000279A6 /* nes_ntsc.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB2170C3E2422000279A6 /* nes_ntsc.txt */; };
 		0DECB35E0C3E2422000279A6 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB21A0C3E2422000279A6 /* readme.txt */; };
-		0DECB3800C3E24C4000279A6 /* Audio.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3680C3E24C3000279A6 /* Audio.tiff */; };
-		0DECB3810C3E24C4000279A6 /* Colors.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3690C3E24C3000279A6 /* Colors.tiff */; };
-		0DECB3820C3E24C4000279A6 /* General.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB36A0C3E24C3000279A6 /* General.tiff */; };
 		0DECB3830C3E24C4000279A6 /* OpenNestopia.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB36B0C3E24C3000279A6 /* OpenNestopia.icns */; };
 		0DECB3840C3E24C4000279A6 /* opennestopia_png24.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB36C0C3E24C3000279A6 /* opennestopia_png24.png */; };
-		0DECB3850C3E24C4000279A6 /* Pause.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB36D0C3E24C3000279A6 /* Pause.tiff */; };
-		0DECB3860C3E24C4000279A6 /* Play.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB36E0C3E24C3000279A6 /* Play.tiff */; };
-		0DECB3870C3E24C4000279A6 /* Reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB36F0C3E24C3000279A6 /* Reset.png */; };
-		0DECB3880C3E24C4000279A6 /* Stop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3700C3E24C3000279A6 /* Stop.tiff */; };
-		0DECB3890C3E24C4000279A6 /* Video.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3710C3E24C4000279A6 /* Video.tiff */; };
 		0DECB38B0C3E24C4000279A6 /* NestopiaView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB3740C3E24C4000279A6 /* NestopiaView.mm */; };
 		0DECB38C0C3E24C4000279A6 /* NstDatabase.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3750C3E24C4000279A6 /* NstDatabase.dat */; };
 		0DECB38D0C3E24C4000279A6 /* OpenNestopiaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB3780C3E24C4000279A6 /* OpenNestopiaController.m */; };
@@ -63,6 +55,12 @@
 		941BA8281605BC02008D96D2 /* DisassembledTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA8271605BC02008D96D2 /* DisassembledTableView.m */; };
 		941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */; };
 		941BA83816063D79008D96D2 /* DebugConsoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA83716063D79008D96D2 /* DebugConsoleView.m */; };
+		941BA85F1607788A008D96D2 /* pause-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA8591607788A008D96D2 /* pause-icon-32.png */; };
+		941BA8601607788A008D96D2 /* play-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85A1607788A008D96D2 /* play-icon-32.png */; };
+		941BA8611607788A008D96D2 /* reset-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85B1607788A008D96D2 /* reset-icon-32.png */; };
+		941BA8621607788A008D96D2 /* save-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85C1607788A008D96D2 /* save-icon-32.png */; };
+		941BA8631607788A008D96D2 /* stop-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85D1607788A008D96D2 /* stop-icon-32.png */; };
+		941BA866160778F8008D96D2 /* open-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA865160778F8008D96D2 /* open-icon-32.png */; };
 		946494D815F21161002B488B /* NstBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934615F21160002B488B /* NstBoard.cpp */; };
 		946494D915F21161002B488B /* NstBoardAe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934815F21160002B488B /* NstBoardAe.cpp */; };
 		946494DA15F21161002B488B /* NstBoardAgci.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934A15F21160002B488B /* NstBoardAgci.cpp */; };
@@ -440,16 +438,8 @@
 		0DECB2180C3E2422000279A6 /* nes_ntsc_config.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = nes_ntsc_config.h; sourceTree = "<group>"; };
 		0DECB2190C3E2422000279A6 /* nes_ntsc_impl.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = nes_ntsc_impl.h; sourceTree = "<group>"; };
 		0DECB21A0C3E2422000279A6 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		0DECB3680C3E24C3000279A6 /* Audio.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Audio.tiff; sourceTree = "<group>"; };
-		0DECB3690C3E24C3000279A6 /* Colors.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Colors.tiff; sourceTree = "<group>"; };
-		0DECB36A0C3E24C3000279A6 /* General.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = General.tiff; sourceTree = "<group>"; };
 		0DECB36B0C3E24C3000279A6 /* OpenNestopia.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OpenNestopia.icns; sourceTree = "<group>"; };
 		0DECB36C0C3E24C3000279A6 /* opennestopia_png24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opennestopia_png24.png; sourceTree = "<group>"; };
-		0DECB36D0C3E24C3000279A6 /* Pause.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Pause.tiff; sourceTree = "<group>"; };
-		0DECB36E0C3E24C3000279A6 /* Play.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Play.tiff; sourceTree = "<group>"; };
-		0DECB36F0C3E24C3000279A6 /* Reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reset.png; sourceTree = "<group>"; };
-		0DECB3700C3E24C3000279A6 /* Stop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Stop.tiff; sourceTree = "<group>"; };
-		0DECB3710C3E24C4000279A6 /* Video.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Video.tiff; sourceTree = "<group>"; };
 		0DECB3730C3E24C4000279A6 /* NestopiaView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NestopiaView.h; sourceTree = "<group>"; };
 		0DECB3740C3E24C4000279A6 /* NestopiaView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NestopiaView.mm; sourceTree = "<group>"; };
 		0DECB3750C3E24C4000279A6 /* NstDatabase.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = NstDatabase.dat; path = osx/NstDatabase.dat; sourceTree = "<group>"; };
@@ -484,6 +474,12 @@
 		941BA83516062C5B008D96D2 /* NstBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstBreakpoint.h; path = debug/NstBreakpoint.h; sourceTree = "<group>"; };
 		941BA83616063D79008D96D2 /* DebugConsoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugConsoleView.h; path = osx/DebugConsoleView.h; sourceTree = "<group>"; };
 		941BA83716063D79008D96D2 /* DebugConsoleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugConsoleView.m; path = osx/DebugConsoleView.m; sourceTree = "<group>"; };
+		941BA8591607788A008D96D2 /* pause-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-icon-32.png"; sourceTree = "<group>"; };
+		941BA85A1607788A008D96D2 /* play-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-icon-32.png"; sourceTree = "<group>"; };
+		941BA85B1607788A008D96D2 /* reset-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset-icon-32.png"; sourceTree = "<group>"; };
+		941BA85C1607788A008D96D2 /* save-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save-icon-32.png"; sourceTree = "<group>"; };
+		941BA85D1607788A008D96D2 /* stop-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop-icon-32.png"; sourceTree = "<group>"; };
+		941BA865160778F8008D96D2 /* open-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-icon-32.png"; sourceTree = "<group>"; };
 		9464934615F21160002B488B /* NstBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstBoard.cpp; sourceTree = "<group>"; };
 		9464934715F21160002B488B /* NstBoard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NstBoard.hpp; sourceTree = "<group>"; };
 		9464934815F21160002B488B /* NstBoardAe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstBoardAe.cpp; sourceTree = "<group>"; };
@@ -1777,16 +1773,14 @@
 		0DECB3670C3E24C3000279A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				0DECB3680C3E24C3000279A6 /* Audio.tiff */,
-				0DECB3690C3E24C3000279A6 /* Colors.tiff */,
-				0DECB36A0C3E24C3000279A6 /* General.tiff */,
+				941BA8591607788A008D96D2 /* pause-icon-32.png */,
+				941BA85A1607788A008D96D2 /* play-icon-32.png */,
+				941BA85B1607788A008D96D2 /* reset-icon-32.png */,
+				941BA865160778F8008D96D2 /* open-icon-32.png */,
+				941BA85C1607788A008D96D2 /* save-icon-32.png */,
+				941BA85D1607788A008D96D2 /* stop-icon-32.png */,
 				0DECB36B0C3E24C3000279A6 /* OpenNestopia.icns */,
 				0DECB36C0C3E24C3000279A6 /* opennestopia_png24.png */,
-				0DECB36D0C3E24C3000279A6 /* Pause.tiff */,
-				0DECB36E0C3E24C3000279A6 /* Play.tiff */,
-				0DECB36F0C3E24C3000279A6 /* Reset.png */,
-				0DECB3700C3E24C3000279A6 /* Stop.tiff */,
-				0DECB3710C3E24C4000279A6 /* Video.tiff */,
 			);
 			name = images;
 			path = osx/images;
@@ -2088,22 +2082,20 @@
 				0DECB35C0C3E2422000279A6 /* nes_ntsc.inl in Resources */,
 				0DECB35D0C3E2422000279A6 /* nes_ntsc.txt in Resources */,
 				0DECB35E0C3E2422000279A6 /* readme.txt in Resources */,
-				0DECB3800C3E24C4000279A6 /* Audio.tiff in Resources */,
-				0DECB3810C3E24C4000279A6 /* Colors.tiff in Resources */,
-				0DECB3820C3E24C4000279A6 /* General.tiff in Resources */,
 				0DECB3830C3E24C4000279A6 /* OpenNestopia.icns in Resources */,
 				0DECB3840C3E24C4000279A6 /* opennestopia_png24.png in Resources */,
-				0DECB3850C3E24C4000279A6 /* Pause.tiff in Resources */,
-				0DECB3860C3E24C4000279A6 /* Play.tiff in Resources */,
-				0DECB3870C3E24C4000279A6 /* Reset.png in Resources */,
-				0DECB3880C3E24C4000279A6 /* Stop.tiff in Resources */,
-				0DECB3890C3E24C4000279A6 /* Video.tiff in Resources */,
 				0DECB38C0C3E24C4000279A6 /* NstDatabase.dat in Resources */,
 				0DECB3980C3E250C000279A6 /* MainMenu.nib in Resources */,
 				0DECB3990C3E250C000279A6 /* Preferences.nib in Resources */,
 				9464959615F21185002B488B /* NstDatabase.xml in Resources */,
 				9464966415F21273002B488B /* NstSoundRenderer.inl in Resources */,
 				9468703915F6418A0049AA2C /* DebuggerWindowController.xib in Resources */,
+				941BA85F1607788A008D96D2 /* pause-icon-32.png in Resources */,
+				941BA8601607788A008D96D2 /* play-icon-32.png in Resources */,
+				941BA8611607788A008D96D2 /* reset-icon-32.png in Resources */,
+				941BA8621607788A008D96D2 /* save-icon-32.png in Resources */,
+				941BA8631607788A008D96D2 /* stop-icon-32.png in Resources */,
+				941BA866160778F8008D96D2 /* open-icon-32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

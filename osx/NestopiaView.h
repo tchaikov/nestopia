@@ -29,16 +29,20 @@ NSLock *soundLock;
 @property (nonatomic, readonly) void* emu;
 @property (assign) BOOL loadedRom;
 
-- (void)saveState;
 - (void)drawRect:(NSRect)frameRect;
 - (void)setFrame:(NSRect)frame;
 - (void)copyGLToBackingStore;
-- (void)awakeFromNib;
 - (id)initWithFrame:(NSRect)frame;
 - (void)resetGame;
 - (void)powerOff;
 
-- (IBAction)startLoad:(id)sender;
+- (IBAction)play:(id)sender;
+- (IBAction)pause:(id)sender;
+- (IBAction)reset:(id)sender;
+- (IBAction)stop:(id)sender;
+- (IBAction)loadRom:(id)sender;
+- (IBAction)loadState:(id)sender;
+- (IBAction)saveState:(id)sender;
 - (IBAction)fullscreenToggle:(id)sender;
 
 - (void)resetVideo;

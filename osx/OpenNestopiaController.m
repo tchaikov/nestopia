@@ -15,15 +15,6 @@
 	[nesView powerOff];
 }
 
-- (IBAction)applyCheats:(id)sender
-{
-	NSArray* codes = [gameSharkCode cells];
-
-	for(int i = 0; i < [codes count]; i ++) {
-        //
-	}
-}
-
 -(IBAction)buttonChanged:(id)sender
 {
 	NSInteger row;
@@ -86,117 +77,6 @@
 //	}
 }
 
-
--(void)setupToolbar
-{
-	items=[[NSMutableDictionary alloc] init];
-	
-	NSString *name;
-	NSToolbarItem *item;
-	
-	name=[[NSString alloc] initWithFormat:@"Play"];
-	item=[[NSToolbarItem alloc] initWithItemIdentifier:name];
-	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
-	[item setLabel:name]; // name for the item in the toolbar
-	[item setToolTip:[NSString stringWithFormat:@"This is the play button"]]; // tooltip
-	[item setTarget:self]; // what should happen when it's clicked
-	[item setAction:@selector(toolbaritemclicked:)];
-	[item setImage:[NSImage imageNamed:name]];
-	[item setEnabled:YES];
-	[items setObject:item forKey:name]; // add to toolbar list
-	
-	name=[[NSString alloc] initWithFormat:@"Pause"];
-	item=[[NSToolbarItem alloc] initWithItemIdentifier:name];
-	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
-	[item setLabel:name]; // name for the item in the toolbar
-	[item setToolTip:[NSString stringWithFormat:@"This is the pause button"]]; // tooltip
-	[item setTarget:self]; // what should happen when it's clicked
-	[item setAction:@selector(toolbaritemclicked:)];
-	[item setImage:[NSImage imageNamed:name]];
-	[item setEnabled:YES];
-	[items setObject:item forKey:name]; // add to toolbar list
-	
-	name=[[NSString alloc] initWithFormat:@"Stop"];
-	item=[[NSToolbarItem alloc] initWithItemIdentifier:name];
-	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
-	[item setLabel:name]; // name for the item in the toolbar
-	[item setToolTip:[NSString stringWithFormat:@"This is the stop button"]]; // tooltip
-	[item setTarget:self]; // what should happen when it's clicked
-	[item setAction:@selector(toolbaritemclicked:)];
-	[item setImage:[NSImage imageNamed:name]];
-	[item setEnabled:YES];
-	[items setObject:item forKey:name]; // add to toolbar list	
-	
-	name=[[NSString alloc] initWithFormat:@"Reset"];
-	item=[[NSToolbarItem alloc] initWithItemIdentifier:name];
-	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
-	[item setLabel:name]; // name for the item in the toolbar
-	[item setToolTip:[NSString stringWithFormat:@"This is the reset button"]]; // tooltip
-	[item setTarget:nesView]; // what should happen when it's clicked
-	[item setAction:@selector(resetGame)];
-	[item setImage:[NSImage imageNamed:name]];
-	[item setEnabled:YES];
-	[items setObject:item forKey:name]; // add to toolbar list
-	
-	name=[[NSString alloc] initWithFormat:@"Full Screen"];
-	item=[[NSToolbarItem alloc] initWithItemIdentifier:name];
-	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
-	[item setLabel:name]; // name for the item in the toolbar
-	[item setToolTip:[NSString stringWithFormat:@"Switch to fullscreen"]]; // tooltip
-	[item setTarget:nesView]; // what should happen when it's clicked
-	[item setAction:@selector(fullscreenToggle:)];
-	[item setImage:[NSImage imageNamed:name]];
-	[item setEnabled:YES];
-	[items setObject:item forKey:name]; // add to toolbar list
-	
-	name=[[NSString alloc] initWithFormat:@"Save State"];
-	item=[[NSToolbarItem alloc] initWithItemIdentifier:name];
-	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
-	[item setLabel:name]; // name for the item in the toolbar
-	[item setToolTip:[NSString stringWithFormat:@"This is the reset button"]]; // tooltip
-	[item setTarget:nesView]; // what should happen when it's clicked
-	[item setAction:@selector(saveState)];
-	[item setImage:[NSImage imageNamed:name]];
-	[item setEnabled:YES];
-	[items setObject:item forKey:name]; // add to toolbar list
-	
-	name=[[NSString alloc] initWithFormat:@"Load State"];
-	item=[[NSToolbarItem alloc] initWithItemIdentifier:name];
-	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
-	[item setLabel:name]; // name for the item in the toolbar
-	[item setToolTip:[NSString stringWithFormat:@"This is the reset button"]]; // tooltip
-	[item setTarget:nesView]; // what should happen when it's clicked
-	[item setAction:@selector(loadState)];
-	[item setImage:[NSImage imageNamed:name]];
-	[item setEnabled:YES];
-	[items setObject:item forKey:name]; // add to toolbar list
-	
-	name=[[NSString alloc] initWithFormat:@"DIP Switches"];
-	item=[[NSToolbarItem alloc] initWithItemIdentifier:name];
-	[item setPaletteLabel:name]; // name for the "Customize Toolbar" sheet
-	[item setLabel:name]; // name for the item in the toolbar
-	[item setToolTip:[NSString stringWithFormat:@"This is the reset button"]]; // tooltip
-	[item setTarget:self]; // what should happen when it's clicked
-	[item setAction:@selector(testDips:)];
-	[item setImage:[NSImage imageNamed:name]];
-	[item setEnabled:YES];
-	[items setObject:item forKey:name]; // add to toolbar list
-	
-	toolbar = [[NSToolbar alloc] initWithIdentifier:@"tooltest"];
-	[toolbar setDelegate:self];
-	[toolbar setAllowsUserCustomization:YES];
-	[toolbar setAutosavesConfiguration:YES];
-	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
-	[toolbar setSizeMode:NSToolbarSizeModeSmall];
-	[mainWindow setToolbar:toolbar];
-	
-}
-
--(void)awakeFromNib
-{   	
-	[self setupToolbar];
-}
-
 - (IBAction)openPreferencesWindow:(id)sender
 {	
 	[[OpenNestopiaPreferences sharedPrefsWindowController] showWindow:nil];
@@ -208,37 +88,6 @@
     if (debuggerWindowController) {
         [debuggerWindowController showWindow:self];
     }
-}
-
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
-	 itemForItemIdentifier:(NSString *)itemIdentifier
-		willBeInsertedIntoToolbar:(BOOL)flag 
-{
-    return [items objectForKey:itemIdentifier];
-}
-
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
-{
-    return [items allKeys];
-}
-
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
-{
-    return [items allKeys];// subarrayWithRange:NSMakeRange(0,3)];
-}
-
-- (void) toolbarWillAddItem: (NSNotification *) notification
-{
-//    NSToolbarItem *addedItem = [[notification userInfo] objectForKey:@"item"];
-//	[addedItem 
-    // set up the item here
-}
-
-- (void)toolbarDidRemoveItem:(NSNotification *)notification
-{
-  //  NSToolbarItem *addedItem = [[notification userInfo] objectForKey:@"item"];
-	
-    // clear associated info here 
 }
 
 
