@@ -61,6 +61,8 @@
 		941BA8621607788A008D96D2 /* save-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85C1607788A008D96D2 /* save-icon-32.png */; };
 		941BA8631607788A008D96D2 /* stop-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85D1607788A008D96D2 /* stop-icon-32.png */; };
 		941BA866160778F8008D96D2 /* open-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA865160778F8008D96D2 /* open-icon-32.png */; };
+		941BA9251608B7D2008D96D2 /* NstBreakpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 941BA9241608B7D2008D96D2 /* NstBreakpoint.cpp */; };
+		941BA9281608CAE2008D96D2 /* DebuggerDelegateBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941BA9261608CAE2008D96D2 /* DebuggerDelegateBridge.mm */; };
 		946494D815F21161002B488B /* NstBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934615F21160002B488B /* NstBoard.cpp */; };
 		946494D915F21161002B488B /* NstBoardAe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934815F21160002B488B /* NstBoardAe.cpp */; };
 		946494DA15F21161002B488B /* NstBoardAgci.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934A15F21160002B488B /* NstBoardAgci.cpp */; };
@@ -480,6 +482,9 @@
 		941BA85C1607788A008D96D2 /* save-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save-icon-32.png"; sourceTree = "<group>"; };
 		941BA85D1607788A008D96D2 /* stop-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop-icon-32.png"; sourceTree = "<group>"; };
 		941BA865160778F8008D96D2 /* open-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-icon-32.png"; sourceTree = "<group>"; };
+		941BA9241608B7D2008D96D2 /* NstBreakpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NstBreakpoint.cpp; path = debug/NstBreakpoint.cpp; sourceTree = "<group>"; };
+		941BA9261608CAE2008D96D2 /* DebuggerDelegateBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DebuggerDelegateBridge.mm; sourceTree = "<group>"; };
+		941BA9271608CAE2008D96D2 /* DebuggerDelegateBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerDelegateBridge.h; sourceTree = "<group>"; };
 		9464934615F21160002B488B /* NstBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstBoard.cpp; sourceTree = "<group>"; };
 		9464934715F21160002B488B /* NstBoard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NstBoard.hpp; sourceTree = "<group>"; };
 		9464934815F21160002B488B /* NstBoardAe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstBoardAe.cpp; sourceTree = "<group>"; };
@@ -1880,9 +1885,11 @@
 			children = (
 				941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */,
 				941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */,
-				941BA81E16057122008D96D2 /* DebuggerDelegate.h */,
 				941BA81F16059FA4008D96D2 /* Breakpoint.h */,
 				941BA82016059FA4008D96D2 /* Breakpoint.m */,
+				941BA81E16057122008D96D2 /* DebuggerDelegate.h */,
+				941BA9271608CAE2008D96D2 /* DebuggerDelegateBridge.h */,
+				941BA9261608CAE2008D96D2 /* DebuggerDelegateBridge.mm */,
 			);
 			name = debug;
 			sourceTree = "<group>";
@@ -1974,7 +1981,6 @@
 		94EB6C4C15FCC3DB00E8C11A /* debug */ = {
 			isa = PBXGroup;
 			children = (
-				941BA83516062C5B008D96D2 /* NstBreakpoint.h */,
 				94EB6C5C15FCCBD900E8C11A /* NstRegister.h */,
 				94EB6C4E15FCC47300E8C11A /* NstOpcode.h */,
 				94EB6C4D15FCC47300E8C11A /* NstOpcode.cpp */,
@@ -1984,6 +1990,8 @@
 				94EB6C5815FCC55A00E8C11A /* NstAddressing.cpp */,
 				94EB6C6115FCD6C900E8C11A /* NstDebugger.h */,
 				94EB6C6015FCD6C900E8C11A /* NstDebugger.cpp */,
+				941BA83516062C5B008D96D2 /* NstBreakpoint.h */,
+				941BA9241608B7D2008D96D2 /* NstBreakpoint.cpp */,
 			);
 			name = debug;
 			sourceTree = "<group>";
@@ -2407,6 +2415,8 @@
 				941BA8281605BC02008D96D2 /* DisassembledTableView.m in Sources */,
 				941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */,
 				941BA83816063D79008D96D2 /* DebugConsoleView.m in Sources */,
+				941BA9251608B7D2008D96D2 /* NstBreakpoint.cpp in Sources */,
+				941BA9281608CAE2008D96D2 /* DebuggerDelegateBridge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

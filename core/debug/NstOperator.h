@@ -32,9 +32,9 @@ namespace Debug {
         const string& str() const {
             return op_;
         }
-        static const Op_& get() {
-            static const Op_ instance;
-            return instance;
+        static const Op_& instance() {
+            static const Op_ op;
+            return op;
         }
     private:
         const string op_;

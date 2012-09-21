@@ -77,7 +77,8 @@
 
 - (Breakpoint *)breakpointAtIndex:(NSUInteger)index
 {
-    
+    // debugger
+    return nil;
 }
 
 - (void)pauseDebugger

@@ -6,10 +6,13 @@
 //
 //
 
+#import "Breakpoint.h"
 #import "DebuggerBridge.h"
+
 #include "NstDebugger.h"
 #include "NstApiEmulator.hpp"
 #include "NstMachine.hpp"
+
 
 @interface DebuggerBridge () {
     Debug::Debugger *debugger;
@@ -54,16 +57,10 @@
     debugger->poke_reg((Debug::Reg::All)reg, data);
 }
 
-- (int)setBreakpointAt:(uint16_t)pc
+- (int)setBreakpoint:(Breakpoint *)bp
 {
-    return debugger->set_breakpoint(pc);
-}
-
-- (int)stopAt:(uint16_t)pc whenAddress:(uint16_t)addr is:(AccessMode)accessMode
-{
-    int index = [self setBreakpointAt:pc];
-    debugger->set_condition(index, addr, (Debug::AccessMode)accessMode);
-    return index;
+    return debugger->set_breakpoint(bp.address,
+                                    (Debug::AccessMode)bp.access);
 }
 
 - (void)resetBreakpoint:(int)index
@@ -71,4 +68,13 @@
     debugger->remove_breakpoint(index);
 }
 
+- (Breakpoint *)breakpointAtIndex:(NSUInteger)index
+{
+    const Debug::Breakpoint* dbp = debugger->lookup_breakpoint(index);
+    if (dbp == nullptr)
+        return nil;
+    return [[Breakpoint alloc] initWithAddress:dbp->address
+                                        access:(AccessMode)dbp->access
+                                       enabled:dbp->enabled];
+}
 @end

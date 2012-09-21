@@ -33,7 +33,13 @@ namespace Debug {
         NONE  = 0,
         READ  = 1 << 0,
         WRITE = 1 << 1,
+        EXEC  = 1 << 2,
         RW    = READ|WRITE,
+    };
+
+    struct Access {
+        uint16_t addr;
+        AccessMode mode;
     };
 }
 

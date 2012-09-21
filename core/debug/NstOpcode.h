@@ -25,7 +25,6 @@ namespace Nes {
 }
 
 namespace Debug {
-    using boost::format;
     using std::string;
 
     struct Decoded {
@@ -35,10 +34,8 @@ namespace Debug {
     class Opcode {
     public:
         virtual ~Opcode() {}
-        virtual Decoded decode(uint& pc) = 0;
-        virtual bool triggers(const Condition& cond) {
-            return false;
-        }
+        virtual Decoded decode(uint16_t& pc) const = 0;
+        virtual Access access(uint16_t pc) const = 0;
     };
     // opcode is a combination of an operator and its operand
     // any opcode which has an operand goes here, even it's an implicit
@@ -50,21 +47,21 @@ namespace Debug {
     public:
         Opcode_()
         : fmt_("%1% %2%"),
-          op_(Operateur::get()),
-          addr_(Addressing::get())
+          op_(Operateur::instance()),
+          addr_(Addressing::instance())
         {}
-        virtual Decoded decode(uint& pc) {
+        virtual Decoded decode(uint16_t& pc) const {
             uint m = addr_.fetch(pc);
             Decoded decoded;
-            decoded.str = (fmt_ % op_.str() % addr_.str(m)).str();
+            decoded.str = (boost::format(fmt_) % op_.str() % addr_.str(m)).str();
             decoded.repr = (op_.repr(addr_.repr(pc, m))).str();
             return decoded;                    
         }
-        virtual bool triggers(const Condition& cond) {
-            return false;
+        virtual Access access(uint16_t pc) const {
+            return {addr_.get(addr_.fetch(pc)), mode};
         }
     private:
-        format fmt_;
+        const std::string fmt_;
         const Operateur& op_;
         const Addressing& addr_;
     };
@@ -74,15 +71,20 @@ namespace Debug {
     struct Opcode_<Operateur, Implied, mode> : public Opcode {
     public:
         Opcode_()
-        : op_(Operateur::get())
+        : op_(Operateur::instance())
         {}
-        virtual Decoded decode(uint& pc) {
+        virtual Decoded decode(uint16_t& pc) const {
             // we are in implied addressing mode, so no need to fetch the
             // operand.
             Decoded decoded;
             decoded.str = op_.str();
             decoded.repr = op_.repr().str();
             return decoded;
+        }
+        // TODO: the memory invoved in implied addressing can be a little bit
+        //       complicated than the others.
+        virtual Access access(uint16_t pc) const {
+            return {0, NONE};
         }
     private:
         const Operateur& op_;

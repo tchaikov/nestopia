@@ -12,6 +12,8 @@
 #include "NstCpu.hpp"
 #include "NstMachine.hpp"
 
+#include "DebuggerDelegateBridge.h"
+
 namespace {
 
     using namespace Debug;
@@ -351,33 +353,39 @@ namespace Debug {
     }
 
     int
-    Debugger::set_breakpoint(uint16_t pc)
+    Debugger::set_breakpoint(uint16_t addr, AccessMode mode)
     {
-        // look for the first usable index
-        int index = 0;
-        while (breakpoints_.find(index++) == breakpoints_.end());
-        breakpoints_.insert(std::make_pair(index, Breakpoint(pc)));
-        return index;
+        return bpm_.set(addr, mode);
     }
 
-    bool
+    void
     Debugger::remove_breakpoint(int index)
     {
-        return breakpoints_.erase(index) > 0;
+        return bpm_.remove(index);
     }
 
-    bool
-    Debugger::set_condition(int index, uint16_t accessed_addr, AccessMode mode)
+    const Breakpoint*
+    Debugger::lookup_breakpoint(int index)
     {
-        Breakpoints::iterator found = breakpoints_.find(index);
-        if (found == breakpoints_.end())
-            return false;
-        found->second.condition.reset(new Condition(accessed_addr, mode));
-        return true;
+        return bpm_.lookup(index);
+    }
+
+    void
+    Debugger::cpu_op_exec(uint16_t pc)
+    {
+        int bp_index = bpm_.test_access(Access({pc, EXEC}));
+        if (bp_index > 0) {
+            return delegate_->suspend_at(bp_index, pc);
+        }
+        Opcode* opcode = opcodes[cpu_.map.Peek8(pc)];
+        bp_index = bpm_.test_access(opcode->access(pc));
+        if (bp_index > 0) {
+            return delegate_->suspend_at(pc, bp_index);
+        }
     }
 
     Decoded
-    Debugger::disassemble(uint& pc) {
+    Debugger::disassemble(uint16_t& pc) {
         uint hex = cpu_.map.Peek8(pc++);
         return opcodes[hex]->decode(pc);
     }

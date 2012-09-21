@@ -10,8 +10,7 @@
 
 #include "NstOpcode.h"
 #include "NstRegister.h"
-
-#include <map>
+#include "NstBreakpoint.h"
 
 namespace Nes {
     namespace Core {
@@ -21,6 +20,8 @@ namespace Nes {
 }
 
 namespace Debug {
+    class DelegateBridge;
+
     // processor status (the P register)
     struct Flags {
         bool carry     : 1;
@@ -45,18 +46,24 @@ namespace Debug {
         uint8_t peek_reg(Reg::All reg);
         void poke_reg(Reg::All reg, uint8_t data);
 
-        int set_breakpoint(uint16_t pc);
-        bool remove_breakpoint(int index);
-        bool set_condition(int index, uint16_t accessed_addr, AccessMode mode);
+        int set_breakpoint(uint16_t pc, AccessMode access);
+        void remove_breakpoint(int index);
         bool disable_breakpoint(int index);
+        const Breakpoint* lookup_breakpoint(int index);
+
+        // cpu
+        void cpu_op_exec(uint16_t addr);
         
-        Decoded disassemble(uint& pc);
+        /// start running until a breakpoint is reached
+        void resume();
+        /// stop running as soon as possible
+        void suspend();
+        Decoded disassemble(uint16_t& pc);
+
     private:
+        DelegateBridge *delegate_;
         Nes::Core::Cpu &cpu_;
-        // <index, breakpoint> pair, will always use the smallest available
-        // integer for the newly added breakpoint.
-        typedef std::map<int, Breakpoint> Breakpoints;
-        Breakpoints breakpoints_;
+        BreakpointManager bpm_;
     };
 }
 

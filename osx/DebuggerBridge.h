@@ -19,28 +19,24 @@ typedef enum : char {
     PC = 'C',
 } Reg;
 
-typedef enum : NSUInteger {
-    AccessNone  = 0,
-    AccessRead  = 1 << 0,
-    AccessWrite = 1 << 1,
-    AccessRW = AccessRead | AccessWrite
-} AccessMode;
-
 @interface Register : NSObject
 + (Reg)regWithName:(NSString*)name;
 + (NSString *)nameWithReg:(Reg)reg;
 @end
 
+@class Breakpoint;
+
 @interface DebuggerBridge : NSObject
 
 - (id)initWithEmu:(void *)emu;
+
 - (uint8_t)peek8:(uint16_t)addr;
 - (void)poke8:(uint16_t)addr with:(uint8_t)data;
 - (uint8_t)peekReg:(Reg)reg;
 - (void)pokeReg:(Reg)reg with:(uint8_t)data;
-- (int)setBreakpointAt:(uint16_t)pc;
-- (int)stopAt:(uint16_t)pc whenAddress:(uint16_t)addr is:(AccessMode)access;
-- (void)resetBreakpoint:(int)breakpoint;
 
+- (int)setBreakpoint:(Breakpoint *)bp;
+- (void)resetBreakpoint:(int)breakpoint;
+- (Breakpoint *)breakpointAtIndex:(NSUInteger)index;
 
 @end

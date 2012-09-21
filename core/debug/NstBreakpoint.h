@@ -9,27 +9,33 @@
 #pragma once
 
 #include <boost/shared_ptr.hpp>
+#include <map>
+
+#include "NstRegister.h"
 
 namespace Debug {
-    struct Condition;
 
     struct Breakpoint {
         uint16_t address;
+        AccessMode access;
         bool enabled;
-        boost::shared_ptr<Condition> condition;
-        Breakpoint(uint16_t addr)
-        : address(addr),
-          enabled(true)
-        {}
     };
 
-    struct Condition {
-        uint16_t accessed_address;
-        AccessMode access_mode;
-        Condition(uint16_t address, AccessMode mode)
-        : accessed_address(address),
-          access_mode(mode)
-        {}
+    class BreakpointManager {
+    public:
+        int set(uint16_t pc, AccessMode access);
+        void remove(int index);
+        void enable(int index);
+        void disable(int index);
+        const Breakpoint* lookup(int index) const;
+
+        int test_access(const Access& access);
+    private:
+
+        // <index, breakpoint> pair, will always use the smallest available
+        // integer for the newly added breakpoint.
+        typedef std::map<int, Breakpoint> Breakpoints;
+        Breakpoints breakpoints_;
     };
 }
 

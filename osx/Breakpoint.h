@@ -8,19 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-@class Condition;
+typedef enum : NSUInteger {
+    AccessNone  = 0,
+    AccessRead  = 1 << 0,
+    AccessWrite = 1 << 1,
+    AccessExec = 1 << 2,
+    AccessRW = AccessRead | AccessWrite,
+} AccessMode;
 
 @interface Breakpoint : NSObject
 
-@property (nonatomic, copy) NSString *desc;
+- (id)initWithAddress:(NSUInteger)address
+               access:(AccessMode)access
+              enabled:(BOOL)enabled;
+
 @property (nonatomic, assign) BOOL enabled;
-@property (nonatomic, assign) NSUInteger pc;
-@property (nonatomic, strong) Condition *condition;
-@end
-
-@interface Condition : NSObject
-
-@property (nonatomic, assign) NSUInteger addr;
-@property (nonatomic, readonly) enum AccessMode;
+@property (nonatomic, assign) NSUInteger address;
+@property (nonatomic, assign) AccessMode access;
 
 @end

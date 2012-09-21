@@ -11,7 +11,8 @@
 @protocol DebuggerDelegate <NSObject>
 
 @required
-- (void) executeDoneAt:(NSUInteger)pc;
-- (void) breakpoint:(NSUInteger)breakpoint triggeredAt:(NSUInteger)pc;
-
+- (void)executeDoneAt:(NSUInteger)pc;
+- (void)breakpoint:(NSUInteger)breakpoint triggeredAt:(NSUInteger)pc;
+- (void)printConsole:(NSString *)msg;
+- (void)updateDisassembly:(NSString *)msg;
 @end

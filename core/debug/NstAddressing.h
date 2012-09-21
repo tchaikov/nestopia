@@ -22,6 +22,7 @@ namespace Debug {
     using std::string;
     using ::Nes::Core::Cpu;
 
+    /// general addressing modes
     template <class Addr_> struct Addr {
         Addr(const format& fmt)
         : fmt_(fmt) {}
@@ -39,20 +40,55 @@ namespace Debug {
         string repr(uint pc, uint addr) const {
             return str(addr);
         }
-        static const Addr_& get() {
-            static Addr_ instance;
-            return instance;
+        static const Addr_& instance() {
+            static Addr_ addr;
+            return addr;
+        }
+
+        /// get the numberic operand
+        uint16_t fetch(uint16_t& pc) const;
+        /// return the address to be accessed by this
+        /// addressing
+        /// @param the operand, it's the @c 1 in "bcc $1"
+        uint16_t get(uint16_t operand) const {
+            return 0;
         }
     protected:
-        uint fetchPc8(uint &pc) const {
-            const uint address = cpu_->map.Peek16(pc);
+        uint8_t peek8(uint16_t addr) const {
+            return cpu_->map.Peek8(addr);
+        }
+        uint16_t peek16(uint16_t addr) const {
+            return cpu_->map.Peek16(addr);
+        }
+
+        uint8_t fetchPc8(uint16_t &pc) const {
+            const uint address = cpu_->map.Peek8(pc);
             ++pc;
             return address;
         }
-        uint fetchPc16(uint &pc) const {
-            const uint address = cpu_->map.Peek16(pc);
+        uint16_t fetchPc16(uint16_t &pc) const {
+            const uint16_t address = cpu_->map.Peek16(pc);
             pc += 2;
             return address;
+        }
+        uint8_t readReg(Reg::Index::All reg) const {
+            return readReg((Reg::All)reg);
+        }
+        uint8_t readReg(Reg::All reg) const {
+            switch (reg) {
+                case Reg::A:
+                    return cpu_->a;
+                case Reg::X:
+                    return cpu_->x;
+                case Reg::Y:
+                    return cpu_->y;
+                case Reg::SP:
+                    return cpu_->sp;
+                case Reg::PC:
+                    return cpu_->pc;
+                default:
+                    return 0xFF;
+            }
         }
     private:
         const Nes::Core::Cpu* cpu_;
@@ -67,7 +103,7 @@ namespace Debug {
     // Accumulator addressing
     struct Acc : Addr<Acc> {
         Acc() : Addr<Acc>("A") {}
-        uint fetch(uint&) const {
+        uint16_t fetch(uint16_t&) const {
             // never reach here
             BOOST_ASSERT(false);
         }
@@ -78,7 +114,7 @@ namespace Debug {
         // should be LDA #10 ; load 10 ($0A) into the accumulator
         // but i prefer the hex presentation
         Imm() : Addr<Imm>("#$%02X") {}
-        uint fetch(uint& pc) const {
+        uint16_t fetch(uint16_t& pc) const {
             return fetchPc8(pc);
         }
     };
@@ -86,27 +122,36 @@ namespace Debug {
     // absolute addressing
     struct Abs : Addr<Abs> {
         Abs() : Addr<Abs>("$%04X") {}
-        uint fetch(uint& pc) const {
+        uint16_t fetch(uint16_t& pc) const {
             return fetchPc16(pc);
+        }
+        uint8_t get(uint16_t data) const {
+            return data;
         }
     };
     
     // Zero page addressing
     struct Zpg : Addr<Zpg> {
         Zpg() : Addr<Zpg>("$%02X") {}
-        uint fetch(uint &pc) const {
+        uint16_t fetch(uint16_t &pc) const {
             return fetchPc16(pc);
         }
+        uint16_t get(uint16_t data) const {
+            return data & 0xFF;
+        }
     };
-    
+
     // Zero page indexed addressing (X or Y)
     template<Reg::Index::All reg>
     struct ZeroPageIndexed : Addr<ZeroPageIndexed<reg> > {
         // LDA $3F, X
         ZeroPageIndexed()
         : Addr<ZeroPageIndexed<reg> >(format("$2%2$02X, %1$C") % reg) {}
-        uint fetch(uint &pc) const {
+        uint16_t fetch(uint16_t &pc) const {
             return Addr<ZeroPageIndexed<reg> >::fetchPc8(pc);
+        }
+        uint16_t get(uint16_t data) const {
+            return (data + Addr<ZeroPageIndexed<reg> >::readReg(reg)) & 0xFF;
         }
     };
     typedef ZeroPageIndexed<Reg::Index::X> ZpgX;
@@ -114,12 +159,15 @@ namespace Debug {
     
     // Absolute indexed addressing
     template<Reg::Index::All reg>
-    struct AbsIndexed : Addr<AbsIndexed<reg> > {
+    struct AbsIndexed : Addr<AbsIndexed<reg>> {
         // LDA $8000, X
         AbsIndexed()
-        : Addr<AbsIndexed<reg> >(format("$2%2$04X, %1$C") % reg) {}
-        uint fetch(uint &pc) const {
+        : Addr<AbsIndexed<reg>>(format("$2%2$04X, %1$C") % reg) {}
+        uint16_t fetch(uint16_t &pc) const {
             return Addr<AbsIndexed<reg> >::fetchPc16(pc);
+        }
+        uint16_t get(uint16_t data) const {
+            return (data + Addr<AbsIndexed<reg>>::readReg(reg)) & 0xFFFF;
         }
     };
     typedef AbsIndexed<Reg::Index::X> AbsX;
@@ -127,11 +175,16 @@ namespace Debug {
     
     // Indexed indirect addressing
     template<Reg::Index::All reg>
-    struct IndexedIndirect : Addr<IndexedIndirect<reg> > {
+    struct IndexedIndirect : Addr<IndexedIndirect<reg>> {
         IndexedIndirect()
         : Addr<IndexedIndirect<reg> >(format("($2%2$02X, %1$C)") % reg) {}
-        uint fetch(uint &pc) const {
+        uint16_t fetch(uint16_t &pc) const {
             return Addr<IndexedIndirect<reg> >::fetchPc8(pc);
+        }
+        uint16_t get(uint16_t index) const {
+            uint8_t offset = Addr<IndexedIndirect<reg>>::readReg(reg);
+            uint16_t addr = Addr<IndexedIndirect<reg>>::peek16(index + offset);
+            return Addr<IndexedIndirect<reg> >::peek8(addr);
         }
     };
     typedef IndexedIndirect<Reg::Index::X> IndX;
@@ -141,8 +194,13 @@ namespace Debug {
     struct IndirectIndexed : Addr<IndirectIndexed<reg> > {
         IndirectIndexed()
         : Addr<IndirectIndexed<reg> >(format("($2%2$02X), %1$C)") % reg) {}
-        uint fetch(uint &pc) const {
+        uint16_t fetch(uint16_t &pc) const {
             return Addr<IndirectIndexed<reg> >::fetchPc8(pc);
+        }
+        uint16_t get(uint16_t data) const {
+            uint16_t index = Addr<IndirectIndexed<reg>>::peek16(data);
+            uint8_t offset = Addr<IndirectIndexed<reg>>::readReg(reg);
+            return Addr<IndirectIndexed<reg>>::peek8(index + offset);
         }
     };
     typedef IndirectIndexed<Reg::Index::Y> IndY;
@@ -150,16 +208,24 @@ namespace Debug {
     // Indirect addressing
     struct Ind : Addr<Ind> {
         Ind() : Addr<Ind>("($04X)") {}
-        uint fetch(uint &pc) const {
+        uint16_t fetch(uint16_t &pc) const {
             return fetchPc16(pc);
+        }
+        uint16_t get(uint16_t data) const {
+            uint16_t addr = Addr<Ind>::peek16(data);
+            return Addr<Ind>::peek8(addr);
         }
     };
 
     // Relative addressing
     struct Rel : Addr<Rel> {
         Rel() : Addr<Rel>("$+02X") {}
-        uint fetch(uint& pc) const {
+        uint16_t fetch(uint16_t& pc) const {
             return fetchPc8(pc);
+        }
+        uint16_t get(uint16_t data) const {
+            uint16_t base = Addr<Rel>::readReg(Reg::PC) + 1;
+            return (base + (int8_t)data) & 0xFFFF;
         }
     };
 }
