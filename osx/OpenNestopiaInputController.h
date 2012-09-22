@@ -36,16 +36,10 @@
     IBOutlet NSArrayController * mKeyboardsController;
     IBOutlet NSArrayController * mKeyboardEventsController;
 	IBOutlet NestopiaView * nestopiaView;
-    
+
     // Don't retain these
     DDHidKeyboard * mCurrentKeyboard;
-	
-	IBOutlet NSArrayController * mJoysticksController;
-	
-    NSMutableArray * mJoystickButtons;
-    int mXAxis;
-    int mYAxis;
-	
+
     // Don't retain these
     DDHidJoystick * mCurrentJoystick;
 	
@@ -56,10 +50,7 @@
 
 @property (nonatomic, strong) NSMutableArray *keyboards;
 @property (nonatomic, strong) NSMutableArray *events;
-@property (nonatomic, strong) NSMutableArray *joysticks;
-@property (nonatomic, assign) NSInteger joystickIndex;
 @property (nonatomic, assign) NSInteger keyboardIndex;
-@property (nonatomic, readonly) NSArray *joystickButtons;
 
 @end
 
@@ -73,24 +64,3 @@
 
 @end
 
-@interface OpenNestopiaInputController (DDHidJoystickDelegate)
-
-- (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
-              xChanged: (int) value;
-
-- (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
-              yChanged: (int) value;
-
-- (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             otherAxis: (unsigned) otherAxis
-          valueChanged: (int) value;
-
-- (void) ddhidJoystick: (DDHidJoystick *) joystick
-            buttonDown: (unsigned) buttonNumber;
-
-- (void) ddhidJoystick: (DDHidJoystick *) joystick
-              buttonUp: (unsigned) buttonNumber;
-@end

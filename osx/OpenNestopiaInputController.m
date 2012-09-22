@@ -24,7 +24,6 @@
 
 
 #import "OpenNestopiaInputController.h"
-#import "ButtonState.h"
 
 @interface OpenNestopiaInputController (Private)
 
@@ -35,7 +34,6 @@
 
 @implementation OpenNestopiaInputController
 
-@synthesize joystickButtons = mJoystickButtons;
 
 - (id) init;
 {
@@ -57,17 +55,6 @@
         self.keyboardIndex = 0;
     else
         self.keyboardIndex = NSNotFound;
-
-    mJoystickButtons = [[NSMutableArray alloc] init];
-    NSArray * joysticks = [DDHidJoystick allJoysticks];
-    for (DDHidJoystick *joystick in joysticks) {
-        joystick.delegate = self;
-    }
-    self.joysticks = joysticks.mutableCopy;
-    if (self.joysticks.count > 0)
-        self.joystickIndex = 0;
-    else
-        self.joystickIndex = NSNotFound;
 }
 
 //=========================================================== 
@@ -94,42 +81,6 @@
 }
 
 //=========================================================== 
-//  joysticks 
-//=========================================================== 
-
-- (NSArray *) joystickButtons;
-{
-    return mJoystickButtons;
-}
-
-
-//=========================================================== 
-//  joystickIndex 
-//=========================================================== 
-
-- (void) setJoystickIndex: (NSInteger) theJoystickIndex
-{
-    if (mCurrentJoystick != nil) {
-        [mCurrentJoystick stopListening];
-        mCurrentJoystick = nil;
-    }
-    _joystickIndex = theJoystickIndex;
-    [mJoysticksController setSelectionIndex: _joystickIndex];
-    if (_joystickIndex != NSNotFound) {
-        mCurrentJoystick = self.joysticks[self.joystickIndex];
-        [mCurrentJoystick startListening];
-        
-        [self willChangeValueForKey: @"joystickButtons"];
-        [mJoystickButtons removeAllObjects];
-        for (DDHidElement* element in [mCurrentJoystick buttonElements]) {
-            ButtonState * state = [[ButtonState alloc] initWithName: [[element usage] usageName]];
-            [mJoystickButtons addObject: state];
-        }
-        [self didChangeValueForKey: @"joystickButtons"];
-    }
-}
-
-//=========================================================== 
 //  events 
 //=========================================================== 
 - (void) addEvent: (id)theEvent
@@ -144,64 +95,6 @@
 
 @end
 
-@implementation OpenNestopiaInputController (DDHidJoystickDelegate)
-
-- (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
-              xChanged: (int) value;
-{
-	NSLog(@"Stick: %d, XValue: %d",stick,value);
-    [self willChangeValueForKey: @"xAxis"];
-    mXAxis = value;
-    [self didChangeValueForKey: @"xAxis"];
-}
-
-- (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
-              yChanged: (int) value;
-{
-	NSLog(@"Stick: %d, XValue: %d",stick,value);
-    [self willChangeValueForKey: @"yAxis"];
-    mYAxis = value;
-    [self didChangeValueForKey: @"yAxis"];
-}
-
-- (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             otherAxis: (unsigned) otherAxis
-          valueChanged: (int) value;
-{
-    // Somehow display values here
-    NSLog(@"Stick: %d, other axis: %d, changed: %d", stick, otherAxis, value);
-}
-
-- (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             povNumber: (unsigned) povNumber
-          valueChanged: (int) value;
-{
-    // Somehow display values here
-    NSLog(@"Stick: %d, POV number: %d, changed: %d", stick, povNumber, value);
-}
-
-- (void) ddhidJoystick: (DDHidJoystick *) joystick
-            buttonDown: (unsigned) buttonNumber;
-{
-	NSLog(@"Button :%d pressed.",buttonNumber);
-    ButtonState * state = [mJoystickButtons objectAtIndex: buttonNumber];
-    [state setPressed: YES];
-}
-
-- (void) ddhidJoystick: (DDHidJoystick *) joystick
-              buttonUp: (unsigned) buttonNumber;
-{
-	NSLog(@"Button :%d pressed.",buttonNumber);
-    ButtonState * state = [mJoystickButtons objectAtIndex: buttonNumber];
-    [state setPressed: NO];
-}
-
-
-@end
 
 @implementation OpenNestopiaInputController (DDHidKeyboardDelegate)
 

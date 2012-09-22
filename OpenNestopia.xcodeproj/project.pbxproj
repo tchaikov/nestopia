@@ -46,7 +46,6 @@
 		0DECB3900C3E24C4000279A6 /* OpenNestopiaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB37F0C3E24C4000279A6 /* OpenNestopiaPreferences.m */; };
 		0DECB3980C3E250C000279A6 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3940C3E250C000279A6 /* MainMenu.nib */; };
 		0DECB3990C3E250C000279A6 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3960C3E250C000279A6 /* Preferences.nib */; };
-		0DECB47C0C3E2C28000279A6 /* ButtonState.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB47A0C3E2C28000279A6 /* ButtonState.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -442,22 +441,20 @@
 		0DECB21A0C3E2422000279A6 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		0DECB36B0C3E24C3000279A6 /* OpenNestopia.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OpenNestopia.icns; sourceTree = "<group>"; };
 		0DECB36C0C3E24C3000279A6 /* opennestopia_png24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opennestopia_png24.png; sourceTree = "<group>"; };
-		0DECB3730C3E24C4000279A6 /* NestopiaView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NestopiaView.h; sourceTree = "<group>"; };
-		0DECB3740C3E24C4000279A6 /* NestopiaView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NestopiaView.mm; sourceTree = "<group>"; };
+		0DECB3730C3E24C4000279A6 /* NestopiaView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = NestopiaView.h; path = osx/NestopiaView.h; sourceTree = "<group>"; };
+		0DECB3740C3E24C4000279A6 /* NestopiaView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NestopiaView.mm; path = osx/NestopiaView.mm; sourceTree = "<group>"; };
 		0DECB3750C3E24C4000279A6 /* NstDatabase.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = NstDatabase.dat; path = osx/NstDatabase.dat; sourceTree = "<group>"; };
-		0DECB3760C3E24C4000279A6 /* OpenNestopia_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = OpenNestopia_Prefix.pch; sourceTree = "<group>"; };
-		0DECB3770C3E24C4000279A6 /* OpenNestopiaController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = OpenNestopiaController.h; sourceTree = "<group>"; };
-		0DECB3780C3E24C4000279A6 /* OpenNestopiaController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = OpenNestopiaController.m; sourceTree = "<group>"; };
-		0DECB3790C3E24C4000279A6 /* OpenNestopiaInputController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = OpenNestopiaInputController.h; sourceTree = "<group>"; };
-		0DECB37A0C3E24C4000279A6 /* OpenNestopiaInputController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = OpenNestopiaInputController.m; sourceTree = "<group>"; };
-		0DECB37C0C3E24C4000279A6 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
-		0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
-		0DECB37E0C3E24C4000279A6 /* OpenNestopiaPreferences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = OpenNestopiaPreferences.h; sourceTree = "<group>"; };
-		0DECB37F0C3E24C4000279A6 /* OpenNestopiaPreferences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = OpenNestopiaPreferences.m; sourceTree = "<group>"; };
+		0DECB3760C3E24C4000279A6 /* OpenNestopia_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = OpenNestopia_Prefix.pch; path = osx/OpenNestopia_Prefix.pch; sourceTree = "<group>"; };
+		0DECB3770C3E24C4000279A6 /* OpenNestopiaController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = OpenNestopiaController.h; path = osx/OpenNestopiaController.h; sourceTree = "<group>"; };
+		0DECB3780C3E24C4000279A6 /* OpenNestopiaController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = OpenNestopiaController.m; path = osx/OpenNestopiaController.m; sourceTree = "<group>"; };
+		0DECB3790C3E24C4000279A6 /* OpenNestopiaInputController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = OpenNestopiaInputController.h; path = osx/OpenNestopiaInputController.h; sourceTree = "<group>"; };
+		0DECB37A0C3E24C4000279A6 /* OpenNestopiaInputController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = OpenNestopiaInputController.m; path = osx/OpenNestopiaInputController.m; sourceTree = "<group>"; };
+		0DECB37C0C3E24C4000279A6 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DBPrefsWindowController.h; path = osx/prefs/DBPrefsWindowController.h; sourceTree = "<group>"; };
+		0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DBPrefsWindowController.m; path = osx/prefs/DBPrefsWindowController.m; sourceTree = "<group>"; };
+		0DECB37E0C3E24C4000279A6 /* OpenNestopiaPreferences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = OpenNestopiaPreferences.h; path = osx/prefs/OpenNestopiaPreferences.h; sourceTree = "<group>"; };
+		0DECB37F0C3E24C4000279A6 /* OpenNestopiaPreferences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = OpenNestopiaPreferences.m; path = osx/prefs/OpenNestopiaPreferences.m; sourceTree = "<group>"; };
 		0DECB3950C3E250C000279A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		0DECB3970C3E250C000279A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
-		0DECB4790C3E2C28000279A6 /* ButtonState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ButtonState.h; sourceTree = "<group>"; };
-		0DECB47A0C3E2C28000279A6 /* ButtonState.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ButtonState.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -1761,16 +1758,6 @@
 				941BA81C16057026008D96D2 /* debug */,
 				946496EE15F26E7D002B488B /* Input */,
 				946496E715F25F7D002B488B /* Audio */,
-				0DECB4790C3E2C28000279A6 /* ButtonState.h */,
-				0DECB47A0C3E2C28000279A6 /* ButtonState.m */,
-				0DECB3730C3E24C4000279A6 /* NestopiaView.h */,
-				0DECB3740C3E24C4000279A6 /* NestopiaView.mm */,
-				0DECB3760C3E24C4000279A6 /* OpenNestopia_Prefix.pch */,
-				0DECB3770C3E24C4000279A6 /* OpenNestopiaController.h */,
-				0DECB3780C3E24C4000279A6 /* OpenNestopiaController.m */,
-				0DECB3790C3E24C4000279A6 /* OpenNestopiaInputController.h */,
-				0DECB37A0C3E24C4000279A6 /* OpenNestopiaInputController.m */,
-				0DECB37B0C3E24C4000279A6 /* prefs */,
 			);
 			path = osx;
 			sourceTree = "<group>";
@@ -1789,17 +1776,6 @@
 			);
 			name = images;
 			path = osx/images;
-			sourceTree = "<group>";
-		};
-		0DECB37B0C3E24C4000279A6 /* prefs */ = {
-			isa = PBXGroup;
-			children = (
-				0DECB37C0C3E24C4000279A6 /* DBPrefsWindowController.h */,
-				0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */,
-				0DECB37E0C3E24C4000279A6 /* OpenNestopiaPreferences.h */,
-				0DECB37F0C3E24C4000279A6 /* OpenNestopiaPreferences.m */,
-			);
-			path = prefs;
 			sourceTree = "<group>";
 		};
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
@@ -1836,6 +1812,7 @@
 		29B97314FDCFA39411CA2CEA /* OpenNestopia */ = {
 			isa = PBXGroup;
 			children = (
+				0DECB3760C3E24C4000279A6 /* OpenNestopia_Prefix.pch */,
 				941BA8291605DDB2008D96D2 /* Model */,
 				941BA8221605BA7E008D96D2 /* Views */,
 				9468703215F63FA20049AA2C /* Controllers */,
@@ -1911,6 +1888,8 @@
 		941BA8221605BA7E008D96D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0DECB3730C3E24C4000279A6 /* NestopiaView.h */,
+				0DECB3740C3E24C4000279A6 /* NestopiaView.mm */,
 				941BA8231605BABE008D96D2 /* WatchTableView.h */,
 				941BA8241605BABE008D96D2 /* WatchTableView.m */,
 				941BA8261605BC02008D96D2 /* DisassembledTableView.h */,
@@ -1952,6 +1931,14 @@
 		9468703215F63FA20049AA2C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0DECB37C0C3E24C4000279A6 /* DBPrefsWindowController.h */,
+				0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */,
+				0DECB37E0C3E24C4000279A6 /* OpenNestopiaPreferences.h */,
+				0DECB37F0C3E24C4000279A6 /* OpenNestopiaPreferences.m */,
+				0DECB3770C3E24C4000279A6 /* OpenNestopiaController.h */,
+				0DECB3780C3E24C4000279A6 /* OpenNestopiaController.m */,
+				0DECB3790C3E24C4000279A6 /* OpenNestopiaInputController.h */,
+				0DECB37A0C3E24C4000279A6 /* OpenNestopiaInputController.m */,
 				9468703515F6418A0049AA2C /* DebuggerWindowController.h */,
 				9468703615F6418A0049AA2C /* DebuggerWindowController.m */,
 				9468703715F6418A0049AA2C /* DebuggerWindowController.xib */,
@@ -2141,7 +2128,6 @@
 				0DECB38E0C3E24C4000279A6 /* OpenNestopiaInputController.m in Sources */,
 				0DECB38F0C3E24C4000279A6 /* DBPrefsWindowController.m in Sources */,
 				0DECB3900C3E24C4000279A6 /* OpenNestopiaPreferences.m in Sources */,
-				0DECB47C0C3E2C28000279A6 /* ButtonState.m in Sources */,
 				946494D815F21161002B488B /* NstBoard.cpp in Sources */,
 				946494D915F21161002B488B /* NstBoardAe.cpp in Sources */,
 				946494DA15F21161002B488B /* NstBoardAgci.cpp in Sources */,
