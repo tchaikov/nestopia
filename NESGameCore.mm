@@ -618,7 +618,18 @@ static int Heights[2] =
 }
 
 #pragma mark -
-#pragma mark Emulation
+#pragma mark Execution
+
+- (void)setPauseEmulation:(BOOL)flag
+{
+    if(flag) isRunning = NO;
+    else     isRunning = YES;
+}
+
+- (BOOL)isEmulationPaused
+{
+    return !isRunning;
+}
 
 - (void)setupEmulation
 {
@@ -682,8 +693,18 @@ static int Heights[2] =
 
 - (void)stopEmulation
 {
+    shouldStop = YES;
+    isRunning  = NO;
     Nes::Api::Machine machine(*emu);
     machine.Power(false);
+    DLog(@"Ending thread");
+}
+
+- (void)resetEmulation
+{
+    DLog(@"Resetting NES");
+    Nes::Api::Machine machine(*emu);
+    machine.Reset(true);
 }
 
 - (void)frameRefreshThread:(id)anArgument
@@ -741,13 +762,6 @@ static int Heights[2] =
 }
 
 # pragma mark -
-
-- (void)resetEmulation
-{
-    DLog(@"Resetting NES");
-    Nes::Api::Machine machine(*emu);
-    machine.Reset(true);
-}
 
 - (void)dealloc
 {

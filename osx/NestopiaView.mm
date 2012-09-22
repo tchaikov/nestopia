@@ -90,6 +90,7 @@ NSString* fName;
 -(void)powerOff
 {
     [gameCore stopEmulation];
+    toolbarItem.enabled = FALSE;
 }
 
 -(void)resetGame
@@ -147,11 +148,26 @@ NSString* fName;
 #pragma mark -
 #pragma mark emulation control
 
-- (IBAction)play:(id)sender
-{}
+- (IBAction)togglePlayPause:(id)sender
+{
+    if (gameCore.pauseEmulation) {
+        [self resume:sender];
+    } else {
+        [self pause:sender];
+    }
+}
 
 - (IBAction)pause:(id)sender
-{}
+{
+    toolbarItem.image = [NSImage imageNamed:@"play-icon-32"];
+    gameCore.pauseEmulation = YES;
+}
+
+- (IBAction)resume:(id)sender
+{
+    toolbarItem.image = [NSImage imageNamed:@"pause-icon-32"];
+    gameCore.pauseEmulation = NO;
+}
 
 - (IBAction)reset:(id)sender
 {}
@@ -236,7 +252,8 @@ NSString* fName;
     gameCoreThread = [[NSThread alloc] initWithTarget:self selector:@selector(OE_gameCoreThread:) object:nil];
 //    [gameCoreProxy setGameThread:gameCoreThread];
     [gameCoreThread start];
-    
+    toolbarItem.enabled = YES;
+    toolbarItem.image = [NSImage imageNamed:@"pause-icon-32"];
     DLog(@"finished starting rom");
 }
 
@@ -252,6 +269,7 @@ NSString* fName;
         [self performSelector:@selector(OE_stopGameCoreThreadRunLoop:) onThread:gameCoreThread withObject:nil waitUntilDone:YES];
         gameCoreThread = nil;
     }
+    toolbarItem.enabled = NO;
 }
 
 - (void)OE_gameCoreThread:(id)anObject;

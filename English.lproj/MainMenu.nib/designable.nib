@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C50</string>
+		<string key="IBDocument.SystemVersion">12C54</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
@@ -228,7 +228,7 @@
 							</object>
 						</object>
 					</dictionary>
-					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
+					<array key="NSToolbarIBAllowedItems">
 						<reference ref="534751052"/>
 						<reference ref="894475536"/>
 						<reference ref="823057145"/>
@@ -239,7 +239,6 @@
 					</array>
 					<array key="NSToolbarIBDefaultItems">
 						<reference ref="894475536"/>
-						<reference ref="823057145"/>
 						<reference ref="1029353289"/>
 						<reference ref="534751052"/>
 						<reference ref="335343299"/>
@@ -700,7 +699,7 @@
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="982341095">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSPopUpButton" id="590477852">
@@ -708,7 +707,6 @@
 							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{12, 323}, {130, 26}}</string>
 							<reference key="NSSuperview" ref="982341095"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPopUpButtonCell" key="NSCell" id="591711181">
 								<int key="NSCellFlags">-2076180416</int>
@@ -785,7 +783,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{465, 367}</string>
-					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="590477852"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
@@ -1008,19 +1005,35 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">play:</string>
-						<reference key="source" ref="90575878"/>
-						<reference key="destination" ref="894475536"/>
-					</object>
-					<int key="connectionID">577</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">loadRom:</string>
 						<reference key="source" ref="90575878"/>
 						<reference key="destination" ref="996762146"/>
 					</object>
 					<int key="connectionID">578</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">toolbar</string>
+						<reference key="source" ref="90575878"/>
+						<reference key="destination" ref="492580624"/>
+					</object>
+					<int key="connectionID">579</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">togglePlayPause:</string>
+						<reference key="source" ref="90575878"/>
+						<reference key="destination" ref="894475536"/>
+					</object>
+					<int key="connectionID">582</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">toolbarItem</string>
+						<reference key="source" ref="90575878"/>
+						<reference key="destination" ref="894475536"/>
+					</object>
+					<int key="connectionID">583</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1709,7 +1722,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">578</int>
+			<int key="maxID">583</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1763,11 +1776,10 @@
 						<string key="fullscreenToggle:">id</string>
 						<string key="loadRom:">id</string>
 						<string key="loadState:">id</string>
-						<string key="pause:">id</string>
-						<string key="play:">id</string>
 						<string key="reset:">id</string>
 						<string key="saveState:">id</string>
 						<string key="stop:">id</string>
+						<string key="togglePlayPause:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="fullscreenToggle:">
@@ -1782,14 +1794,6 @@
 							<string key="name">loadState:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="pause:">
-							<string key="name">pause:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="play:">
-							<string key="name">play:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="reset:">
 							<string key="name">reset:</string>
 							<string key="candidateClassName">id</string>
@@ -1802,19 +1806,23 @@
 							<string key="name">stop:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="togglePlayPause:">
+							<string key="name">togglePlayPause:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="dipSwitchPanel">NSPanel</string>
 						<string key="mainWindow">NSWindow</string>
+						<string key="toolbarItem">NSToolbarItem</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="dipSwitchPanel">
-							<string key="name">dipSwitchPanel</string>
-							<string key="candidateClassName">NSPanel</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="mainWindow">
 							<string key="name">mainWindow</string>
 							<string key="candidateClassName">NSWindow</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toolbarItem">
+							<string key="name">toolbarItem</string>
+							<string key="candidateClassName">NSToolbarItem</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -1882,17 +1890,12 @@
 					<string key="className">OpenNestopiaInputController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="mJoysticksController">NSArrayController</string>
 						<string key="mKeyboardEventsController">NSArrayController</string>
 						<string key="mKeyboardsController">NSArrayController</string>
 						<string key="mPad1Controls">NSArrayController</string>
 						<string key="nestopiaView">NestopiaView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="mJoysticksController">
-							<string key="name">mJoysticksController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="mKeyboardEventsController">
 							<string key="name">mKeyboardEventsController</string>
 							<string key="candidateClassName">NSArrayController</string>

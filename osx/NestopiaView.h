@@ -15,8 +15,8 @@ NSLock *soundLock;
 {
 	
 	IBOutlet NSWindow *mainWindow;
-	IBOutlet NSPanel *dipSwitchPanel;
-	
+    IBOutlet NSToolbarItem *toolbarItem;
+
 	NSOpenGLContext *fullScreenGLContext;
     GLuint           gameTexture;      // this is the texture that is defined by the gameCores pixelFormat and type
 
@@ -36,8 +36,7 @@ NSLock *soundLock;
 - (void)resetGame;
 - (void)powerOff;
 
-- (IBAction)play:(id)sender;
-- (IBAction)pause:(id)sender;
+- (IBAction)togglePlayPause:(id)sender;
 - (IBAction)reset:(id)sender;
 - (IBAction)stop:(id)sender;
 - (IBAction)loadRom:(id)sender;

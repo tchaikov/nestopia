@@ -97,10 +97,11 @@ extern NSString *const NESUnlimitedSprites;
 
 @property(weak)     id<RenderDelegate>  renderDelegate;
 
+- (void)executeFrame;
+
 #pragma mark -
 #pragma mark Execution
-
-- (void)executeFrame;
+@property(getter=isEmulationPaused) BOOL pauseEmulation;
 - (void)setupEmulation;
 - (void)resetEmulation;
 - (void)stopEmulation;
