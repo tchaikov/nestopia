@@ -17,13 +17,9 @@
 
 @implementation DebuggerWindowController
 
-- (id)initWithEmu:(void *)emu
+- (void)setEmu:(void *)emu
 {
-    self = [super init];
-    if (self) {
-        self.debugger = [[DebuggerBridge alloc] initWithEmu:emu];
-    }
-    return self;
+    self.debugger = [[DebuggerBridge alloc] initWithEmu:emu];
 }
 
 - (id)initWithWindow:(NSWindow *)window
@@ -55,13 +51,13 @@
 {
     Breakpoint * breakpoint = [self breakpointAtIndex:breakpointIndex];
     NSAssert(breakpoint, @"breakpoint #%ld not found", breakpointIndex);
-    [consoleView printStoppedByBreakpoint:breakpoint at:pc];
+    [self.consoleView printStoppedByBreakpoint:breakpoint at:pc];
     [self updateDisassemblyWindowStartsAt:pc];
     [self updateWatchWindow];
 }
 
 - (void)printConsole:(NSString *)msg {
-    [consoleView print:msg];
+    [self.consoleView print:msg];
 }
 
 #pragma mark -

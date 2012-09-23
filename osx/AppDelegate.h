@@ -10,13 +10,13 @@
 
 @class DebuggerWindowController;
 
-@interface AppDelegate : NSObject<NSApplicationDelegate>
+@interface AppDelegate : NSObject<NSApplicationDelegate, NSMenuDelegate>
 
 @property (assign) IBOutlet NSWindow *mainWindow;
 @property (assign) IBOutlet NestopiaView *nesView;
 @property (assign) IBOutlet DebuggerWindowController *debugerWindowController;
 
 - (IBAction)openPreferencesWindow:(id)sender;
-- (IBAction)openDebugConsole:(id)sender;
+- (IBAction)openDebugWindow:(id)sender;
 
 @end

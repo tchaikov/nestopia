@@ -16,14 +16,12 @@
 
 
 @interface DebuggerWindowController : NSWindowController<DebuggerDelegate>
-{
-    IBOutlet DisassembledTableView *disassembledView;
-    IBOutlet WatchTableView *watchView;
-    IBOutlet DebugConsoleView *consoleView;
-}
 
 @property(nonatomic, strong) DebuggerBridge* debugger;
+@property(assign) IBOutlet DisassembledTableView *disassembledView;
+@property(assign) IBOutlet WatchTableView *watchView;
+@property(assign) IBOutlet DebugConsoleView *consoleView;
 
-- (id)initWithEmu:(void *)emu;
+- (void)setEmu:(void *)emu;
 
 @end

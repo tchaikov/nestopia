@@ -82,13 +82,24 @@
 	[[OpenNestopiaPreferences sharedPrefsWindowController] showWindow:nil];
 }
 
-- (IBAction)openDebugConsole:(id)sender
+- (IBAction)openDebugWindow:(NSMenuItem *)sender
 {
-    DebuggerWindowController *debuggerWindowController = [[DebuggerWindowController alloc] initWithEmu:self.nesView.emu];
-    if (debuggerWindowController) {
-        [debuggerWindowController showWindow:self];
+    if (self.debugerWindowController.window.isVisible) {
+        [self.debugerWindowController close];
+        sender.title = @"Show Debug Console";
+    } else {
+        self.debugerWindowController.emu = self.nesView.emu;
+        [self.debugerWindowController showWindow:self];
+        sender.title = @"Hide Debug Console";
     }
 }
 
+#pragma mark -
+#pragma mark NSMenuDelegate
+
+- (BOOL)validateMenuItem:(NSMenuItem *)item
+{
+	return TRUE;
+}
 
 @end
