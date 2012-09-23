@@ -157,13 +157,13 @@ NSString* fName;
     }
 }
 
-- (IBAction)pause:(id)sender
+- (void)pause:(id)sender
 {
     toolbarItem.image = [NSImage imageNamed:@"play-icon-32"];
     gameCore.pauseEmulation = YES;
 }
 
-- (IBAction)resume:(id)sender
+- (void)resume:(id)sender
 {
     toolbarItem.image = [NSImage imageNamed:@"pause-icon-32"];
     gameCore.pauseEmulation = NO;
@@ -199,7 +199,7 @@ NSString* fName;
         self.loadedRom = [gameCore loadFileAtPath:fileName];
     }
     
-    if(sender!=nil) {
+    if (sender!=nil) {
         [mainWindow makeKeyAndOrderFront:nil];
         [self setupEmulation];
     }
@@ -497,7 +497,7 @@ NSString* fName;
                  gameCore.videoBuffer);
 
     GLenum status = glGetError();
-    if(status)
+    if (status)
     {
         NSLog(@"updateGameTexture, after updating tex: OpenGL error %04X", status);
         glDeleteTextures(1, &gameTexture);

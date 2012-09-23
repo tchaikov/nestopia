@@ -1,18 +1,18 @@
-#import "OpenNestopiaController.h"
+#import "AppDelegate.h"
 #import "OpenNestopiaPreferences.h"
 #import "DebuggerWindowController.h"
 
 
-@implementation OpenNestopiaController
+@implementation AppDelegate
 
 - (void)windowWillMiniaturize:(NSNotification *)aNotification 
 { 
-    [nesView copyGLToBackingStore]; 
+    [self.nesView copyGLToBackingStore];
 } 
 
 - (void)windowWillClose:(NSNotification *)aNotification
 {
-	[nesView powerOff];
+	[self.nesView powerOff];
 }
 
 -(IBAction)buttonChanged:(id)sender
@@ -84,7 +84,7 @@
 
 - (IBAction)openDebugConsole:(id)sender
 {
-    DebuggerWindowController *debuggerWindowController = [[DebuggerWindowController alloc] initWithEmu:nesView.emu];
+    DebuggerWindowController *debuggerWindowController = [[DebuggerWindowController alloc] initWithEmu:self.nesView.emu];
     if (debuggerWindowController) {
         [debuggerWindowController showWindow:self];
     }

@@ -31,21 +31,17 @@
 		0DECB3480C3E2422000279A6 /* NstVsSuperXevious.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB1EC0C3E2421000279A6 /* NstVsSuperXevious.cpp */; };
 		0DECB3490C3E2422000279A6 /* NstVsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB1EE0C3E2421000279A6 /* NstVsSystem.cpp */; };
 		0DECB34A0C3E2422000279A6 /* NstVsTkoBoxing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB1F00C3E2421000279A6 /* NstVsTkoBoxing.cpp */; };
-		0DECB35A0C3E2422000279A6 /* changes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB2120C3E2422000279A6 /* changes.txt */; };
 		0DECB35B0C3E2422000279A6 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB2140C3E2422000279A6 /* license.txt */; };
 		0DECB35C0C3E2422000279A6 /* nes_ntsc.inl in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB2160C3E2422000279A6 /* nes_ntsc.inl */; };
 		0DECB35D0C3E2422000279A6 /* nes_ntsc.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB2170C3E2422000279A6 /* nes_ntsc.txt */; };
-		0DECB35E0C3E2422000279A6 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB21A0C3E2422000279A6 /* readme.txt */; };
 		0DECB3830C3E24C4000279A6 /* OpenNestopia.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB36B0C3E24C3000279A6 /* OpenNestopia.icns */; };
 		0DECB3840C3E24C4000279A6 /* opennestopia_png24.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB36C0C3E24C3000279A6 /* opennestopia_png24.png */; };
 		0DECB38B0C3E24C4000279A6 /* NestopiaView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB3740C3E24C4000279A6 /* NestopiaView.mm */; };
 		0DECB38C0C3E24C4000279A6 /* NstDatabase.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3750C3E24C4000279A6 /* NstDatabase.dat */; };
-		0DECB38D0C3E24C4000279A6 /* OpenNestopiaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB3780C3E24C4000279A6 /* OpenNestopiaController.m */; };
+		0DECB38D0C3E24C4000279A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB3780C3E24C4000279A6 /* AppDelegate.m */; };
 		0DECB38E0C3E24C4000279A6 /* OpenNestopiaInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB37A0C3E24C4000279A6 /* OpenNestopiaInputController.m */; };
 		0DECB38F0C3E24C4000279A6 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */; };
 		0DECB3900C3E24C4000279A6 /* OpenNestopiaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DECB37F0C3E24C4000279A6 /* OpenNestopiaPreferences.m */; };
-		0DECB3980C3E250C000279A6 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3940C3E250C000279A6 /* MainMenu.nib */; };
-		0DECB3990C3E250C000279A6 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 0DECB3960C3E250C000279A6 /* Preferences.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -329,6 +325,7 @@
 		946496F215F279D4002B488B /* OETimingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 946496F115F279D1002B488B /* OETimingUtils.m */; };
 		9468703815F6418A0049AA2C /* DebuggerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468703615F6418A0049AA2C /* DebuggerWindowController.m */; };
 		9468703915F6418A0049AA2C /* DebuggerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9468703715F6418A0049AA2C /* DebuggerWindowController.xib */; };
+		94D42D9A160F5299002935C8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94D42D98160F5299002935C8 /* MainMenu.xib */; };
 		94E8D1E115F380A9000234E4 /* NstApiRam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1DF15F380A9000234E4 /* NstApiRam.cpp */; };
 		94E8D1FF15F38802000234E4 /* NESGameCore+NESFeatures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */; };
 		94E8D27315F397E3000234E4 /* DDHidLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E8D1FB15F382C2000234E4 /* DDHidLib.framework */; };
@@ -445,16 +442,14 @@
 		0DECB3740C3E24C4000279A6 /* NestopiaView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NestopiaView.mm; path = osx/NestopiaView.mm; sourceTree = "<group>"; };
 		0DECB3750C3E24C4000279A6 /* NstDatabase.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = NstDatabase.dat; path = osx/NstDatabase.dat; sourceTree = "<group>"; };
 		0DECB3760C3E24C4000279A6 /* OpenNestopia_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = OpenNestopia_Prefix.pch; path = osx/OpenNestopia_Prefix.pch; sourceTree = "<group>"; };
-		0DECB3770C3E24C4000279A6 /* OpenNestopiaController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = OpenNestopiaController.h; path = osx/OpenNestopiaController.h; sourceTree = "<group>"; };
-		0DECB3780C3E24C4000279A6 /* OpenNestopiaController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = OpenNestopiaController.m; path = osx/OpenNestopiaController.m; sourceTree = "<group>"; };
+		0DECB3770C3E24C4000279A6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = osx/AppDelegate.h; sourceTree = "<group>"; };
+		0DECB3780C3E24C4000279A6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = osx/AppDelegate.m; sourceTree = "<group>"; };
 		0DECB3790C3E24C4000279A6 /* OpenNestopiaInputController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = OpenNestopiaInputController.h; path = osx/OpenNestopiaInputController.h; sourceTree = "<group>"; };
 		0DECB37A0C3E24C4000279A6 /* OpenNestopiaInputController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = OpenNestopiaInputController.m; path = osx/OpenNestopiaInputController.m; sourceTree = "<group>"; };
 		0DECB37C0C3E24C4000279A6 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DBPrefsWindowController.h; path = osx/prefs/DBPrefsWindowController.h; sourceTree = "<group>"; };
 		0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DBPrefsWindowController.m; path = osx/prefs/DBPrefsWindowController.m; sourceTree = "<group>"; };
 		0DECB37E0C3E24C4000279A6 /* OpenNestopiaPreferences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = OpenNestopiaPreferences.h; path = osx/prefs/OpenNestopiaPreferences.h; sourceTree = "<group>"; };
 		0DECB37F0C3E24C4000279A6 /* OpenNestopiaPreferences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = OpenNestopiaPreferences.m; path = osx/prefs/OpenNestopiaPreferences.m; sourceTree = "<group>"; };
-		0DECB3950C3E250C000279A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		0DECB3970C3E250C000279A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -1050,6 +1045,7 @@
 		9468703515F6418A0049AA2C /* DebuggerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebuggerWindowController.h; path = osx/DebuggerWindowController.h; sourceTree = "<group>"; };
 		9468703615F6418A0049AA2C /* DebuggerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebuggerWindowController.m; path = osx/DebuggerWindowController.m; sourceTree = "<group>"; };
 		9468703715F6418A0049AA2C /* DebuggerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DebuggerWindowController.xib; path = osx/DebuggerWindowController.xib; sourceTree = "<group>"; };
+		94D42D99160F5299002935C8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		94E8D1DF15F380A9000234E4 /* NstApiRam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstApiRam.cpp; sourceTree = "<group>"; };
 		94E8D1E015F380A9000234E4 /* NstApiRam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NstApiRam.h; sourceTree = "<group>"; };
 		94E8D1E715F382C2000234E4 /* DDHidLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDHidLib.xcodeproj; path = DDHidLib/DDHidLib.xcodeproj; sourceTree = "<group>"; };
@@ -1812,6 +1808,7 @@
 		29B97314FDCFA39411CA2CEA /* OpenNestopia */ = {
 			isa = PBXGroup;
 			children = (
+				94D42D98160F5299002935C8 /* MainMenu.xib */,
 				0DECB3760C3E24C4000279A6 /* OpenNestopia_Prefix.pch */,
 				941BA8291605DDB2008D96D2 /* Model */,
 				941BA8221605BA7E008D96D2 /* Views */,
@@ -1838,8 +1835,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0DECB3940C3E250C000279A6 /* MainMenu.nib */,
-				0DECB3960C3E250C000279A6 /* Preferences.nib */,
 				0DECB3670C3E24C3000279A6 /* images */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -1935,8 +1930,8 @@
 				0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */,
 				0DECB37E0C3E24C4000279A6 /* OpenNestopiaPreferences.h */,
 				0DECB37F0C3E24C4000279A6 /* OpenNestopiaPreferences.m */,
-				0DECB3770C3E24C4000279A6 /* OpenNestopiaController.h */,
-				0DECB3780C3E24C4000279A6 /* OpenNestopiaController.m */,
+				0DECB3770C3E24C4000279A6 /* AppDelegate.h */,
+				0DECB3780C3E24C4000279A6 /* AppDelegate.m */,
 				0DECB3790C3E24C4000279A6 /* OpenNestopiaInputController.h */,
 				0DECB37A0C3E24C4000279A6 /* OpenNestopiaInputController.m */,
 				9468703515F6418A0049AA2C /* DebuggerWindowController.h */,
@@ -2019,6 +2014,7 @@
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* OpenNestopia */;
 			projectDirPath = "";
@@ -2072,16 +2068,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				0DECB35A0C3E2422000279A6 /* changes.txt in Resources */,
 				0DECB35B0C3E2422000279A6 /* license.txt in Resources */,
 				0DECB35C0C3E2422000279A6 /* nes_ntsc.inl in Resources */,
 				0DECB35D0C3E2422000279A6 /* nes_ntsc.txt in Resources */,
-				0DECB35E0C3E2422000279A6 /* readme.txt in Resources */,
 				0DECB3830C3E24C4000279A6 /* OpenNestopia.icns in Resources */,
 				0DECB3840C3E24C4000279A6 /* opennestopia_png24.png in Resources */,
 				0DECB38C0C3E24C4000279A6 /* NstDatabase.dat in Resources */,
-				0DECB3980C3E250C000279A6 /* MainMenu.nib in Resources */,
-				0DECB3990C3E250C000279A6 /* Preferences.nib in Resources */,
 				9464959615F21185002B488B /* NstDatabase.xml in Resources */,
 				9464966415F21273002B488B /* NstSoundRenderer.inl in Resources */,
 				9468703915F6418A0049AA2C /* DebuggerWindowController.xib in Resources */,
@@ -2091,6 +2083,7 @@
 				941BA8621607788A008D96D2 /* save-icon-32.png in Resources */,
 				941BA8631607788A008D96D2 /* stop-icon-32.png in Resources */,
 				941BA866160778F8008D96D2 /* open-icon-32.png in Resources */,
+				94D42D9A160F5299002935C8 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2124,7 +2117,7 @@
 				0DECB3490C3E2422000279A6 /* NstVsSystem.cpp in Sources */,
 				0DECB34A0C3E2422000279A6 /* NstVsTkoBoxing.cpp in Sources */,
 				0DECB38B0C3E24C4000279A6 /* NestopiaView.mm in Sources */,
-				0DECB38D0C3E24C4000279A6 /* OpenNestopiaController.m in Sources */,
+				0DECB38D0C3E24C4000279A6 /* AppDelegate.m in Sources */,
 				0DECB38E0C3E24C4000279A6 /* OpenNestopiaInputController.m in Sources */,
 				0DECB38F0C3E24C4000279A6 /* DBPrefsWindowController.m in Sources */,
 				0DECB3900C3E24C4000279A6 /* OpenNestopiaPreferences.m in Sources */,
@@ -2417,20 +2410,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		0DECB3940C3E250C000279A6 /* MainMenu.nib */ = {
+		94D42D98160F5299002935C8 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0DECB3950C3E250C000279A6 /* English */,
+				94D42D99160F5299002935C8 /* English */,
 			);
-			name = MainMenu.nib;
-			sourceTree = "<group>";
-		};
-		0DECB3960C3E250C000279A6 /* Preferences.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0DECB3970C3E250C000279A6 /* English */,
-			);
-			name = Preferences.nib;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2446,12 +2431,14 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)\"",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2466,12 +2453,14 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)\"",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
