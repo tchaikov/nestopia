@@ -21,7 +21,10 @@ typedef enum : NSUInteger {
 - (id)initWithAddress:(NSUInteger)address
                access:(AccessMode)access
               enabled:(BOOL)enabled;
+- (NSString *)triggerDescAt:(NSUInteger)pc;
++ (NSString *)descriptionHeader;
 
+@property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, assign) BOOL enabled;
 @property (nonatomic, assign) NSUInteger address;
 @property (nonatomic, assign) AccessMode access;

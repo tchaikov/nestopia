@@ -7,8 +7,6 @@
 
 @interface OpenNestopiaController : NSObject
 {
-	
-	
     NSToolbar *toolbar;
     
     NSMutableDictionary *items; // all items that are allowed to be in the toolbar

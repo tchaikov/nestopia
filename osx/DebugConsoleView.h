@@ -12,6 +12,7 @@
 
 @interface DebugConsoleView : NSTextView
 
-- (void)printStoppedByBreakpoint:(Breakpoint*)breakpoint;
+- (void)printStoppedByBreakpoint:(Breakpoint *)breakpoint at:(NSUInteger)pc;
+- (void)print:(NSString *)msg;
 
 @end

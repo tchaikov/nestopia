@@ -28,9 +28,21 @@
 
 #pragma mark -
 #pragma mark Debug
-- (void)printStoppedByBreakpoint:(Breakpoint*)breakpoint
+- (void)printPrompt
 {
-    /// TODO
+    [self insertText:@"(ndb) "];
+}
+
+- (void)printStoppedByBreakpoint:(Breakpoint*)breakpoint at:(NSUInteger)pc
+{
+    // see for colored string
+    [self insertText:[NSString stringWithFormat:@"Breakpoint %ld, at %#04lx",
+                      breakpoint.index, pc]];
+}
+
+- (void)print:(NSString *)msg
+{
+    [self insertText:msg];
 }
 
 @end

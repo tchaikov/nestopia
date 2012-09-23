@@ -6,11 +6,12 @@
 //
 //
 
+#include "NstCpu.hpp"
+#include "NstMachine.hpp"
+
 #include "NstDebugger.h"
 #include "NstOpcode.h"
 #include "NstOperator.h"
-#include "NstCpu.hpp"
-#include "NstMachine.hpp"
 
 #include "DebuggerDelegateBridge.h"
 
@@ -352,6 +353,22 @@ namespace Debug {
         }
     }
 
+    NES_HOOK(Debugger, checkNextOpcode) {
+        cpu_op_exec(cpu_.pc);
+    }
+
+    void
+    Debugger::attach()
+    {
+        cpu_.AddHook(Nes::Core::Hook(this, &Debugger::Hook_checkNextOpcode));
+    }
+
+    void
+    Debugger::detach()
+    {
+        cpu_.RemoveHook(Nes::Core::Hook(this, &Debugger::Hook_checkNextOpcode));
+    }
+
     int
     Debugger::set_breakpoint(uint16_t addr, AccessMode mode)
     {
@@ -375,7 +392,7 @@ namespace Debug {
     {
         int bp_index = bpm_.test_access(Access({pc, EXEC}));
         if (bp_index > 0) {
-            return delegate_->suspend_at(bp_index, pc);
+            return delegate_->suspend_at(pc, bp_index);
         }
         Opcode* opcode = opcodes[cpu_.map.Peek8(pc)];
         bp_index = bpm_.test_access(opcode->access(pc));

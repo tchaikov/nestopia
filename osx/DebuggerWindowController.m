@@ -51,13 +51,17 @@
     [self updateWatchWindow];
 }
 
-- (void)breakpoint:(NSUInteger)breakpointNo triggeredAt:(NSUInteger)pc
+- (void)breakpoint:(NSUInteger)breakpointIndex triggeredAt:(NSUInteger)pc
 {
-    Breakpoint * breakpoint = [self breakpointAtIndex:breakpointNo];
-    NSAssert(breakpoint, @"breakpoint #%ld not found", breakpointNo);
-    [consoleView printStoppedByBreakpoint:breakpoint];
+    Breakpoint * breakpoint = [self breakpointAtIndex:breakpointIndex];
+    NSAssert(breakpoint, @"breakpoint #%ld not found", breakpointIndex);
+    [consoleView printStoppedByBreakpoint:breakpoint at:pc];
     [self updateDisassemblyWindowStartsAt:pc];
     [self updateWatchWindow];
+}
+
+- (void)printConsole:(NSString *)msg {
+    [consoleView print:msg];
 }
 
 #pragma mark -

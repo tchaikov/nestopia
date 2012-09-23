@@ -8,9 +8,12 @@
 
 #pragma once
 
+#include "NstCore.hpp"
+#include "NstHook.hpp"
 #include "NstOpcode.h"
 #include "NstRegister.h"
 #include "NstBreakpoint.h"
+
 
 namespace Nes {
     namespace Core {
@@ -59,6 +62,12 @@ namespace Debug {
         /// stop running as soon as possible
         void suspend();
         Decoded disassemble(uint16_t& pc);
+
+    private:
+        void attach();
+        void detach();
+
+        NES_DECL_HOOK(checkNextOpcode);
 
     private:
         DelegateBridge *delegate_;
