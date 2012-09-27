@@ -67,9 +67,16 @@ namespace Debug {
         void attach();
         void detach();
 
+        int check_with_breakpoints(uint16_t pc);
+
         NES_DECL_HOOK(checkNextOpcode);
 
     private:
+        enum RunMode {
+            RUN_UNTIL,
+            STEP_OVER,
+            STEP_INTO,
+        } run_mode_;
         DelegateBridge *delegate_;
         Nes::Core::Cpu &cpu_;
         BreakpointManager bpm_;

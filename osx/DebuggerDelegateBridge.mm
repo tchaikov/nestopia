@@ -35,7 +35,19 @@ namespace Debug {
     }
 
     void
-    DelegateBridge::suspend_at(uint16_t pc, int breakpoint)
+    DelegateBridge::will_step_to(uint16_t pc)
+    {
+        [impl->delegate willStepToAddress:pc];
+    }
+
+    void
+    DelegateBridge::will_jump_to(uint16_t pc)
+    {
+        /// @todo
+    }
+
+    void
+    DelegateBridge::will_trigger_breakpoint(uint16_t pc, int breakpoint)
     {
         [impl->delegate breakpoint:breakpoint triggeredAt:pc];
     }

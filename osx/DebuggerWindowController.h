@@ -13,15 +13,19 @@
 @class WatchTableView;
 @class DebugConsoleView;
 @class DebuggerBridge;
+@class NESGameCore;
 
-
-@interface DebuggerWindowController : NSWindowController<DebuggerDelegate>
+@interface DebuggerWindowController : NSWindowController<DebuggerDelegate, NSTableViewDataSource> {
+@private
+    NSMutableArray *_disassembled;
+}
 
 @property(nonatomic, strong) DebuggerBridge* debugger;
-@property(assign) IBOutlet DisassembledTableView *disassembledView;
+@property(assign) IBOutlet NSTableView *disassembledView;
 @property(assign) IBOutlet WatchTableView *watchView;
 @property(assign) IBOutlet DebugConsoleView *consoleView;
+@property(nonatomic, assign) NESGameCore *gameCore;
 
-- (void)setEmu:(void *)emu;
+- (void)setGameCore:(NESGameCore *)gameCore;
 
 @end

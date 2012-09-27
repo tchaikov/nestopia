@@ -499,6 +499,10 @@ namespace Nes
 			static const byte writeClocks[0x100];
 
 		public:
+            uint GetPc() const
+            {
+                return pc;
+            }
 
 			Apu& GetApu()
 			{
@@ -579,6 +583,11 @@ namespace Nes
 			}
 
 			Io::Port& Map(Address address)
+			{
+				return map( address );
+			}
+
+			const Io::Port& Map(Address address) const
 			{
 				return map( address );
 			}

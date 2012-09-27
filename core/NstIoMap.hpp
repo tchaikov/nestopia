@@ -114,6 +114,12 @@ namespace Nes
 					return ports[address];
 				}
 
+				const Port& operator () (Address address) const
+				{
+					NST_ASSERT( address < FULL_SIZE );
+					return ports[address];
+				}
+
 				Section operator () (Address first,Address last)
 				{
 					NST_ASSERT( first <= last && last < SIZE );

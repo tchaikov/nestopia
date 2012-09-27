@@ -284,7 +284,9 @@ namespace {
 namespace Debug {
     Debugger::Debugger(Nes::Core::Machine& machine)
     : cpu_(machine.cpu)
-    {}
+    {
+        set_cpu(&cpu_);
+    }
 
     uint8_t
     Debugger::peek8(uint16_t addr)
@@ -390,15 +392,36 @@ namespace Debug {
     void
     Debugger::cpu_op_exec(uint16_t pc)
     {
+        switch (run_mode_) {
+            case STEP_INTO:
+            case STEP_OVER:
+                return delegate_->will_step_to(pc);
+            case RUN_UNTIL:
+            {
+                int index = check_with_breakpoints(pc);
+                if (index >= 0) {
+                    return delegate_->will_trigger_breakpoint(pc, index);
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }
+
+    int
+    Debugger::check_with_breakpoints(uint16_t pc)
+    {
         int bp_index = bpm_.test_access(Access({pc, EXEC}));
         if (bp_index > 0) {
-            return delegate_->suspend_at(pc, bp_index);
+            return bp_index;
         }
         Opcode* opcode = opcodes[cpu_.map.Peek8(pc)];
         bp_index = bpm_.test_access(opcode->access(pc));
         if (bp_index > 0) {
-            return delegate_->suspend_at(pc, bp_index);
+            return bp_index;
         }
+        return -1;
     }
 
     Decoded
@@ -406,4 +429,6 @@ namespace Debug {
         uint hex = cpu_.map.Peek8(pc++);
         return opcodes[hex]->decode(pc);
     }
+
+    int check_with_breakpoints(uint16_t pc);
 }

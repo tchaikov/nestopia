@@ -25,11 +25,6 @@ NSString* fName;
 
 //NSConditionLock cLock;
 
-- (void *)emu
-{
-    return gameCore.nesEmu;
-}
-
 - (void)resetVideo
 {
     if (fGLSetup) {
@@ -89,13 +84,13 @@ NSString* fName;
 
 -(void)powerOff
 {
-    [gameCore stopEmulation];
+    [self.gameCore stopEmulation];
     toolbarItem.enabled = FALSE;
 }
 
 -(void)resetGame
 {
-    [gameCore resetEmulation];
+    [self.gameCore resetEmulation];
 }
 
 #pragma mark --Cocoa overloads--
@@ -150,7 +145,7 @@ NSString* fName;
 
 - (IBAction)togglePlayPause:(id)sender
 {
-    if (gameCore.pauseEmulation) {
+    if (_gameCore.pauseEmulation) {
         [self resume:sender];
     } else {
         [self pause:sender];
@@ -160,13 +155,14 @@ NSString* fName;
 - (void)pause:(id)sender
 {
     toolbarItem.image = [NSImage imageNamed:@"play-icon-32"];
-    gameCore.pauseEmulation = YES;
+    _gameCore.pauseEmulation = YES;
+    /// TODO: update debugger window
 }
 
 - (void)resume:(id)sender
 {
     toolbarItem.image = [NSImage imageNamed:@"pause-icon-32"];
-    gameCore.pauseEmulation = NO;
+    _gameCore.pauseEmulation = NO;
 }
 
 - (IBAction)reset:(id)sender
@@ -191,12 +187,12 @@ NSString* fName;
             [self stopEmulation];
             self.loadedRom = NO;
         }
-        gameCore = [[NESGameCore alloc] init];
-        gameCore.renderDelegate = self;
+        _gameCore = [[NESGameCore alloc] init];
+        self.gameCore.renderDelegate = self;
         NSString* fileName = [[oPanel URL] path];
         saveName = [[[fileName lastPathComponent] stringByDeletingPathExtension] stringByAppendingPathExtension:@"sav"];
         NSLog(@"load saved state: %@", fileName);
-        self.loadedRom = [gameCore loadFileAtPath:fileName];
+        self.loadedRom = [self.gameCore loadFileAtPath:fileName];
     }
     
     if (sender!=nil) {
@@ -219,7 +215,7 @@ NSString* fName;
     
     if ([oPanel runModal] == NSOKButton) {
         NSLog(@"load state from: %@", oPanel.URL.path);
-        [gameCore loadStateFromFileAtPath:oPanel.URL.path];
+        [self.gameCore loadStateFromFileAtPath:oPanel.URL.path];
     }
 }
 
@@ -232,7 +228,7 @@ NSString* fName;
     sPanel.allowedFileTypes = @[@"sav"];
     
     if ([sPanel runModal] == NSOKButton) {
-        [gameCore saveStateToFileAtPath:sPanel.URL.path];
+        [self.gameCore saveStateToFileAtPath:sPanel.URL.path];
     }
 }
 
@@ -242,15 +238,15 @@ NSString* fName;
 - (void)setupEmulation {
     NSLog(@"Setting up emulation");
     
-    [gameCore setupEmulation];
+    [self.gameCore setupEmulation];
     
     // audio!
-    gameAudio = [[OEGameAudio alloc] initWithCore:gameCore];
+    gameAudio = [[OEGameAudio alloc] initWithCore:self.gameCore];
     
     [self setupGameCore];
     
     gameCoreThread = [[NSThread alloc] initWithTarget:self selector:@selector(OE_gameCoreThread:) object:nil];
-//    [gameCoreProxy setGameThread:gameCoreThread];
+//    [self.gameCoreProxy setGameThread:gameCoreThread];
     [gameCoreThread start];
     toolbarItem.enabled = YES;
     toolbarItem.image = [NSImage imageNamed:@"pause-icon-32"];
@@ -259,11 +255,11 @@ NSString* fName;
 
 - (void)stopEmulation
 {
-    [gameCore stopEmulation];
+    [self.gameCore stopEmulation];
     [gameAudio stopAudio];
-    [gameCore setRenderDelegate:nil];
-    gameCore      = nil;
-    gameAudio     = nil;
+    [self.gameCore setRenderDelegate:nil];
+    _gameCore  = nil;
+    gameAudio  = nil;
     
     if (gameCoreThread != nil) {
         [self performSelector:@selector(OE_stopGameCoreThreadRunLoop:) onThread:gameCoreThread withObject:nil waitUntilDone:YES];
@@ -277,7 +273,7 @@ NSString* fName;
     NSLog(@"Begin separate thread");
     
     // starts the threaded emulator timer
-    [gameCore startEmulation];
+    [self.gameCore startEmulation];
     
     CFRunLoopRun();
     
@@ -304,7 +300,7 @@ NSString* fName;
     NSRect oldFrame = [mainWindow frame];
     NSRect newFrame = [self frame];
     newFrame.origin = oldFrame.origin;
-    IntSize bufferSize = gameCore.bufferSize;
+    IntSize bufferSize = self.gameCore.bufferSize;
     NSSize aspect = NSMakeSize(bufferSize.width, bufferSize.height);
     newFrame.size = NSMakeSize(bufferSize.width, bufferSize.height);
     
@@ -343,13 +339,13 @@ NSString* fName;
     glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
     DLog(@"set params - uploading texture");
-    IntSize bufferSize = gameCore.bufferSize;
+    IntSize bufferSize = _gameCore.bufferSize;
     glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0,
-                 gameCore.internalPixelFormat,
+                 _gameCore.internalPixelFormat,
                  bufferSize.width, bufferSize.height, 0,
-                 gameCore.pixelFormat,
-                 gameCore.pixelType,
-                 gameCore.videoBuffer);
+                 _gameCore.pixelFormat,
+                 _gameCore.pixelType,
+                 _gameCore.videoBuffer);
     glClearColor (0.0, 0.0, 1.0, 1.0);
     glClearDepth(1.0);
     
@@ -362,28 +358,28 @@ NSString* fName;
     if ([mainWindow isKeyWindow]) {
         switch (usageId) {
             case 82:
-                [gameCore didReleaseNESButton:NESButtonUp forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonUp forPlayer:0];
                 break;
             case 79:
-                [gameCore didReleaseNESButton:NESButtonRight forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonRight forPlayer:0];
                 break;
             case 81:
-                [gameCore didReleaseNESButton:NESButtonDown forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonDown forPlayer:0];
                 break;
             case 80:
-                [gameCore didReleaseNESButton:NESButtonLeft forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonLeft forPlayer:0];
                 break;
             case 4:
-                [gameCore didReleaseNESButton:NESButtonA forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonA forPlayer:0];
                 break;
             case 22:
-                [gameCore didReleaseNESButton:NESButtonB forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonB forPlayer:0];
                 break;
             case 40:
-                [gameCore didReleaseNESButton:NESButtonStart forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonStart forPlayer:0];
                 break;    
             case 49:
-                [gameCore didReleaseNESButton:NESButtonSelect forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonSelect forPlayer:0];
                 break;
         }
     }
@@ -400,28 +396,28 @@ NSString* fName;
         switch(usageId)
         {
             case 82:
-                [gameCore didPushNESButton:NESButtonUp forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonUp forPlayer:0];
                 break;
             case 79:
-                [gameCore didPushNESButton:NESButtonRight forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonRight forPlayer:0];
                 break;
             case 81:
-                [gameCore didPushNESButton:NESButtonDown forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonDown forPlayer:0];
                 break;
             case 80:
-                [gameCore didPushNESButton:NESButtonLeft forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonLeft forPlayer:0];
                 break;
             case 4:
-                [gameCore didPushNESButton:NESButtonA forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonA forPlayer:0];
                 break;
             case 22:
-                [gameCore didPushNESButton:NESButtonB forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonB forPlayer:0];
                 break;
             case 40:
-                [gameCore didPushNESButton:NESButtonStart forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonStart forPlayer:0];
                 break;
             case 49:
-                [gameCore didPushNESButton:NESButtonSelect forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonSelect forPlayer:0];
                 break;
         }
     }
@@ -488,13 +484,13 @@ NSString* fName;
     glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, GL_TRUE);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
 
-    IntSize bufferSize = gameCore.bufferSize;
+    IntSize bufferSize = _gameCore.bufferSize;
     glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0,
-                 gameCore.internalPixelFormat,
+                 _gameCore.internalPixelFormat,
                  bufferSize.width, bufferSize.height, 0,
-                 gameCore.pixelFormat,
-                 gameCore.pixelType,
-                 gameCore.videoBuffer);
+                 _gameCore.pixelFormat,
+                 _gameCore.pixelType,
+                 _gameCore.videoBuffer);
 
     GLenum status = glGetError();
     if (status)

@@ -63,6 +63,12 @@ extern "C" {
 NSUInteger NESControlValues[] = { Nes::Api::Input::Controllers::Pad::UP, Nes::Api::Input::Controllers::Pad::DOWN, Nes::Api::Input::Controllers::Pad::LEFT, Nes::Api::Input::Controllers::Pad::RIGHT, Nes::Api::Input::Controllers::Pad::A, Nes::Api::Input::Controllers::Pad::B, Nes::Api::Input::Controllers::Pad::START, Nes::Api::Input::Controllers::Pad::SELECT
 };
 
+
+@interface NESGameCore () {
+    BOOL wasPaused;
+}
+@end
+
 @implementation NESGameCore
 
 @synthesize videoBuffer = videoBuffer;
@@ -707,6 +713,14 @@ static int Heights[2] =
     machine.Reset(true);
 }
 
+NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotification";
+
+- (NSUInteger)pc
+{
+    const Nes::Core::Machine& machine(*emu);
+    return machine.cpu.GetPc();
+}
+
 - (void)frameRefreshThread:(id)anArgument
 {
     NSTimeInterval gameInterval = 1./[self frameInterval];
@@ -721,6 +735,7 @@ static int Heights[2] =
     OESetThreadRealtime(gameInterval, .007, .03); // guessed from bsnes
     
     //[NSTimer PSY_scheduledTimerWithTimeInterval:gameInterval repeats:YES usingBlock:^(NSTimer *timer){
+    wasPaused = NO;
     while (!shouldStop) {
         gameTime += gameInterval;
         @autoreleasepool {            
@@ -735,9 +750,20 @@ static int Heights[2] =
                 
                 [self.renderDelegate didExecute];
                 //});
+                wasPaused = NO;
             }
-            if(frameCounter >= frameSkip) frameCounter = 0;
-            else                          frameCounter++;
+            if (frameCounter >= frameSkip) {
+                frameCounter = 0;
+            } else {
+                frameCounter++;
+            }
+        }
+        if (!wasPaused && self.pauseEmulation) {
+            NSNotification *notif = [NSNotification notificationWithName:NESEmulatorDidPauseNotification
+                                                                  object:self];
+            [[NSNotificationQueue defaultQueue] enqueueNotification:notif
+                                                       postingStyle:NSPostWhenIdle];
+            wasPaused = TRUE;
         }
         //OEPerfMonitorObserve(@"CFRunLoop", gameInterval, ^{
         CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, 0);

@@ -47,7 +47,6 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		941BA82116059FA4008D96D2 /* Breakpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82016059FA4008D96D2 /* Breakpoint.m */; };
 		941BA8251605BABE008D96D2 /* WatchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA8241605BABE008D96D2 /* WatchTableView.m */; };
-		941BA8281605BC02008D96D2 /* DisassembledTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA8271605BC02008D96D2 /* DisassembledTableView.m */; };
 		941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */; };
 		941BA83816063D79008D96D2 /* DebugConsoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA83716063D79008D96D2 /* DebugConsoleView.m */; };
 		941BA85F1607788A008D96D2 /* pause-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA8591607788A008D96D2 /* pause-icon-32.png */; };
@@ -459,8 +458,6 @@
 		941BA82016059FA4008D96D2 /* Breakpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Breakpoint.m; sourceTree = "<group>"; };
 		941BA8231605BABE008D96D2 /* WatchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WatchTableView.h; path = osx/WatchTableView.h; sourceTree = "<group>"; };
 		941BA8241605BABE008D96D2 /* WatchTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WatchTableView.m; path = osx/WatchTableView.m; sourceTree = "<group>"; };
-		941BA8261605BC02008D96D2 /* DisassembledTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisassembledTableView.h; path = osx/DisassembledTableView.h; sourceTree = "<group>"; };
-		941BA8271605BC02008D96D2 /* DisassembledTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisassembledTableView.m; path = osx/DisassembledTableView.m; sourceTree = "<group>"; };
 		941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerBridge.h; sourceTree = "<group>"; };
 		941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DebuggerBridge.mm; sourceTree = "<group>"; };
 		941BA83516062C5B008D96D2 /* NstBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstBreakpoint.h; path = debug/NstBreakpoint.h; sourceTree = "<group>"; };
@@ -1883,8 +1880,6 @@
 				0DECB3740C3E24C4000279A6 /* NestopiaView.mm */,
 				941BA8231605BABE008D96D2 /* WatchTableView.h */,
 				941BA8241605BABE008D96D2 /* WatchTableView.m */,
-				941BA8261605BC02008D96D2 /* DisassembledTableView.h */,
-				941BA8271605BC02008D96D2 /* DisassembledTableView.m */,
 				941BA83616063D79008D96D2 /* DebugConsoleView.h */,
 				941BA83716063D79008D96D2 /* DebugConsoleView.m */,
 			);
@@ -2385,7 +2380,6 @@
 				94EB6C6215FCD6C900E8C11A /* NstDebugger.cpp in Sources */,
 				941BA82116059FA4008D96D2 /* Breakpoint.m in Sources */,
 				941BA8251605BABE008D96D2 /* WatchTableView.m in Sources */,
-				941BA8281605BC02008D96D2 /* DisassembledTableView.m in Sources */,
 				941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */,
 				941BA83816063D79008D96D2 /* DebugConsoleView.m in Sources */,
 				941BA9251608B7D2008D96D2 /* NstBreakpoint.cpp in Sources */,

@@ -13,6 +13,8 @@
 #include "NstApiEmulator.hpp"
 #include "NstMachine.hpp"
 
+@implementation Decoded
+@end
 
 @interface DebuggerBridge () {
     Debug::Debugger *debugger;
@@ -77,4 +79,17 @@
                                         access:(AccessMode)dbp->access
                                        enabled:dbp->enabled];
 }
+
+- (Decoded *)disassemble:(NSUInteger *)addr
+{
+    uint16_t pc = *addr;
+    Debug::Decoded decoded = debugger->disassemble(pc);
+    Decoded *brDecoded = [[Decoded alloc] init];
+    brDecoded.description = [NSString stringWithUTF8String:decoded.str.c_str()];
+    brDecoded.repr = [NSString stringWithUTF8String:decoded.repr.c_str()];
+    brDecoded.address = *addr;
+    *addr = pc;
+    return brDecoded;
+}
+
 @end

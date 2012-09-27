@@ -13,7 +13,7 @@
 @required
 
 /// called when in step {over, in} mode
-- (void)executeDoneAt:(NSUInteger)pc;
+- (void)willStepToAddress:(NSUInteger)pc;
 /// called in run-until mode
 - (void)breakpoint:(NSUInteger)breakpoint triggeredAt:(NSUInteger)pc;
 /// convenient method in case debugger wanna say something.

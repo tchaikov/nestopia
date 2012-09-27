@@ -88,7 +88,7 @@
         [self.debugerWindowController close];
         sender.title = @"Show Debug Console";
     } else {
-        self.debugerWindowController.emu = self.nesView.emu;
+        self.debugerWindowController.gameCore = self.nesView.gameCore;
         [self.debugerWindowController showWindow:self];
         sender.title = @"Hide Debug Console";
     }

@@ -21,12 +21,12 @@ NSLock *soundLock;
     GLuint           gameTexture;      // this is the texture that is defined by the gameCores pixelFormat and type
 
     NSThread    *gameCoreThread;
-    NESGameCore *gameCore;
+    NESGameCore *_gameCore;
     OEGameAudio *gameAudio;
     BOOL         hasStartedAudio;
 }
 
-@property (nonatomic, readonly) void* emu;
+@property (nonatomic, readonly) NESGameCore *gameCore;
 @property (assign) BOOL loadedRom;
 
 - (void)drawRect:(NSRect)frameRect;

@@ -24,6 +24,12 @@ typedef enum : char {
 + (NSString *)nameWithReg:(Reg)reg;
 @end
 
+@interface Decoded : NSObject
+@property (copy) NSString *description;
+@property (copy) NSString *repr;
+@property (assign) NSUInteger address;
+@end
+
 @class Breakpoint;
 
 @interface DebuggerBridge : NSObject
@@ -38,5 +44,7 @@ typedef enum : char {
 - (int)setBreakpoint:(Breakpoint *)bp;
 - (void)resetBreakpoint:(int)breakpoint;
 - (Breakpoint *)breakpointAtIndex:(NSUInteger)index;
+
+- (Decoded *)disassemble:(NSUInteger *)addr;
 
 @end

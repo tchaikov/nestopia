@@ -21,7 +21,8 @@ namespace Debug {
     using boost::format;
     using std::string;
     using ::Nes::Core::Cpu;
-
+    void set_cpu(const Cpu *cpu);
+    const Cpu* get_cpu();
     /// general addressing modes
     template <class Addr_> struct Addr {
         Addr(const format& fmt)
@@ -55,19 +56,19 @@ namespace Debug {
         }
     protected:
         uint8_t peek8(uint16_t addr) const {
-            return cpu_->map.Peek8(addr);
+            return get_cpu()->map.Peek8(addr);
         }
         uint16_t peek16(uint16_t addr) const {
-            return cpu_->map.Peek16(addr);
+            return get_cpu()->map.Peek16(addr);
         }
 
         uint8_t fetchPc8(uint16_t &pc) const {
-            const uint address = cpu_->map.Peek8(pc);
+            const uint address = peek8(pc);
             ++pc;
             return address;
         }
         uint16_t fetchPc16(uint16_t &pc) const {
-            const uint16_t address = cpu_->map.Peek16(pc);
+            const uint16_t address = peek16(pc);
             pc += 2;
             return address;
         }
@@ -77,24 +78,23 @@ namespace Debug {
         uint8_t readReg(Reg::All reg) const {
             switch (reg) {
                 case Reg::A:
-                    return cpu_->a;
+                    return get_cpu()->a;
                 case Reg::X:
-                    return cpu_->x;
+                    return get_cpu()->x;
                 case Reg::Y:
-                    return cpu_->y;
+                    return get_cpu()->y;
                 case Reg::SP:
-                    return cpu_->sp;
+                    return get_cpu()->sp;
                 case Reg::PC:
-                    return cpu_->pc;
+                    return get_cpu()->pc;
                 default:
                     return 0xFF;
             }
         }
     private:
-        const Nes::Core::Cpu* cpu_;
         format fmt_;
     };
-    
+
     // Implied addressing
     // since implied addressing can involve more than one register and/or
     // memory address, it needs more tweak if it is to be well presented.

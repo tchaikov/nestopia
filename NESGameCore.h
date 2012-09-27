@@ -45,6 +45,8 @@ extern NSString *const NESColorFringing ;
 extern NSString *const NESHue;
 extern NSString *const NESUnlimitedSprites;
 
+extern NSString *const NESEmulatorDidPauseNotification;
+
 
 
 #pragma mark -
@@ -85,6 +87,7 @@ extern NSString *const NESUnlimitedSprites;
 @property(readonly) NSString *batterySavesDirectoryPath;
 @property(readonly) OERingBuffer *ringBuffer;
 @property(readonly) void *nesEmu;
+@property(readonly) NSUInteger pc;
 @property(readonly) NSUInteger audioBufferSize;
 @property(readonly) double audioSampleRate;
 @property(readonly) NSUInteger channelCount;

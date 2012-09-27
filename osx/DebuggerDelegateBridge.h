@@ -20,7 +20,9 @@ namespace Debug {
         DelegateBridge(void *delegate);
         ~DelegateBridge();
         void print_console(const std::string& msg);
-        void suspend_at(uint16_t pc, int breakpoint);
+        void will_step_to(uint16_t pc);
+        void will_jump_to(uint16_t pc);
+        void will_trigger_breakpoint(uint16_t pc, int breakpoint);
         void update_sprite(int x, int y);
 
     private:
