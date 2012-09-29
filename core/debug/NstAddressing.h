@@ -103,6 +103,10 @@ namespace Debug {
     // Accumulator addressing
     struct Acc : Addr<Acc> {
         Acc() : Addr<Acc>("A") {}
+        string str() const {
+            return "A";
+        }
+
         uint16_t fetch(uint16_t&) const {
             // never reach here
             BOOST_ASSERT(false);

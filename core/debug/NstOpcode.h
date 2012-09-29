@@ -54,7 +54,7 @@ namespace Debug {
             uint m = addr_.fetch(pc);
             Decoded decoded;
             decoded.str = (boost::format(fmt_) % op_.str() % addr_.str(m)).str();
-            decoded.repr = (op_.repr(addr_.repr(pc, m))).str();
+            decoded.repr = op_.repr(addr_.repr(pc, m)).str();
             return decoded;                    
         }
         virtual Access access(uint16_t pc) const {
@@ -65,6 +65,30 @@ namespace Debug {
         const Operateur& op_;
         const Addressing& addr_;
     };
+
+    template <class Operateur,
+              AccessMode mode>
+    struct Opcode_<Operateur, Acc, mode> : public Opcode {
+    public:
+        Opcode_()
+        : op_(Operateur::instance())
+        {}
+        virtual Decoded decode(uint16_t& pc) const {
+            // we are in Acc addressing mode, so no need to fetch the
+            // operand.
+            Decoded decoded;
+            decoded.str = (boost::format("%1% A") % op_.str()).str();
+            decoded.repr = op_.repr("A").str();
+            return decoded;
+        }
+        // no memory space is touched in Acc addressing mode
+        virtual Access access(uint16_t pc) const {
+            return {0, NONE};
+        }
+    private:
+        const Operateur& op_;
+    };
+
 
     template <class Operateur,
               AccessMode mode>
