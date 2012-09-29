@@ -311,24 +311,22 @@ NSString * const NESUnlimitedSprites = @"NESUnlimitedSprites";
 - (void)recordMovie:(NSString*) moviePath mode:(BOOL)append
 {
     Nes::Api::Movie movie(*emu);
-    Nes::Result result; 
     
     std::fstream movieFile([moviePath cStringUsingEncoding:NSUTF8StringEncoding], std::ios::in | std::ios::binary);
     
     if(append) 
-        result = movie.Record(movieFile,Nes::Api::Movie::APPEND);
+        movie.Record(movieFile,Nes::Api::Movie::APPEND);
     else 
-        result = movie.Record(movieFile, Nes::Api::Movie::CLEAN);
+        movie.Record(movieFile, Nes::Api::Movie::CLEAN);
 }
 
 - (void)playMovie:(NSString*) moviePath
 {
     Nes::Api::Movie movie(*emu);
-    Nes::Result result; 
     
     std::ifstream movieFile([moviePath cStringUsingEncoding:NSUTF8StringEncoding], std::ios::in | std::ios::binary);
     
-    result = movie.Play(movieFile);
+    movie.Play(movieFile);
 }
 
 - (void)stopMovie

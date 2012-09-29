@@ -148,6 +148,7 @@
         NSUInteger prevCount = _disassembled.count;
         while (lastAddr < expectedLastAddr) {
             [_disassembled addObject:[self.debugger disassemble:&lastAddr]];
+            NSLog(@"lastAddr = %#04lx, expectedLastAddr = %#04lx", lastAddr, expectedLastAddr);
         }
         NSRange range = {prevCount, _disassembled.count - prevCount};
         indexesAdded = [NSIndexSet indexSetWithIndexesInRange:range];
