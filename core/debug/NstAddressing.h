@@ -150,7 +150,7 @@ namespace Debug {
     struct ZeroPageIndexed : Addr<ZeroPageIndexed<reg> > {
         // LDA $3F, X
         ZeroPageIndexed()
-        : Addr<ZeroPageIndexed<reg> >(format("$2%2$02X, %1$C") % reg) {}
+        : Addr<ZeroPageIndexed<reg> >(format("$%2$02X, %1$C") % reg) {}
         uint16_t fetch(uint16_t &pc) const {
             return Addr<ZeroPageIndexed<reg> >::fetchPc8(pc);
         }
@@ -166,7 +166,7 @@ namespace Debug {
     struct AbsIndexed : Addr<AbsIndexed<reg>> {
         // LDA $8000, X
         AbsIndexed()
-        : Addr<AbsIndexed<reg>>(format("$2%2$04X, %1$C") % reg) {}
+        : Addr<AbsIndexed<reg>>(format("$%2$04X, %1$C") % reg) {}
         uint16_t fetch(uint16_t &pc) const {
             return Addr<AbsIndexed<reg> >::fetchPc16(pc);
         }
@@ -181,7 +181,7 @@ namespace Debug {
     template<Reg::Index::All reg>
     struct IndexedIndirect : Addr<IndexedIndirect<reg>> {
         IndexedIndirect()
-        : Addr<IndexedIndirect<reg> >(format("($2%2$02X, %1$C)") % reg) {}
+        : Addr<IndexedIndirect<reg> >(format("($%2$02X, %1$C)") % reg) {}
         uint16_t fetch(uint16_t &pc) const {
             return Addr<IndexedIndirect<reg> >::fetchPc8(pc);
         }
@@ -197,7 +197,7 @@ namespace Debug {
     template<Reg::Index::All reg>
     struct IndirectIndexed : Addr<IndirectIndexed<reg> > {
         IndirectIndexed()
-        : Addr<IndirectIndexed<reg> >(format("($2%2$02X), %1$C)") % reg) {}
+        : Addr<IndirectIndexed<reg> >(format("($%2$02X), %1$C)") % reg) {}
         uint16_t fetch(uint16_t &pc) const {
             return Addr<IndirectIndexed<reg> >::fetchPc8(pc);
         }
@@ -211,7 +211,7 @@ namespace Debug {
 
     // Indirect addressing
     struct Ind : Addr<Ind> {
-        Ind() : Addr<Ind>("($04X)") {}
+        Ind() : Addr<Ind>("($%04X)") {}
         uint16_t fetch(uint16_t &pc) const {
             return fetchPc16(pc);
         }
@@ -223,7 +223,7 @@ namespace Debug {
 
     // Relative addressing
     struct Rel : Addr<Rel> {
-        Rel() : Addr<Rel>("$+02X") {}
+        Rel() : Addr<Rel>("$%+02X") {}
         uint16_t fetch(uint16_t& pc) const {
             return fetchPc8(pc);
         }
@@ -232,5 +232,6 @@ namespace Debug {
             return (base + (int8_t)data) & 0xFFFF;
         }
     };
+
 }
 
