@@ -28,6 +28,7 @@ typedef enum : char {
 @property (copy) NSString *description;
 @property (copy) NSString *repr;
 @property (assign) NSUInteger address;
+@property (readonly) NSString *addressString;
 @end
 
 @class Breakpoint;

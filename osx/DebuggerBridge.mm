@@ -14,6 +14,11 @@
 #include "NstMachine.hpp"
 
 @implementation Decoded
+
+- (NSString *)addressString {
+    return [NSString stringWithFormat:@"%04lX", self.address];
+}
+
 @end
 
 @interface DebuggerBridge () {

@@ -148,7 +148,6 @@
         NSUInteger prevCount = _disassembled.count;
         while (lastAddr < expectedLastAddr) {
             [_disassembled addObject:[self.debugger disassemble:&lastAddr]];
-            NSLog(@"lastAddr = %#04lx, expectedLastAddr = %#04lx", lastAddr, expectedLastAddr);
         }
         NSRange range = {prevCount, _disassembled.count - prevCount};
         indexesAdded = [NSIndexSet indexSetWithIndexesInRange:range];
@@ -157,7 +156,9 @@
     // if the window is too large, shrink it.
     NSIndexSet *indexesRemoved = nil;
     if (_disassembled.count > DISASSEMBLY_WINDOW_SIZE) {
-        NSRange range = {0, _disassembled.count - DISASSEMBLY_WINDOW_SIZE};
+        NSUInteger currentIndex = [self indexOfOpcodeAtAddress:pc];
+        NSUInteger lastIndex = _disassembled.count - DISASSEMBLY_WINDOW_SIZE;
+        NSRange range = {0, MIN(currentIndex, lastIndex)};
         [_disassembled removeObjectsInRange:range];
         indexesRemoved = [NSIndexSet indexSetWithIndexesInRange:range];
     }
@@ -197,10 +198,10 @@
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    NSDictionary *dictionary = _disassembled[row];
+    Decoded *decoded = _disassembled[row];
     // assuming the identifiers of the columns are the same as the propertie names
     // of class Opcode
-    return [dictionary valueForKey:[tableColumn identifier]];
+    return [decoded valueForKey:tableColumn.identifier];
 }
 
 
