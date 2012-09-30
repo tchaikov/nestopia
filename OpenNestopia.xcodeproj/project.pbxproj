@@ -331,6 +331,8 @@
 		94EB6C5A15FCCA9F00E8C11A /* NstOperator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C5615FCC55100E8C11A /* NstOperator.cpp */; };
 		94EB6C5B15FCCAA700E8C11A /* NstAddressing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C5815FCC55A00E8C11A /* NstAddressing.cpp */; };
 		94EB6C6215FCD6C900E8C11A /* NstDebugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C6015FCD6C900E8C11A /* NstDebugger.cpp */; };
+		94FF5D3A1618795A00D294F5 /* DisassembledTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FF5D381618795A00D294F5 /* DisassembledTableController.m */; };
+		94FF5D3B1618795A00D294F5 /* DisassembledTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94FF5D391618795A00D294F5 /* DisassembledTableController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1051,6 +1053,9 @@
 		94EB6C5C15FCCBD900E8C11A /* NstRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstRegister.h; path = debug/NstRegister.h; sourceTree = "<group>"; };
 		94EB6C6015FCD6C900E8C11A /* NstDebugger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NstDebugger.cpp; path = debug/NstDebugger.cpp; sourceTree = "<group>"; };
 		94EB6C6115FCD6C900E8C11A /* NstDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NstDebugger.h; path = debug/NstDebugger.h; sourceTree = "<group>"; };
+		94FF5D371618795A00D294F5 /* DisassembledTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisassembledTableController.h; path = osx/DisassembledTableController.h; sourceTree = "<group>"; };
+		94FF5D381618795A00D294F5 /* DisassembledTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisassembledTableController.m; path = osx/DisassembledTableController.m; sourceTree = "<group>"; };
+		94FF5D391618795A00D294F5 /* DisassembledTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisassembledTableController.xib; path = osx/DisassembledTableController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1912,6 +1917,8 @@
 		9468703215F63FA20049AA2C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9485DA501618A326004C9DCC /* DebuggerWindow */,
+				9485DA4F1618A316004C9DCC /* DisassembledTable */,
 				0DECB37C0C3E24C4000279A6 /* DBPrefsWindowController.h */,
 				0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */,
 				0DECB37E0C3E24C4000279A6 /* OpenNestopiaPreferences.h */,
@@ -1920,10 +1927,27 @@
 				0DECB3780C3E24C4000279A6 /* AppDelegate.m */,
 				0DECB3790C3E24C4000279A6 /* OpenNestopiaInputController.h */,
 				0DECB37A0C3E24C4000279A6 /* OpenNestopiaInputController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		9485DA4F1618A316004C9DCC /* DisassembledTable */ = {
+			isa = PBXGroup;
+			children = (
+				94FF5D371618795A00D294F5 /* DisassembledTableController.h */,
+				94FF5D381618795A00D294F5 /* DisassembledTableController.m */,
+				94FF5D391618795A00D294F5 /* DisassembledTableController.xib */,
+			);
+			name = DisassembledTable;
+			sourceTree = "<group>";
+		};
+		9485DA501618A326004C9DCC /* DebuggerWindow */ = {
+			isa = PBXGroup;
+			children = (
 				9468703515F6418A0049AA2C /* DebuggerWindowController.h */,
 				9468703615F6418A0049AA2C /* DebuggerWindowController.m */,
 			);
-			name = Controllers;
+			name = DebuggerWindow;
 			sourceTree = "<group>";
 		};
 		94E8D1E815F382C2000234E4 /* Products */ = {
@@ -2068,6 +2092,7 @@
 				941BA8631607788A008D96D2 /* stop-icon-32.png in Resources */,
 				941BA866160778F8008D96D2 /* open-icon-32.png in Resources */,
 				94D42D9A160F5299002935C8 /* MainMenu.xib in Resources */,
+				94FF5D3B1618795A00D294F5 /* DisassembledTableController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2378,6 +2403,7 @@
 				941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */,
 				941BA9251608B7D2008D96D2 /* NstBreakpoint.cpp in Sources */,
 				941BA9281608CAE2008D96D2 /* DebuggerDelegateBridge.mm in Sources */,
+				94FF5D3A1618795A00D294F5 /* DisassembledTableController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
