@@ -125,7 +125,7 @@ namespace Debug {
     
     template<Reg::All reg> struct Compare : Op<Compare<reg> > {
         // well, that's nasty. and 'M' can not include 'A'
-        Compare() : Op<Compare<reg> >(string("CMP") + (reg == 'M' ? 'P' : (char)reg))
+        Compare() : Op<Compare<reg> >(reg == 'M' ? string("CMP") : string("CM") + (char)reg)
         {}
         format repr(const string& m) const {
             return format("P.N,P.C,P.Z = %1% - %2%") % (char)reg % m;
