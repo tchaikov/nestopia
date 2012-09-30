@@ -9,7 +9,6 @@
 #import "DebuggerWindowController.h"
 #import "Breakpoint.h"
 #import "DebuggerBridge.h"
-#import "DebugConsoleView.h"
 #import "NESGameCore.h"
 
 @interface DebuggerWindowController ()
@@ -48,6 +47,7 @@
     if (self.gameCore.pauseEmulation) {
         // already paused
         [self updateAllWindowsWithPc:self.gameCore.pc];
+        [self printPrompt];
     }
 }
 
@@ -55,6 +55,7 @@
 - (void)emulatorPaused:(NSNotification *)note {
     NESGameCore *gameCore = [note object];
     [self updateAllWindowsWithPc:gameCore.pc];
+    [self printPrompt];
 }
 
 #pragma mark -
@@ -95,12 +96,13 @@
 - (void)willStepToAddress:(NSUInteger)pc
 {
     [self updateAllWindowsWithPc:pc];
+    [self printPrompt];
 }
 
 - (void)breakpoint:(NSUInteger)breakpointIndex triggeredAt:(NSUInteger)pc {
     Breakpoint * breakpoint = [self breakpointAtIndex:breakpointIndex];
     NSAssert(breakpoint, @"breakpoint #%ld not found", breakpointIndex);
-    [self.consoleView printStoppedByBreakpoint:breakpoint at:pc];
+    [self printStoppedByBreakpoint:breakpoint at:pc];
     [self updateAllWindowsWithPc:pc];
 }
 
@@ -204,5 +206,57 @@
     return [decoded valueForKey:tableColumn.identifier];
 }
 
+#pragma mark -
+#pragma mark NSTextView delegate methods
+
+- (void)printPrompt {
+    NSString *prompt = @"(ndb) ";
+    [self.consoleView insertText:prompt];
+    NSRange range = NSMakeRange(committedLength, prompt.length);
+    [self.consoleView setFont:[NSFont userFixedPitchFontOfSize:12]
+                        range:range];
+//    [self.consoleView setTextColor:[NSColor colorWithCalibratedRed:0x57
+//                                                             green:0x6e
+//                                                              blue:0xfa
+//                                                             alpha:1]
+//                             range:range];
+    committedLength = self.consoleView.string.length;
+}
+
+- (void)printStoppedByBreakpoint:(Breakpoint*)breakpoint at:(NSUInteger)pc
+{
+    // see for colored string
+    [self.consoleView insertText:[NSString stringWithFormat:@"Breakpoint %ld, at %#04lx",
+                      breakpoint.index, pc]];
+    committedLength = self.consoleView.string.length;
+}
+
+- (void)print:(NSString *)msg
+{
+    [self insertText:msg];
+}
+
+- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
+    // Allow changes only for uncommitted text
+    return affectedCharRange.location >= committedLength;
+}
+
+- (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
+    BOOL retval = NO;
+
+    // When return is entered, record and color the newly committed text
+    if (@selector(insertNewline:) == commandSelector) {
+
+        NSUInteger textLength = [[textView string] length];
+        if (textLength > committedLength) {
+            [textView setSelectedRange:NSMakeRange(textLength, 0)];
+            [textView insertText:@"\n"];
+            textLength++;
+            committedLength = textLength;
+        }
+        retval = YES;
+    }
+    return retval;
+}
 
 @end

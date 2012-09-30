@@ -48,7 +48,6 @@
 		941BA82116059FA4008D96D2 /* Breakpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82016059FA4008D96D2 /* Breakpoint.m */; };
 		941BA8251605BABE008D96D2 /* WatchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA8241605BABE008D96D2 /* WatchTableView.m */; };
 		941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */; };
-		941BA83816063D79008D96D2 /* DebugConsoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA83716063D79008D96D2 /* DebugConsoleView.m */; };
 		941BA85F1607788A008D96D2 /* pause-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA8591607788A008D96D2 /* pause-icon-32.png */; };
 		941BA8601607788A008D96D2 /* play-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85A1607788A008D96D2 /* play-icon-32.png */; };
 		941BA8611607788A008D96D2 /* reset-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85B1607788A008D96D2 /* reset-icon-32.png */; };
@@ -461,8 +460,6 @@
 		941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerBridge.h; sourceTree = "<group>"; };
 		941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DebuggerBridge.mm; sourceTree = "<group>"; };
 		941BA83516062C5B008D96D2 /* NstBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstBreakpoint.h; path = debug/NstBreakpoint.h; sourceTree = "<group>"; };
-		941BA83616063D79008D96D2 /* DebugConsoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugConsoleView.h; path = osx/DebugConsoleView.h; sourceTree = "<group>"; };
-		941BA83716063D79008D96D2 /* DebugConsoleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugConsoleView.m; path = osx/DebugConsoleView.m; sourceTree = "<group>"; };
 		941BA8591607788A008D96D2 /* pause-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-icon-32.png"; sourceTree = "<group>"; };
 		941BA85A1607788A008D96D2 /* play-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-icon-32.png"; sourceTree = "<group>"; };
 		941BA85B1607788A008D96D2 /* reset-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset-icon-32.png"; sourceTree = "<group>"; };
@@ -1880,8 +1877,6 @@
 				0DECB3740C3E24C4000279A6 /* NestopiaView.mm */,
 				941BA8231605BABE008D96D2 /* WatchTableView.h */,
 				941BA8241605BABE008D96D2 /* WatchTableView.m */,
-				941BA83616063D79008D96D2 /* DebugConsoleView.h */,
-				941BA83716063D79008D96D2 /* DebugConsoleView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2381,7 +2376,6 @@
 				941BA82116059FA4008D96D2 /* Breakpoint.m in Sources */,
 				941BA8251605BABE008D96D2 /* WatchTableView.m in Sources */,
 				941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */,
-				941BA83816063D79008D96D2 /* DebugConsoleView.m in Sources */,
 				941BA9251608B7D2008D96D2 /* NstBreakpoint.cpp in Sources */,
 				941BA9281608CAE2008D96D2 /* DebuggerDelegateBridge.mm in Sources */,
 			);
