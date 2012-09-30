@@ -753,7 +753,6 @@
 							<string key="NSFrameSize">{264, 237}</string>
 							<reference key="NSSuperview" ref="197801583"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSClassName">NestopiaView</string>
 							<string key="NSExtension">NSOpenGLView</string>
 						</object>
@@ -848,10 +847,10 @@
 																		<int key="NSCellFlags">337641536</int>
 																		<int key="NSCellFlags2">2048</int>
 																		<string key="NSContents">Text Cell</string>
-																		<object class="NSFont" key="NSSupport" id="51427407">
-																			<string key="NSName">LucidaGrande</string>
-																			<double key="NSSize">13</double>
-																			<int key="NSfFlags">1044</int>
+																		<object class="NSFont" key="NSSupport" id="161880950">
+																			<string key="NSName">Menlo-Regular</string>
+																			<double key="NSSize">11</double>
+																			<int key="NSfFlags">530</int>
 																		</object>
 																		<reference key="NSControlView" ref="42919650"/>
 																		<object class="NSColor" key="NSBackgroundColor" id="810492650">
@@ -892,7 +891,7 @@
 																		<int key="NSCellFlags">337641536</int>
 																		<int key="NSCellFlags2">2048</int>
 																		<string key="NSContents">Text Cell</string>
-																		<reference key="NSSupport" ref="51427407"/>
+																		<reference key="NSSupport" ref="161880950"/>
 																		<reference key="NSControlView" ref="42919650"/>
 																		<reference key="NSBackgroundColor" ref="810492650"/>
 																		<reference key="NSTextColor" ref="519676243"/>
@@ -970,7 +969,7 @@
 											<string key="NSFrame">{{0, 5}, {498, 236}}</string>
 											<reference key="NSSuperview" ref="635279743"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
+											<reference key="NSNextKeyView" ref="780887136"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<int key="NSsFlags">133682</int>
 											<reference key="NSVScroller" ref="450009832"/>
@@ -1015,7 +1014,7 @@
 																			<string key="NSFrameSize">{245, 174}</string>
 																			<reference key="NSSuperview" ref="588735070"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="1054893157"/>
+																			<reference key="NSNextKeyView" ref="464064400"/>
 																			<string key="NSReuseIdentifierKey">_NS:13</string>
 																			<bool key="NSEnabled">YES</bool>
 																			<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -1057,7 +1056,11 @@
 																						<int key="NSCellFlags">337641536</int>
 																						<int key="NSCellFlags2">2048</int>
 																						<string key="NSContents">Text Cell</string>
-																						<reference key="NSSupport" ref="51427407"/>
+																						<object class="NSFont" key="NSSupport" id="51427407">
+																							<string key="NSName">LucidaGrande</string>
+																							<double key="NSSize">13</double>
+																							<int key="NSfFlags">1044</int>
+																						</object>
 																						<reference key="NSControlView" ref="443490790"/>
 																						<reference key="NSBackgroundColor" ref="810492650"/>
 																						<reference key="NSTextColor" ref="519676243"/>
@@ -1166,7 +1169,7 @@
 															<string key="NSFrameSize">{247, 192}</string>
 															<reference key="NSSuperview" ref="824869973"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="464064400"/>
+															<reference key="NSNextKeyView" ref="588735070"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<int key="NSsFlags">133682</int>
 															<reference key="NSVScroller" ref="186054729"/>
@@ -1223,7 +1226,7 @@
 																			<string key="NSFrameSize">{238, 190}</string>
 																			<reference key="NSSuperview" ref="234373344"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="1001857089"/>
+																			<reference key="NSNextKeyView" ref="614798499"/>
 																			<string key="NSReuseIdentifierKey">_NS:13</string>
 																			<object class="NSTextContainer" key="NSTextContainer" id="36078892">
 																				<object class="NSLayoutManager" key="NSLayoutManager">
@@ -1451,7 +1454,6 @@ wGw</bytes>
 																	<string key="NSFrame">{{223, 1}, {16, 190}}</string>
 																	<reference key="NSSuperview" ref="275393630"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView"/>
 																	<string key="NSReuseIdentifierKey">_NS:83</string>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																	<reference key="NSTarget" ref="275393630"/>
@@ -1478,7 +1480,7 @@ wGw</bytes>
 															<string key="NSFrameSize">{240, 192}</string>
 															<reference key="NSSuperview" ref="777937997"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="614798499"/>
+															<reference key="NSNextKeyView" ref="234373344"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<int key="NSsFlags">133138</int>
 															<reference key="NSVScroller" ref="1001857089"/>
