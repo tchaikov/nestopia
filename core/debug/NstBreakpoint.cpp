@@ -20,28 +20,30 @@ namespace Debug {
         return index;
     }
 
-    void
+    bool
     BreakpointManager::remove(int index)
     {
-        breakpoints_.erase(index);
+        return breakpoints_.erase(index) > 0;
     }
     
-    void
+    bool
     BreakpointManager::disable(int index)
     {
         auto found = breakpoints_.find(index);
         if (found == breakpoints_.end())
-            return;
+            return false;
         found->second.enabled = false;
+        return true;
     }
 
-    void
+    bool
     BreakpointManager::enable(int index)
     {
         auto found = breakpoints_.find(index);
         if (found == breakpoints_.end())
-            return;
+            return false;
         found->second.enabled = true;
+        return true;
     }
 
     const Breakpoint*

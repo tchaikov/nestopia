@@ -55,6 +55,7 @@
 		941BA866160778F8008D96D2 /* open-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA865160778F8008D96D2 /* open-icon-32.png */; };
 		941BA9251608B7D2008D96D2 /* NstBreakpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 941BA9241608B7D2008D96D2 /* NstBreakpoint.cpp */; };
 		941BA9281608CAE2008D96D2 /* DebuggerDelegateBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941BA9261608CAE2008D96D2 /* DebuggerDelegateBridge.mm */; };
+		944C241616198797001C7C15 /* NSFont+DebugConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 944C241516198797001C7C15 /* NSFont+DebugConsole.m */; };
 		946494D815F21161002B488B /* NstBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934615F21160002B488B /* NstBoard.cpp */; };
 		946494D915F21161002B488B /* NstBoardAe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934815F21160002B488B /* NstBoardAe.cpp */; };
 		946494DA15F21161002B488B /* NstBoardAgci.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9464934A15F21160002B488B /* NstBoardAgci.cpp */; };
@@ -330,6 +331,7 @@
 		94E8D1FF15F38802000234E4 /* NESGameCore+NESFeatures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */; };
 		94E8D27315F397E3000234E4 /* DDHidLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E8D1FB15F382C2000234E4 /* DDHidLib.framework */; };
 		94E8D29E15F39952000234E4 /* DDHidLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94E8D1FB15F382C2000234E4 /* DDHidLib.framework */; };
+		94E90DF5161A1187003A9351 /* CommandParser.rl in Sources */ = {isa = PBXBuildFile; fileRef = 94E90DF2161A1172003A9351 /* CommandParser.rl */; };
 		94EB6C4F15FCC47300E8C11A /* NstOpcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C4D15FCC47300E8C11A /* NstOpcode.cpp */; };
 		94EB6C5A15FCCA9F00E8C11A /* NstOperator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C5615FCC55100E8C11A /* NstOperator.cpp */; };
 		94EB6C5B15FCCAA700E8C11A /* NstAddressing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EB6C5815FCC55A00E8C11A /* NstAddressing.cpp */; };
@@ -337,6 +339,20 @@
 		94FF5D3A1618795A00D294F5 /* DisassembledTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FF5D381618795A00D294F5 /* DisassembledTableController.m */; };
 		94FF5D3B1618795A00D294F5 /* DisassembledTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94FF5D391618795A00D294F5 /* DisassembledTableController.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		94E90DDE161A0955003A9351 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.rl";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)$(INPUT_FILE_DIR)/$(INPUT_FILE_BASE).m",
+			);
+			script = "#!/usr/bin/bash\n# The default PATH for this shell is /Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin.\n# Ragel is usually in none of those, so let's see if they've extended their PATH\n\nif [ -f ~/.bash_profile ]; then\n  source ~/.bash_profile\nelif [ -f ~/.bash_login ]; then\n  source ~/.bash_login\nelif [ -f ~/.profile ]; then\n  source ~/.profile\nfi\n\nOUTPUT_FILE=\"${DERIVED_FILES_DIR}/${CURRENT_ARCH}${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.m\"\nragel -C \"${INPUT_FILE_PATH}\" -o \"${OUTPUT_FILE}\"\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		94E8D1F415F382C2000234E4 /* PBXContainerItemProxy */ = {
@@ -472,6 +488,8 @@
 		941BA9241608B7D2008D96D2 /* NstBreakpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NstBreakpoint.cpp; path = debug/NstBreakpoint.cpp; sourceTree = "<group>"; };
 		941BA9261608CAE2008D96D2 /* DebuggerDelegateBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DebuggerDelegateBridge.mm; sourceTree = "<group>"; };
 		941BA9271608CAE2008D96D2 /* DebuggerDelegateBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerDelegateBridge.h; sourceTree = "<group>"; };
+		944C241416198797001C7C15 /* NSFont+DebugConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFont+DebugConsole.h"; path = "osx/NSFont+DebugConsole.h"; sourceTree = "<group>"; };
+		944C241516198797001C7C15 /* NSFont+DebugConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFont+DebugConsole.m"; path = "osx/NSFont+DebugConsole.m"; sourceTree = "<group>"; };
 		9464934615F21160002B488B /* NstBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstBoard.cpp; sourceTree = "<group>"; };
 		9464934715F21160002B488B /* NstBoard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NstBoard.hpp; sourceTree = "<group>"; };
 		9464934815F21160002B488B /* NstBoardAe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstBoardAe.cpp; sourceTree = "<group>"; };
@@ -1052,6 +1070,9 @@
 		94E8D1E715F382C2000234E4 /* DDHidLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDHidLib.xcodeproj; path = DDHidLib/DDHidLib.xcodeproj; sourceTree = "<group>"; };
 		94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "NESGameCore+NESFeatures.mm"; path = "../NESGameCore+NESFeatures.mm"; sourceTree = "<group>"; };
 		94E8D25115F38D7B000234E4 /* DDHidLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DDHidLib.framework; path = DDHidLib/DDHidLib.framework; sourceTree = "<group>"; };
+		94E90DF1161A1172003A9351 /* CommandRunner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CommandRunner.h; path = osx/CommandRunner.h; sourceTree = "<group>"; };
+		94E90DF2161A1172003A9351 /* CommandParser.rl */ = {isa = PBXFileReference; lastKnownFileType = text; name = CommandParser.rl; path = osx/CommandParser.rl; sourceTree = "<group>"; };
+		94E90DF3161A1172003A9351 /* CommandParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CommandParser.h; path = osx/CommandParser.h; sourceTree = "<group>"; };
 		94EB6C4D15FCC47300E8C11A /* NstOpcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NstOpcode.cpp; path = debug/NstOpcode.cpp; sourceTree = "<group>"; };
 		94EB6C4E15FCC47300E8C11A /* NstOpcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NstOpcode.h; path = debug/NstOpcode.h; sourceTree = "<group>"; };
 		94EB6C5615FCC55100E8C11A /* NstOperator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NstOperator.cpp; path = debug/NstOperator.cpp; sourceTree = "<group>"; };
@@ -1886,6 +1907,8 @@
 			children = (
 				0DECB3730C3E24C4000279A6 /* NestopiaView.h */,
 				0DECB3740C3E24C4000279A6 /* NestopiaView.mm */,
+				944C241416198797001C7C15 /* NSFont+DebugConsole.h */,
+				944C241516198797001C7C15 /* NSFont+DebugConsole.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1901,6 +1924,16 @@
 				948BB4A5161977210051A851 /* Decoded.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		944C241716198A64001C7C15 /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				94E90DF1161A1172003A9351 /* CommandRunner.h */,
+				94E90DF2161A1172003A9351 /* CommandParser.rl */,
+				94E90DF3161A1172003A9351 /* CommandParser.h */,
+			);
+			name = Console;
 			sourceTree = "<group>";
 		};
 		946496E715F25F7D002B488B /* Audio */ = {
@@ -1927,6 +1960,7 @@
 		9468703215F63FA20049AA2C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				944C241716198A64001C7C15 /* Console */,
 				9485DA501618A326004C9DCC /* DebuggerWindow */,
 				9485DA4F1618A316004C9DCC /* DisassembledTable */,
 				9485DA511618AAC1004C9DCC /* WatchTable */,
@@ -2021,6 +2055,7 @@
 				0DECB3B20C3E264D000279A6 /* CopyFiles */,
 			);
 			buildRules = (
+				94E90DDE161A0955003A9351 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2125,6 +2160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94E90DF5161A1187003A9351 /* CommandParser.rl in Sources */,
 				94EB6C5B15FCCAA700E8C11A /* NstAddressing.cpp in Sources */,
 				94EB6C5A15FCCA9F00E8C11A /* NstOperator.cpp in Sources */,
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
@@ -2428,6 +2464,7 @@
 				9485DA551618AAFE004C9DCC /* WatchTableController.m in Sources */,
 				9485DA5D1618AE17004C9DCC /* Watched.m in Sources */,
 				948BB4A6161977210051A851 /* Decoded.m in Sources */,
+				944C241616198797001C7C15 /* NSFont+DebugConsole.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,8 +10,11 @@
 #import "Breakpoint.h"
 #import "DebuggerBridge.h"
 #import "NESGameCore.h"
+#import "CommandParser.h"
 #import "DisassembledTableController.h"
 #import "WatchTableController.h"
+#import "NSFont+DebugConsole.h"
+
 
 @interface DebuggerWindowController ()
 
@@ -32,6 +35,7 @@
 {
     self = [super initWithWindow:window];
     if (self) {
+        _commandParser = [[CommandParser alloc] initWithRunner:self];
     }
     
     return self;
@@ -51,6 +55,8 @@
         [[WatchTableController alloc] initWithNibName:@"WatchTableController" bundle:nil];
     [_watchView addSubview:_watchController.view];
     _watchController.view.frame = _watchView.bounds;
+
+    self.consoleView.font = [NSFont debugConsoleInputFont];
 }
 
 - (void)showWindow:(id)sender {
@@ -88,13 +94,84 @@
 
 #pragma mark -
 #pragma mark private
-- (void)pausedAtPc:(NSUInteger)pc withPrompt:(BOOL)prompt
-{
+- (void)pausedAtPc:(NSUInteger)pc withPrompt:(BOOL)prompt {
     [_disassembledController updateWithPc:pc];
     [_watchController update];
     if (prompt) {
         [self printPrompt];
     }
+}
+
+- (void)runCommand:(NSString *)command {
+    [_commandParser parse:command];
+}
+
+#pragma mark -
+#pragma mark CommandRunner
+- (void)display:(NSUInteger)address {
+    uint8_t value = [self.debugger peek8:address];
+    // this is fake $(n) variable 8P
+    [self print:@"$%d = %d", _printCount, value];
+}
+
+- (void)set:(uint16_t)address withValue:(uint8_t)value {
+    [self.debugger poke8:address with:value];
+    // no news is good news
+}
+
+- (void)setBreakpoint:(Breakpoint *)bp {
+    int index = [self.debugger setBreakpoint:bp];
+    [self print:@"Breakpoint %d: %@", index, bp];
+}
+
+- (void)removeBreakpoint:(NSUInteger)index {
+    if ([self.debugger resetBreakpoint:index])
+        return;
+    [self checkBreakpointAt:index];
+}
+
+- (void)disableBreakpoint:(NSUInteger)index {
+    if ([self.debugger disableBreakpoint:index])
+        return;
+    [self checkBreakpointAt:index];
+}
+
+- (void)enableBreakpoint:(NSUInteger)index {
+    if ([self.debugger enableBreakpoint:index])
+        return;
+    [self checkBreakpointAt:index];
+}
+
+- (void)checkBreakpointAt:(NSUInteger)index {
+    if (![self.debugger breakpointAtIndex:index]) {
+        [self print:@"No breakpoint number %d", index];
+    } else {
+        [self print:@"Ops"];
+    }
+}
+
+- (void)next {
+    // TODO
+}
+
+- (void)stepIn {
+    // TODO
+}
+
+- (void)until {
+    // TODO
+}
+
+- (void)watch:(NSUInteger)address {
+    // TODO
+}
+
+- (void)unwatch:(NSUInteger)index {
+    // TODO
+}
+
+- (void)searchBytes:(NSData *)bytes {
+    // TODO
 }
 
 #pragma mark -
@@ -103,14 +180,13 @@
 - (void)printPrompt {
     NSString *prompt = @"(ndb) ";
     [self.consoleView insertText:prompt];
-    NSRange range = NSMakeRange(committedLength, prompt.length);
-    [self.consoleView setFont:[NSFont userFixedPitchFontOfSize:12]
-                        range:range];
+    NSRange range = NSMakeRange(committedLength, prompt.length-1);
     [self.consoleView setTextColor:[NSColor colorWithSRGBRed:0.34
                                                        green:0.43
                                                         blue:1
                                                        alpha:1]
                              range:range];
+    NSLog(@"range = %ld, %ld", range.location, range.length);
     committedLength = self.consoleView.string.length;
 }
 
@@ -122,8 +198,13 @@
     committedLength = self.consoleView.string.length;
 }
 
-- (void)print:(NSString *)msg
+- (void)print:(NSString *)fmt, ...
 {
+    va_list args;
+    va_start(args, fmt);
+    NSString *msg =
+        [[NSString alloc] initWithFormat:fmt arguments:args];
+    va_end(args);
     [self insertText:msg];
 }
 

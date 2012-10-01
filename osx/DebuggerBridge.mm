@@ -58,19 +58,24 @@
     debugger->poke_reg((Debug::Reg::All)reg, data);
 }
 
-- (int)setBreakpoint:(Breakpoint *)bp
-{
+- (int)setBreakpoint:(Breakpoint *)bp {
     return debugger->set_breakpoint(bp.address,
                                     (Debug::AccessMode)bp.access);
 }
 
-- (void)resetBreakpoint:(int)index
-{
-    debugger->remove_breakpoint(index);
+- (BOOL)resetBreakpoint:(int)index {
+    return debugger->remove_breakpoint(index);
 }
 
-- (Breakpoint *)breakpointAtIndex:(NSUInteger)index
-{
+- (BOOL)disableBreakpoint:(int)index {
+    return debugger->disable_breakpoint(index);
+}
+
+- (BOOL)enableBreakpoint:(int)index {
+    return debugger->enable_breakpoint(index);
+}
+
+- (Breakpoint *)breakpointAtIndex:(NSUInteger)index {
     const Debug::Breakpoint* dbp = debugger->lookup_breakpoint(index);
     if (dbp == nullptr)
         return nil;

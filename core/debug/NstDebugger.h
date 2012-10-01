@@ -25,8 +25,10 @@ namespace Nes {
 namespace Debug {
     class DelegateBridge;
 
-    /// frontend of Nes::Core::Cpu, which is able to peek and poke all corners
-    /// of 6502 and the cartridge, disassemble the instructions.
+    /// façade of
+    ///    - Nes::Core::Cpu, which is able to peek and poke all corners
+    ///      of 6502 and the cartridge, disassemble the instructions.
+    ///    - breakpoint manager
     class Debugger {
     public:
         Debugger(Nes::Core::Machine& machine);
@@ -39,8 +41,9 @@ namespace Debug {
         void poke_reg(Reg::All reg, uint8_t data);
 
         int set_breakpoint(uint16_t pc, AccessMode access);
-        void remove_breakpoint(int index);
+        bool remove_breakpoint(int index);
         bool disable_breakpoint(int index);
+        bool enable_breakpoint(int index);
         const Breakpoint* lookup_breakpoint(int index);
 
         // cpu

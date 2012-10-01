@@ -37,7 +37,9 @@ typedef enum : char {
 - (void)pokeReg:(Reg)reg with:(uint8_t)data;
 
 - (int)setBreakpoint:(Breakpoint *)bp;
-- (void)resetBreakpoint:(int)breakpoint;
+- (BOOL)resetBreakpoint:(int)index;
+- (BOOL)disableBreakpoint:(int)index;
+- (BOOL)enableBreakpoint:(int)index;
 - (Breakpoint *)breakpointAtIndex:(NSUInteger)index;
 
 - (Decoded *)disassemble:(NSUInteger *)addr;

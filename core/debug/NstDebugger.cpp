@@ -377,7 +377,7 @@ namespace Debug {
         return bpm_.set(addr, mode);
     }
 
-    void
+    bool
     Debugger::remove_breakpoint(int index)
     {
         return bpm_.remove(index);
@@ -387,6 +387,16 @@ namespace Debug {
     Debugger::lookup_breakpoint(int index)
     {
         return bpm_.lookup(index);
+    }
+
+    bool
+    Debugger::disable_breakpoint(int index) {
+        return bpm_.disable(index);
+    }
+
+    bool
+    Debugger::enable_breakpoint(int index) {
+        return bpm_.enable(index);
     }
 
     void

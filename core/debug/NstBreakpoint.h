@@ -24,9 +24,9 @@ namespace Debug {
     class BreakpointManager {
     public:
         int set(uint16_t pc, AccessMode access);
-        void remove(int index);
-        void enable(int index);
-        void disable(int index);
+        bool remove(int index);
+        bool enable(int index);
+        bool disable(int index);
         const Breakpoint* lookup(int index) const;
 
         int test_access(const Access& access);

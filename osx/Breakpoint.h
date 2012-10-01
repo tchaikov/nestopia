@@ -15,7 +15,7 @@ typedef enum : NSUInteger {
     AccessExec = 1 << 2,
     AccessRW = AccessRead | AccessWrite,
 } AccessMode;
-
+    
 @interface Breakpoint : NSObject
 
 - (id)initWithAddress:(NSUInteger)address
