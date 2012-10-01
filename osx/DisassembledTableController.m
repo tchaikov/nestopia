@@ -8,6 +8,7 @@
 
 #import "DisassembledTableController.h"
 #import "Breakpoint.h"
+#import "Decoded.h"
 #import "DebuggerBridge.h"
 
 @interface DisassembledTableController ()

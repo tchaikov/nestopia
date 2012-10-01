@@ -25,14 +25,7 @@ typedef enum : char {
 + (NSString *)nameWithReg:(Reg)reg;
 @end
 
-@interface Decoded : NSObject
-@property (copy) NSString *description;
-@property (copy) NSString *repr;
-@property (assign) NSUInteger address;
-@property (readonly) NSString *addressString;
-@end
-
-@class Breakpoint;
+@class Breakpoint, Decoded;
 
 @interface DebuggerBridge : NSObject
 

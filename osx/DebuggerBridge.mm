@@ -6,20 +6,14 @@
 //
 //
 
-#import "Breakpoint.h"
 #import "DebuggerBridge.h"
+
+#import "Breakpoint.h"
+#import "Decoded.h"
 
 #include "NstDebugger.h"
 #include "NstApiEmulator.hpp"
 #include "NstMachine.hpp"
-
-@implementation Decoded
-
-- (NSString *)addressString {
-    return [NSString stringWithFormat:@"%04lX", self.address];
-}
-
-@end
 
 @interface DebuggerBridge () {
     Debug::Debugger *debugger;

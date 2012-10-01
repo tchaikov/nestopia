@@ -324,6 +324,7 @@
 		9485DA551618AAFE004C9DCC /* WatchTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485DA531618AAFE004C9DCC /* WatchTableController.m */; };
 		9485DA561618AAFE004C9DCC /* WatchTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9485DA541618AAFE004C9DCC /* WatchTableController.xib */; };
 		9485DA5D1618AE17004C9DCC /* Watched.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485DA5C1618AE17004C9DCC /* Watched.m */; };
+		948BB4A6161977210051A851 /* Decoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 948BB4A5161977210051A851 /* Decoded.m */; };
 		94D42D9A160F5299002935C8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94D42D98160F5299002935C8 /* MainMenu.xib */; };
 		94E8D1E115F380A9000234E4 /* NstApiRam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1DF15F380A9000234E4 /* NstApiRam.cpp */; };
 		94E8D1FF15F38802000234E4 /* NESGameCore+NESFeatures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */; };
@@ -457,8 +458,8 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* OpenNestopia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenNestopia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		941BA81E16057122008D96D2 /* DebuggerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerDelegate.h; sourceTree = "<group>"; };
-		941BA81F16059FA4008D96D2 /* Breakpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Breakpoint.h; sourceTree = "<group>"; };
-		941BA82016059FA4008D96D2 /* Breakpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Breakpoint.m; sourceTree = "<group>"; };
+		941BA81F16059FA4008D96D2 /* Breakpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Breakpoint.h; path = osx/Breakpoint.h; sourceTree = "<group>"; };
+		941BA82016059FA4008D96D2 /* Breakpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Breakpoint.m; path = osx/Breakpoint.m; sourceTree = "<group>"; };
 		941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerBridge.h; sourceTree = "<group>"; };
 		941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DebuggerBridge.mm; sourceTree = "<group>"; };
 		941BA83516062C5B008D96D2 /* NstBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstBreakpoint.h; path = debug/NstBreakpoint.h; sourceTree = "<group>"; };
@@ -1043,6 +1044,8 @@
 		9485DA541618AAFE004C9DCC /* WatchTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WatchTableController.xib; path = osx/WatchTableController.xib; sourceTree = "<group>"; };
 		9485DA5B1618AE17004C9DCC /* Watched.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Watched.h; path = osx/Watched.h; sourceTree = "<group>"; };
 		9485DA5C1618AE17004C9DCC /* Watched.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Watched.m; path = osx/Watched.m; sourceTree = "<group>"; };
+		948BB4A4161977210051A851 /* Decoded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoded.h; path = osx/Decoded.h; sourceTree = "<group>"; };
+		948BB4A5161977210051A851 /* Decoded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Decoded.m; path = osx/Decoded.m; sourceTree = "<group>"; };
 		94D42D99160F5299002935C8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		94E8D1DF15F380A9000234E4 /* NstApiRam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstApiRam.cpp; sourceTree = "<group>"; };
 		94E8D1E015F380A9000234E4 /* NstApiRam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NstApiRam.h; sourceTree = "<group>"; };
@@ -1857,8 +1860,6 @@
 			children = (
 				941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */,
 				941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */,
-				941BA81F16059FA4008D96D2 /* Breakpoint.h */,
-				941BA82016059FA4008D96D2 /* Breakpoint.m */,
 				941BA81E16057122008D96D2 /* DebuggerDelegate.h */,
 				941BA9271608CAE2008D96D2 /* DebuggerDelegateBridge.h */,
 				941BA9261608CAE2008D96D2 /* DebuggerDelegateBridge.mm */,
@@ -1894,6 +1895,10 @@
 			children = (
 				9485DA5B1618AE17004C9DCC /* Watched.h */,
 				9485DA5C1618AE17004C9DCC /* Watched.m */,
+				941BA81F16059FA4008D96D2 /* Breakpoint.h */,
+				941BA82016059FA4008D96D2 /* Breakpoint.m */,
+				948BB4A4161977210051A851 /* Decoded.h */,
+				948BB4A5161977210051A851 /* Decoded.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2422,6 +2427,7 @@
 				94FF5D3A1618795A00D294F5 /* DisassembledTableController.m in Sources */,
 				9485DA551618AAFE004C9DCC /* WatchTableController.m in Sources */,
 				9485DA5D1618AE17004C9DCC /* Watched.m in Sources */,
+				948BB4A6161977210051A851 /* Decoded.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
