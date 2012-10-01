@@ -11,6 +11,7 @@
 #import "DebuggerBridge.h"
 #import "NESGameCore.h"
 #import "DisassembledTableController.h"
+#import "WatchTableController.h"
 
 @interface DebuggerWindowController ()
 
@@ -23,6 +24,7 @@
     _gameCore = gameCore;
     self.debugger = [[DebuggerBridge alloc] initWithEmu:gameCore.nesEmu];
     _disassembledController.debugger = self.debugger;
+    _watchController.debugger = self.debugger;
 }
 
 
@@ -40,25 +42,29 @@
                                              selector:@selector(emulatorPaused:)
                                                  name:NESEmulatorDidPauseNotification
                                                object:nil];
-    _disassembledController = [[DisassembledTableController alloc] initWithNibName:@"DisassembledTableController" bundle:nil];
-    [self.disassembledView addSubview:_disassembledController.view];
-    _disassembledController.view.frame = self.disassembledView.bounds;
+    _disassembledController =
+        [[DisassembledTableController alloc] initWithNibName:@"DisassembledTableController" bundle:nil];
+    [_disassembledView addSubview:_disassembledController.view];
+    _disassembledController.view.frame = _disassembledView.bounds;
+
+    _watchController =
+        [[WatchTableController alloc] initWithNibName:@"WatchTableController" bundle:nil];
+    [_watchView addSubview:_watchController.view];
+    _watchController.view.frame = _watchView.bounds;
 }
 
 - (void)showWindow:(id)sender {
     [super showWindow:sender];
     if (self.gameCore.pauseEmulation) {
         // already paused
-        [self updateAllWindowsWithPc:self.gameCore.pc];
-        [self printPrompt];
+        [self pausedAtPc:self.gameCore.pc withPrompt:YES];
     }
 }
 
 #pragma mark -
 - (void)emulatorPaused:(NSNotification *)note {
     NESGameCore *gameCore = [note object];
-    [self updateAllWindowsWithPc:gameCore.pc];
-    [self printPrompt];
+    [self pausedAtPc:gameCore.pc withPrompt:YES];
 }
 
 #pragma mark -
@@ -66,47 +72,30 @@
 
 - (void)willStepToAddress:(NSUInteger)pc
 {
-    [self updateAllWindowsWithPc:pc];
-    [self printPrompt];
+    [self pausedAtPc:pc withPrompt:YES];
 }
 
-- (void)breakpoint:(NSUInteger)breakpointIndex triggeredAt:(NSUInteger)pc {
-    Breakpoint * breakpoint = [self breakpointAtIndex:breakpointIndex];
-    NSAssert(breakpoint, @"breakpoint #%ld not found", breakpointIndex);
+- (void)breakpoint:(NSUInteger)index triggeredAt:(NSUInteger)pc {
+    [self pausedAtPc:pc withPrompt:NO];
+    Breakpoint * breakpoint = [self.debugger breakpointAtIndex:index];
+    NSAssert(breakpoint, @"breakpoint #%ld not found", index);
     [self printStoppedByBreakpoint:breakpoint at:pc];
-    [self updateAllWindowsWithPc:pc];
 }
 
 - (void)printConsole:(NSString *)msg {
     [self.consoleView print:msg];
 }
 
-- (void)updateWithCurrentAddress:(NSUInteger)pc {
-}
-
 #pragma mark -
 #pragma mark private
-- (void)updateAllWindowsWithPc:(NSUInteger)pc
+- (void)pausedAtPc:(NSUInteger)pc withPrompt:(BOOL)prompt
 {
-    [_disassembledController updateDisassemblyWindowWithPc:pc];
-    [self updateWatchWindow];
+    [_disassembledController updateWithPc:pc];
+    [_watchController update];
+    if (prompt) {
+        [self printPrompt];
+    }
 }
-
-- (void)updateWatchWindow
-{
-    // call debuggerBridge to disassemble the instruction at/after pc
-    /// @todo
-}
-
-- (Breakpoint *)breakpointAtIndex:(NSUInteger)index {
-    // debugger
-    return nil;
-}
-
-- (void)pauseDebugger {
-    
-}
-
 
 #pragma mark -
 #pragma mark NSTextView delegate methods

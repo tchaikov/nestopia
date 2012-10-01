@@ -15,12 +15,11 @@
 @private
     NSMutableArray *_disassembled;
     DebuggerBridge *_debugger;
+
+    IBOutlet NSTableView *_disassembledView;
 }
 
 - (void)setDebugger:(DebuggerBridge *)debugger;
-- (void)updateDisassemblyWindowWithPc:(NSUInteger)pc;
-
-@property(assign) IBOutlet NSTableView *disassembledView;
-
+- (void)updateWithPc:(NSUInteger)pc;
 
 @end

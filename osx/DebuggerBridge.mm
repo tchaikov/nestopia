@@ -54,7 +54,7 @@
     return debugger->poke8(addr, data);
 }
 
-- (uint8_t)peekReg:(Reg)reg
+- (uint16_t)peekReg:(Reg)reg
 {
     return debugger->peek_reg((Debug::Reg::All)reg);
 }

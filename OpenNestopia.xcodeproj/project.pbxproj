@@ -46,7 +46,6 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		941BA82116059FA4008D96D2 /* Breakpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82016059FA4008D96D2 /* Breakpoint.m */; };
-		941BA8251605BABE008D96D2 /* WatchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941BA8241605BABE008D96D2 /* WatchTableView.m */; };
 		941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */; };
 		941BA85F1607788A008D96D2 /* pause-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA8591607788A008D96D2 /* pause-icon-32.png */; };
 		941BA8601607788A008D96D2 /* play-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 941BA85A1607788A008D96D2 /* play-icon-32.png */; };
@@ -322,6 +321,9 @@
 		946496ED15F25FCF002B488B /* OERingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 946496EC15F25FCF002B488B /* OERingBuffer.m */; };
 		946496F215F279D4002B488B /* OETimingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 946496F115F279D1002B488B /* OETimingUtils.m */; };
 		9468703815F6418A0049AA2C /* DebuggerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468703615F6418A0049AA2C /* DebuggerWindowController.m */; };
+		9485DA551618AAFE004C9DCC /* WatchTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485DA531618AAFE004C9DCC /* WatchTableController.m */; };
+		9485DA561618AAFE004C9DCC /* WatchTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9485DA541618AAFE004C9DCC /* WatchTableController.xib */; };
+		9485DA5D1618AE17004C9DCC /* Watched.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485DA5C1618AE17004C9DCC /* Watched.m */; };
 		94D42D9A160F5299002935C8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94D42D98160F5299002935C8 /* MainMenu.xib */; };
 		94E8D1E115F380A9000234E4 /* NstApiRam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1DF15F380A9000234E4 /* NstApiRam.cpp */; };
 		94E8D1FF15F38802000234E4 /* NESGameCore+NESFeatures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94E8D1FE15F38802000234E4 /* NESGameCore+NESFeatures.mm */; };
@@ -457,8 +459,6 @@
 		941BA81E16057122008D96D2 /* DebuggerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerDelegate.h; sourceTree = "<group>"; };
 		941BA81F16059FA4008D96D2 /* Breakpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Breakpoint.h; sourceTree = "<group>"; };
 		941BA82016059FA4008D96D2 /* Breakpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Breakpoint.m; sourceTree = "<group>"; };
-		941BA8231605BABE008D96D2 /* WatchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WatchTableView.h; path = osx/WatchTableView.h; sourceTree = "<group>"; };
-		941BA8241605BABE008D96D2 /* WatchTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WatchTableView.m; path = osx/WatchTableView.m; sourceTree = "<group>"; };
 		941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerBridge.h; sourceTree = "<group>"; };
 		941BA82B1605DE0F008D96D2 /* DebuggerBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DebuggerBridge.mm; sourceTree = "<group>"; };
 		941BA83516062C5B008D96D2 /* NstBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NstBreakpoint.h; path = debug/NstBreakpoint.h; sourceTree = "<group>"; };
@@ -1038,6 +1038,11 @@
 		946496F415F280DB002B488B /* RenderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RenderDelegate.h; path = ../RenderDelegate.h; sourceTree = "<group>"; };
 		9468703515F6418A0049AA2C /* DebuggerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebuggerWindowController.h; path = osx/DebuggerWindowController.h; sourceTree = "<group>"; };
 		9468703615F6418A0049AA2C /* DebuggerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebuggerWindowController.m; path = osx/DebuggerWindowController.m; sourceTree = "<group>"; };
+		9485DA521618AAFE004C9DCC /* WatchTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WatchTableController.h; path = osx/WatchTableController.h; sourceTree = "<group>"; };
+		9485DA531618AAFE004C9DCC /* WatchTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WatchTableController.m; path = osx/WatchTableController.m; sourceTree = "<group>"; };
+		9485DA541618AAFE004C9DCC /* WatchTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WatchTableController.xib; path = osx/WatchTableController.xib; sourceTree = "<group>"; };
+		9485DA5B1618AE17004C9DCC /* Watched.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Watched.h; path = osx/Watched.h; sourceTree = "<group>"; };
+		9485DA5C1618AE17004C9DCC /* Watched.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Watched.m; path = osx/Watched.m; sourceTree = "<group>"; };
 		94D42D99160F5299002935C8 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		94E8D1DF15F380A9000234E4 /* NstApiRam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NstApiRam.cpp; sourceTree = "<group>"; };
 		94E8D1E015F380A9000234E4 /* NstApiRam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NstApiRam.h; sourceTree = "<group>"; };
@@ -1880,8 +1885,6 @@
 			children = (
 				0DECB3730C3E24C4000279A6 /* NestopiaView.h */,
 				0DECB3740C3E24C4000279A6 /* NestopiaView.mm */,
-				941BA8231605BABE008D96D2 /* WatchTableView.h */,
-				941BA8241605BABE008D96D2 /* WatchTableView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1889,6 +1892,8 @@
 		941BA8291605DDB2008D96D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9485DA5B1618AE17004C9DCC /* Watched.h */,
+				9485DA5C1618AE17004C9DCC /* Watched.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1919,6 +1924,7 @@
 			children = (
 				9485DA501618A326004C9DCC /* DebuggerWindow */,
 				9485DA4F1618A316004C9DCC /* DisassembledTable */,
+				9485DA511618AAC1004C9DCC /* WatchTable */,
 				0DECB37C0C3E24C4000279A6 /* DBPrefsWindowController.h */,
 				0DECB37D0C3E24C4000279A6 /* DBPrefsWindowController.m */,
 				0DECB37E0C3E24C4000279A6 /* OpenNestopiaPreferences.h */,
@@ -1948,6 +1954,16 @@
 				9468703615F6418A0049AA2C /* DebuggerWindowController.m */,
 			);
 			name = DebuggerWindow;
+			sourceTree = "<group>";
+		};
+		9485DA511618AAC1004C9DCC /* WatchTable */ = {
+			isa = PBXGroup;
+			children = (
+				9485DA521618AAFE004C9DCC /* WatchTableController.h */,
+				9485DA531618AAFE004C9DCC /* WatchTableController.m */,
+				9485DA541618AAFE004C9DCC /* WatchTableController.xib */,
+			);
+			name = WatchTable;
 			sourceTree = "<group>";
 		};
 		94E8D1E815F382C2000234E4 /* Products */ = {
@@ -2093,6 +2109,7 @@
 				941BA866160778F8008D96D2 /* open-icon-32.png in Resources */,
 				94D42D9A160F5299002935C8 /* MainMenu.xib in Resources */,
 				94FF5D3B1618795A00D294F5 /* DisassembledTableController.xib in Resources */,
+				9485DA561618AAFE004C9DCC /* WatchTableController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2399,11 +2416,12 @@
 				94EB6C4F15FCC47300E8C11A /* NstOpcode.cpp in Sources */,
 				94EB6C6215FCD6C900E8C11A /* NstDebugger.cpp in Sources */,
 				941BA82116059FA4008D96D2 /* Breakpoint.m in Sources */,
-				941BA8251605BABE008D96D2 /* WatchTableView.m in Sources */,
 				941BA82C1605DE0F008D96D2 /* DebuggerBridge.mm in Sources */,
 				941BA9251608B7D2008D96D2 /* NstBreakpoint.cpp in Sources */,
 				941BA9281608CAE2008D96D2 /* DebuggerDelegateBridge.mm in Sources */,
 				94FF5D3A1618795A00D294F5 /* DisassembledTableController.m in Sources */,
+				9485DA551618AAFE004C9DCC /* WatchTableController.m in Sources */,
+				9485DA5D1618AE17004C9DCC /* Watched.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

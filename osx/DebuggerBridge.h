@@ -17,6 +17,7 @@ typedef enum : char {
     P = 'P',
     SP = 'S',
     PC = 'C',
+    UNKNOWN = '-',
 } Reg;
 
 @interface Register : NSObject
@@ -39,7 +40,7 @@ typedef enum : char {
 
 - (uint8_t)peek8:(uint16_t)addr;
 - (void)poke8:(uint16_t)addr with:(uint8_t)data;
-- (uint8_t)peekReg:(Reg)reg;
+- (uint16_t)peekReg:(Reg)reg;
 - (void)pokeReg:(Reg)reg with:(uint8_t)data;
 
 - (int)setBreakpoint:(Breakpoint *)bp;

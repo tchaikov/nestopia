@@ -306,7 +306,7 @@ namespace Debug {
         return cpu_.map.Peek16(addr);
     }
 
-    uint8_t
+    uint16_t
     Debugger::peek_reg(Reg::All reg)
     {
         switch (reg) {

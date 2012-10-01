@@ -24,7 +24,6 @@
     if (self) {
         // Initialization code here.
         _disassembled = [[NSMutableArray alloc] initWithCapacity:DISASSEMBLY_WINDOW_SIZE];
-
     }
 
     return self;
@@ -40,11 +39,11 @@
 #define DISASSEMBLY_WINDOW_AHEAD 50  // display at least 50 instructions ahead of pc
 #define MAX_INSTRUCTION_LENGTH 3     // it takes at most 3 bytes to store an instruction
 
-- (void)updateDisassemblyWindowWithPc:(NSUInteger)pc
+- (void)updateWithPc:(NSUInteger)pc
 {
     // fill up the disassembled opcode table view if we are running out of current
     // window
-    [self.disassembledView beginUpdates];
+    [_disassembledView beginUpdates];
     
     NSIndexSet *indexesAdded = nil;
     NSUInteger expectedLastAddr = pc + MAX_INSTRUCTION_LENGTH * DISASSEMBLY_WINDOW_SIZE;
@@ -80,23 +79,23 @@
         }
     }
     if (indexesAdded) {
-        [self.disassembledView insertRowsAtIndexes:indexesAdded
+        [_disassembledView insertRowsAtIndexes:indexesAdded
                                      withAnimation:(NSTableViewAnimationEffectFade|
                                                     NSTableViewAnimationSlideUp)];
     }
     if (indexesRemoved) {
-        [self.disassembledView removeRowsAtIndexes:indexesRemoved
+        [_disassembledView removeRowsAtIndexes:indexesRemoved
                                      withAnimation:(NSTableViewAnimationEffectFade|
                                                     NSTableViewAnimationSlideUp)];
     }
-    [self.disassembledView endUpdates];
+    [_disassembledView endUpdates];
     
     // highlight current instruction
     NSUInteger currentIndex = [self indexOfOpcodeAtAddress:pc];
     NSAssert(currentIndex != NSNotFound, @"current instruction %ld not in window", pc);
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:currentIndex];
-    [self.disassembledView scrollRowToVisible:currentIndex];
-    [[self.disassembledView animator] selectRowIndexes:indexSet byExtendingSelection:NO];
+    [_disassembledView scrollRowToVisible:currentIndex];
+    [[_disassembledView animator] selectRowIndexes:indexSet byExtendingSelection:NO];
 }
 
 #pragma mark -
