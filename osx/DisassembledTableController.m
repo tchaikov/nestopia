@@ -11,9 +11,6 @@
 #import "Decoded.h"
 #import "DebuggerBridge.h"
 
-@interface DisassembledTableController ()
-
-@end
 
 #define DISASSEMBLY_WINDOW_SIZE 200  // display at most 200 instructions in the window
 
