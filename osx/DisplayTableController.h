@@ -10,7 +10,7 @@
 
 @class DebuggerBridge;
 
-@interface WatchTableController : NSViewController<NSTableViewDelegate, NSTableViewDataSource> {
+@interface DisplayTableController : NSViewController<NSTableViewDelegate, NSTableViewDataSource> {
 @private
     NSMutableArray *_watches;
     DebuggerBridge *_debugger;
@@ -20,8 +20,8 @@
 
 - (void)setDebugger:(DebuggerBridge *)debugger;
 - (void)update;
-- (void)addWatch:(NSString *)name;
-- (void)removeWatch:(NSString *)name;
+- (NSUInteger)addDisplay:(NSString *)name;
+- (void)removeDisplay:(NSUInteger)index;
 
 
 @end

@@ -322,8 +322,8 @@
 		946496ED15F25FCF002B488B /* OERingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 946496EC15F25FCF002B488B /* OERingBuffer.m */; };
 		946496F215F279D4002B488B /* OETimingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 946496F115F279D1002B488B /* OETimingUtils.m */; };
 		9468703815F6418A0049AA2C /* DebuggerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468703615F6418A0049AA2C /* DebuggerWindowController.m */; };
-		9485DA551618AAFE004C9DCC /* WatchTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485DA531618AAFE004C9DCC /* WatchTableController.m */; };
-		9485DA561618AAFE004C9DCC /* WatchTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9485DA541618AAFE004C9DCC /* WatchTableController.xib */; };
+		9485DA551618AAFE004C9DCC /* DisplayTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485DA531618AAFE004C9DCC /* DisplayTableController.m */; };
+		9485DA561618AAFE004C9DCC /* DisplayTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9485DA541618AAFE004C9DCC /* DisplayTableController.xib */; };
 		9485DA5D1618AE17004C9DCC /* Watched.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485DA5C1618AE17004C9DCC /* Watched.m */; };
 		948BB4A6161977210051A851 /* Decoded.m in Sources */ = {isa = PBXBuildFile; fileRef = 948BB4A5161977210051A851 /* Decoded.m */; };
 		94D42D9A160F5299002935C8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94D42D98160F5299002935C8 /* MainMenu.xib */; };
@@ -1057,9 +1057,9 @@
 		946496F415F280DB002B488B /* RenderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RenderDelegate.h; path = ../RenderDelegate.h; sourceTree = "<group>"; };
 		9468703515F6418A0049AA2C /* DebuggerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebuggerWindowController.h; path = osx/DebuggerWindowController.h; sourceTree = "<group>"; };
 		9468703615F6418A0049AA2C /* DebuggerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebuggerWindowController.m; path = osx/DebuggerWindowController.m; sourceTree = "<group>"; };
-		9485DA521618AAFE004C9DCC /* WatchTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WatchTableController.h; path = osx/WatchTableController.h; sourceTree = "<group>"; };
-		9485DA531618AAFE004C9DCC /* WatchTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WatchTableController.m; path = osx/WatchTableController.m; sourceTree = "<group>"; };
-		9485DA541618AAFE004C9DCC /* WatchTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WatchTableController.xib; path = osx/WatchTableController.xib; sourceTree = "<group>"; };
+		9485DA521618AAFE004C9DCC /* DisplayTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayTableController.h; path = osx/DisplayTableController.h; sourceTree = "<group>"; };
+		9485DA531618AAFE004C9DCC /* DisplayTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayTableController.m; path = osx/DisplayTableController.m; sourceTree = "<group>"; };
+		9485DA541618AAFE004C9DCC /* DisplayTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisplayTableController.xib; path = osx/DisplayTableController.xib; sourceTree = "<group>"; };
 		9485DA5B1618AE17004C9DCC /* Watched.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Watched.h; path = osx/Watched.h; sourceTree = "<group>"; };
 		9485DA5C1618AE17004C9DCC /* Watched.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Watched.m; path = osx/Watched.m; sourceTree = "<group>"; };
 		948BB4A4161977210051A851 /* Decoded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoded.h; path = osx/Decoded.h; sourceTree = "<group>"; };
@@ -1998,9 +1998,9 @@
 		9485DA511618AAC1004C9DCC /* WatchTable */ = {
 			isa = PBXGroup;
 			children = (
-				9485DA521618AAFE004C9DCC /* WatchTableController.h */,
-				9485DA531618AAFE004C9DCC /* WatchTableController.m */,
-				9485DA541618AAFE004C9DCC /* WatchTableController.xib */,
+				9485DA521618AAFE004C9DCC /* DisplayTableController.h */,
+				9485DA531618AAFE004C9DCC /* DisplayTableController.m */,
+				9485DA541618AAFE004C9DCC /* DisplayTableController.xib */,
 			);
 			name = WatchTable;
 			sourceTree = "<group>";
@@ -2149,7 +2149,7 @@
 				941BA866160778F8008D96D2 /* open-icon-32.png in Resources */,
 				94D42D9A160F5299002935C8 /* MainMenu.xib in Resources */,
 				94FF5D3B1618795A00D294F5 /* DisassembledTableController.xib in Resources */,
-				9485DA561618AAFE004C9DCC /* WatchTableController.xib in Resources */,
+				9485DA561618AAFE004C9DCC /* DisplayTableController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2461,7 +2461,7 @@
 				941BA9251608B7D2008D96D2 /* NstBreakpoint.cpp in Sources */,
 				941BA9281608CAE2008D96D2 /* DebuggerDelegateBridge.mm in Sources */,
 				94FF5D3A1618795A00D294F5 /* DisassembledTableController.m in Sources */,
-				9485DA551618AAFE004C9DCC /* WatchTableController.m in Sources */,
+				9485DA551618AAFE004C9DCC /* DisplayTableController.m in Sources */,
 				9485DA5D1618AE17004C9DCC /* Watched.m in Sources */,
 				948BB4A6161977210051A851 /* Decoded.m in Sources */,
 				944C241616198797001C7C15 /* NSFont+DebugConsole.m in Sources */,

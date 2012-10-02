@@ -12,7 +12,7 @@
 
 @protocol CommandRunner <NSObject>
 
-- (void)display:(NSUInteger)address;
+- (void)printVar:(NSUInteger)address;
 - (void)set:(uint16_t)address withValue:(uint8_t)value;
 - (void)setBreakpoint:(Breakpoint *)bp;
 - (void)removeBreakpoint:(NSUInteger)index;
@@ -21,8 +21,8 @@
 - (void)next;
 - (void)stepIn;
 - (void)until;
-- (void)watch:(NSUInteger)address;
-- (void)unwatch:(NSUInteger)index;
+- (void)display:(NSString *)var;
+- (void)undisplay:(NSUInteger)index;
 - (void)searchBytes:(NSData *)bytes;
 
 @end

@@ -12,7 +12,7 @@
 #import "NESGameCore.h"
 #import "CommandParser.h"
 #import "DisassembledTableController.h"
-#import "WatchTableController.h"
+#import "DisplayTableController.h"
 #import "NSFont+DebugConsole.h"
 
 
@@ -27,7 +27,7 @@
     _gameCore = gameCore;
     self.debugger = [[DebuggerBridge alloc] initWithEmu:gameCore.nesEmu];
     _disassembledController.debugger = self.debugger;
-    _watchController.debugger = self.debugger;
+    _displayController.debugger = self.debugger;
 }
 
 
@@ -51,10 +51,10 @@
     [_disassembledView addSubview:_disassembledController.view];
     _disassembledController.view.frame = _disassembledView.bounds;
 
-    _watchController =
-        [[WatchTableController alloc] initWithNibName:@"WatchTableController" bundle:nil];
-    [_watchView addSubview:_watchController.view];
-    _watchController.view.frame = _watchView.bounds;
+    _displayController =
+        [[DisplayTableController alloc] initWithNibName:@"WatchTableController" bundle:nil];
+    [_displayView addSubview:_displayController.view];
+    _displayController.view.frame = _displayView.bounds;
 
     self.consoleView.font = [NSFont debugConsoleInputFont];
 }
@@ -96,7 +96,7 @@
 #pragma mark private
 - (void)pausedAtPc:(NSUInteger)pc withPrompt:(BOOL)prompt {
     [_disassembledController updateWithPc:pc];
-    [_watchController update];
+    [_displayController update];
     if (prompt) {
         [self printPrompt];
     }
@@ -108,7 +108,7 @@
 
 #pragma mark -
 #pragma mark CommandRunner
-- (void)display:(NSUInteger)address {
+- (void)printVar:(NSUInteger)address {
     uint8_t value = [self.debugger peek8:address];
     // this is fake $(n) variable 8P
     [self print:@"$%d = %d", _printCount, value];
@@ -162,12 +162,12 @@
     // TODO
 }
 
-- (void)watch:(NSUInteger)address {
-    // TODO
+- (void)display:(NSString *)var {
+    [_displayController addDisplay:var];
 }
 
-- (void)unwatch:(NSUInteger)index {
-    // TODO
+- (void)undisplay:(NSUInteger)index {
+    [_displayController removeDisplay:index];
 }
 
 - (void)searchBytes:(NSData *)bytes {

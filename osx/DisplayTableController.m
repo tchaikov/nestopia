@@ -6,14 +6,14 @@
 //
 //
 
-#import "WatchTableController.h"
+#import "DisplayTableController.h"
 #import "Watched.h"
 
-@interface WatchTableController ()
+@interface DisplayTableController ()
 
 @end
 
-@implementation WatchTableController
+@implementation DisplayTableController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -21,7 +21,7 @@
     if (self) {
         _watches = [[NSMutableArray alloc] initWithCapacity:20];
         for (NSString *name in @[@"%pc", @"%A", @"%X", @"%Y", @"%sp", @"%P"]) {
-            [self addWatch:name];
+            [self addDisplay:name];
         }
     }
     return self;
@@ -49,20 +49,19 @@
     }
 }
 
-- (void)addWatch:(NSString *)name {
+- (NSUInteger)addDisplay:(NSString *)name {
     NSUInteger index = [self indexOfWatchWithName:name];
     if (index != NSNotFound)
-        return;
+        return index;
     [_watches addObject:[Watched watchedWithName:name]];
-    [_watchesView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:_watches.count - 1]
+    index = _watches.count - 1;
+    [_watchesView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:index]
                         withAnimation:(NSTableViewAnimationEffectFade|
                                        NSTableViewAnimationSlideUp)];
+    return index;
 }
 
-- (void)removeWatch:(NSString *)name {
-    NSUInteger index = [self indexOfWatchWithName:name];
-    if (index == NSNotFound)
-        return;
+- (void)removeDisplay:(NSUInteger)index {
     [_watches removeObjectAtIndex:index];
     [_watchesView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index]
                         withAnimation:(NSTableViewAnimationEffectFade|

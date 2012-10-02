@@ -35,10 +35,10 @@
   address = imm_addr;
   sp = ' ';
   # inspect
-  action display {
-    [self.commandRunner display:saved_hex];
+  action print_var {
+    [self.commandRunner printVar:saved_hex];
   }
-  display = ('p' | 'print' ) sp+ address @display;
+  print_var = ('p' | 'print' ) sp+ address @print_var;
 
   action set {
     [self.commandRunner set:saved_address withValue:saved_value];
@@ -87,15 +87,23 @@
   }
   until = 'until' @until;
 
-  # watch
-  action watch {
-    [self.commandRunner watch:saved_address];
+  # display
+  action display {
+    [self.commandRunner display:saved_expr];
   }
-  watch = 'watch' sp+ address @watch;
-  action unwatch {
-    [self.commandRunner unwatch:saved_dec];
+  action save_expr {
+    saved_expr =
+      [[NSString alloc] initWithBytes:mark
+                               length:fpc - mark
+                             encoding:NSUTF8StringEncoding];
   }
-  unwatch = 'unwatch' sp+ decimal @unwatch;
+
+  var = ('$'xdigit+ | '%'ascii+) >mark_begin %save_expr;
+  display = 'display' sp+ var @display;
+  action undisplay {
+    [self.commandRunner undisplay:saved_dec];
+  }
+  undisplay = 'undisplay' sp+ decimal @undisplay;
 
   # memory
   action search {
@@ -108,14 +116,14 @@
   bytes = (xdigit{2})+ >mark_begin %save_bytes;
   search = 'search' sp+ bytes @search;
 
-  main := (print |
+  main := (print_var |
            set |
            breakp |
            next |
            until |
            step |
-           watch |
-           unwatch |
+           display |
+           undisplay |
            search);
 }%%
 
@@ -139,6 +147,7 @@
   int saved_hex = ~0, saved_dec = ~0;
   uint16_t saved_address = ~0;
   uint8_t saved_value = ~0;
+  NSString *saved_expr = nil;
   %% write exec;
 }
 

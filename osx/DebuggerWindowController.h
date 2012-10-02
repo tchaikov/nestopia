@@ -12,7 +12,7 @@
 #import "CommandRunner.h"
 
 @class DisassembledTableController;
-@class WatchTableController;
+@class DisplayTableController;
 @class DebugConsoleView;
 @class CommandParser;
 @class DebuggerBridge;
@@ -29,8 +29,8 @@ NSTextViewDelegate, CommandRunner> {
     DisassembledTableController *_disassembledController;
     IBOutlet NSView *_disassembledView;
 
-    WatchTableController *_watchController;
-    IBOutlet NSView *_watchView;
+    DisplayTableController *_displayController;
+    IBOutlet NSView *_displayView;
 }
 
 @property(nonatomic, strong) DebuggerBridge* debugger;
