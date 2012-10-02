@@ -116,7 +116,13 @@
   bytes = (xdigit{2})+ >mark_begin %save_bytes;
   search = 'search' sp+ bytes @search;
 
-  main := (print_var |
+  # repeat
+  action repeat {
+    [self.commandRunner repeatLastCommand];
+  }
+
+  main := (empty @repeat |
+           print_var |
            set |
            breakp |
            next |
@@ -134,7 +140,6 @@
 - (id)initWithRunner:(id<CommandRunner>)runner {
   if ((self = [super init]) != nil) {
     self.commandRunner = runner;
-    %% write init;
   }
   return self;
 }
@@ -148,6 +153,7 @@
   uint16_t saved_address = ~0;
   uint8_t saved_value = ~0;
   NSString *saved_expr = nil;
+  %% write init;
   %% write exec;
 }
 

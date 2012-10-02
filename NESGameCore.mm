@@ -379,7 +379,7 @@ void NST_CALLBACK doEvent(void* userData, Nes::Api::Machine::Event event,Nes::Re
 {
     Nes::Api::Machine machine(*emu);
     
-    if ( machine.GetMode() == Nes::Api::Machine::NTSC ) {
+    if ( self.machine.GetMode() == Nes::Api::Machine::NTSC ) {
         return 60;
     } else {
         return 50;
@@ -713,6 +713,18 @@ static int Heights[2] =
     machine.Reset(true);
 }
 
+- (void)setCondition:(ExecCondition)condition {
+    NSAssert(self.pauseEmulation, @"can only issue command to a paused emulation");
+    _execCondition = condition;
+}
+
+- (BOOL)shouldExec {
+    if (self.execCondition) {
+        return self.execCondition();
+    }
+    return !self.pauseEmulation;
+}
+
 NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotification";
 
 - (NSUInteger)pc
@@ -741,8 +753,7 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
         @autoreleasepool {            
             willSkipFrame = (frameCounter != frameSkip);
             
-            if (isRunning)
-            {
+            if ([self shouldExec]) {
                 //OEPerfMonitorObserve(@"executeFrame", gameInterval, ^{
                 [self.renderDelegate willExecute];
                 
@@ -763,6 +774,7 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
                                                                   object:self];
             [[NSNotificationQueue defaultQueue] enqueueNotification:notif
                                                        postingStyle:NSPostWhenIdle];
+            NSLog(@"paused at %#06lx", self.pc);
             wasPaused = TRUE;
         }
         //OEPerfMonitorObserve(@"CFRunLoop", gameInterval, ^{
@@ -799,6 +811,10 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
     delete controls;
 }
 
+- (Nes::Api::Machine)machine {
+    return Nes::Api::Machine(*emu);
+}
+
 #pragma mark - NESSystemResponderClient
 - (oneway void)didPushNESButton:(NESButton)button forPlayer:(NSUInteger)player;
 {
@@ -826,12 +842,11 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
     const char* filename = [fileName UTF8String];
     
     Nes::Result result; 
-    
-    Nes::Api::Machine machine(*emu);
+
     std::ofstream stateFile( filename, std::ifstream::out|std::ifstream::binary );
     
     if (stateFile.is_open())
-        result = machine.SaveState(stateFile, Nes::Api::Machine::NO_COMPRESSION );
+        result = self.machine.SaveState(stateFile, Nes::Api::Machine::NO_COMPRESSION );
     else
         return NO;
     
@@ -862,11 +877,10 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
 {
     Nes::Result result; 
     
-    Nes::Api::Machine machine(*emu);
     std::ifstream stateFile( [fileName UTF8String], std::ifstream::in|std::ifstream::binary );
     
     if (stateFile.is_open())
-        result = machine.LoadState(stateFile);
+        result = self.machine.LoadState(stateFile);
     else
         return NO;
     

@@ -24,5 +24,6 @@
 - (void)display:(NSString *)var;
 - (void)undisplay:(NSUInteger)index;
 - (void)searchBytes:(NSData *)bytes;
+- (void)repeatLastCommand;
 
 @end

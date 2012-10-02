@@ -84,6 +84,41 @@
                                        enabled:dbp->enabled];
 }
 
+- (void)next {
+    @synchronized(self) {
+        debugger->next();
+    }
+}
+
+- (void)stepInto {
+    @synchronized(self) {
+        debugger->step_into();
+    }
+}
+
+- (void)pause {
+    @synchronized(self) {
+        debugger->pause();
+    }
+}
+
+- (void)resume {
+    @synchronized(self) {
+        debugger->resume();
+    }
+}
+
+- (void)until:(NSUInteger)address {
+    @synchronized(self) {
+        debugger->until(address);
+    }
+}
+- (BOOL)shouldExec {
+    @synchronized(self) {
+        return debugger->should_exec();
+    }
+}
+
 - (Decoded *)disassemble:(NSUInteger *)addr
 {
     uint16_t pc = *addr;

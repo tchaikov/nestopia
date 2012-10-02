@@ -36,6 +36,7 @@ namespace Debug {
         virtual ~Opcode() {}
         virtual Decoded decode(uint16_t& pc) const = 0;
         virtual Access access(uint16_t pc) const = 0;
+        virtual int flow_control_type() const = 0;
     };
     // opcode is a combination of an operator and its operand
     // any opcode which has an operand goes here, even it's an implicit
@@ -59,6 +60,9 @@ namespace Debug {
         }
         virtual Access access(uint16_t pc) const {
             return {addr_.get(addr_.fetch(pc)), mode};
+        }
+        virtual int flow_control_type() const {
+            return Operateur::flow_control_type;
         }
     private:
         const std::string fmt_;
@@ -85,6 +89,9 @@ namespace Debug {
         virtual Access access(uint16_t pc) const {
             return {0, NONE};
         }
+        virtual int flow_control_type() const {
+            return Operateur::flow_control_type;
+        }
     private:
         const Operateur& op_;
     };
@@ -109,6 +116,9 @@ namespace Debug {
         //       complicated than the others.
         virtual Access access(uint16_t pc) const {
             return {0, NONE};
+        }
+        virtual int flow_control_type() const {
+            return Operateur::flow_control_type;
         }
     private:
         const Operateur& op_;

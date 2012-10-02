@@ -21,7 +21,13 @@ namespace Nes {
 namespace Debug {
     using boost::format;
     using std::string;
-    
+
+    enum {
+        NON = 0,
+        RETURN = -1,
+        CALL = 1,
+    };
+
     template<class Op_>
     struct Op {
         Op(const string& op)
@@ -36,6 +42,9 @@ namespace Debug {
             static const Op_ op;
             return op;
         }
+        enum {
+            flow_control_type = NONE,
+        };
     private:
         const string op_;
     };
@@ -320,6 +329,9 @@ namespace Debug {
         format repr(const string& m) const {
             return format("push16(pc+1); goto %1%;") % m;
         }
+        enum {
+            flow_control_type = CALL,
+        };
     };
     
     struct Rts : Op<Rts> {
@@ -327,6 +339,9 @@ namespace Debug {
         format repr() const {
             return format("goto pop16() + 1");
         }
+        enum {
+            flow_control_type = RETURN,
+        };
     };
     
     struct Rti : Op<Rti> {

@@ -42,6 +42,14 @@ typedef enum : char {
 - (BOOL)enableBreakpoint:(int)index;
 - (Breakpoint *)breakpointAtIndex:(NSUInteger)index;
 
+- (void)next;
+- (void)stepInto;
+- (void)pause;
+- (void)resume;
+- (void)until:(NSUInteger)address;
+
+- (BOOL)shouldExec;
+
 - (Decoded *)disassemble:(NSUInteger *)addr;
 
 @end

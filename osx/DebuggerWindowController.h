@@ -23,6 +23,7 @@ NSTextViewDelegate, CommandRunner> {
 @private
     NSUInteger committedLength;
     CommandParser* _commandParser;
+    NSString *_lastCommand;
     // TODO: support $(n) variable ?
     int _printCount;
 

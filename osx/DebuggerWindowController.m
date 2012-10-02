@@ -64,13 +64,16 @@
     if (self.gameCore.pauseEmulation) {
         // already paused
         [self pausedAtPc:self.gameCore.pc withPrompt:YES];
+        [self attachToGameCore:self.gameCore];
     }
 }
 
 #pragma mark -
 - (void)emulatorPaused:(NSNotification *)note {
+    NSLog(@"received pause message");
     NESGameCore *gameCore = [note object];
     [self pausedAtPc:gameCore.pc withPrompt:YES];
+    [self attachToGameCore:gameCore];
 }
 
 #pragma mark -
@@ -102,8 +105,17 @@
     }
 }
 
-- (void)runCommand:(NSString *)command {
-    [_commandParser parse:command];
+- (void)attachToGameCore:(NESGameCore *)gameCore {
+    gameCore.execCondition = ^ {
+        return [self.debugger shouldExec];
+    };
+    [self.debugger pause];
+    gameCore.pauseEmulation = YES;
+}
+
+- (void)detachFromGameCore:(NESGameCore *)gameCore {
+    [self.debugger resume];
+    gameCore.execCondition = nil;
 }
 
 #pragma mark -
@@ -151,15 +163,19 @@
 }
 
 - (void)next {
-    // TODO
+    [self.debugger next];
 }
 
 - (void)stepIn {
-    // TODO
+    [self.debugger stepInto];
 }
 
 - (void)until {
-    // TODO
+    [self.debugger until:self.gameCore.pc];
+}
+
+- (void)untilHitAddress:(NSUInteger)address {
+    [self.debugger until:address];
 }
 
 - (void)display:(NSString *)var {
@@ -172,6 +188,13 @@
 
 - (void)searchBytes:(NSData *)bytes {
     // TODO
+}
+
+- (void)repeatLastCommand {
+    if (_lastCommand) {
+        [_commandParser parse:_lastCommand];
+    }
+    [self printPrompt];
 }
 
 #pragma mark -
@@ -219,12 +242,18 @@
     // When return is entered, record and color the newly committed text
     if (@selector(insertNewline:) == commandSelector) {
 
-        NSUInteger textLength = [[textView string] length];
+        NSUInteger textLength = textView.string.length;
         if (textLength > committedLength) {
             [textView setSelectedRange:NSMakeRange(textLength, 0)];
+            NSString *command = [[textView.string substringFromIndex:committedLength] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             [textView insertText:@"\n"];
             textLength++;
             committedLength = textLength;
+            if (command.length > 0) {
+                _lastCommand = command;
+            }
+            [_commandParser parse:command];
+            [self printPrompt];
         }
         retval = YES;
     }

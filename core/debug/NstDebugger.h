@@ -23,6 +23,7 @@ namespace Nes {
 }
 
 namespace Debug {
+
     class DelegateBridge;
 
     /// façade of
@@ -47,31 +48,42 @@ namespace Debug {
         const Breakpoint* lookup_breakpoint(int index);
 
         // cpu
-        void cpu_op_exec(uint16_t addr);
-        
-        /// start running until a breakpoint is reached
+        void next();
+        void step_into();
+        /// continue running until a breakpoint is reached
+        void pause();
         void resume();
-        /// stop running as soon as possible
-        void suspend();
+        void until(uint16_t address);
+        /// @return true if should execute next opcode
+        bool should_exec();
+
         Decoded disassemble(uint16_t& pc);
 
     private:
-        void attach();
-        void detach();
+        bool done_with_next();
+        bool done_with_step();
+        bool done_with_finish();
+        bool done_with_until();
+        bool done_with_bp();
 
         int check_with_breakpoints(uint16_t pc);
 
-        NES_DECL_HOOK(checkNextOpcode);
-
     private:
-        enum RunMode {
-            RUN_UNTIL,
-            STEP_OVER,
-            STEP_INTO,
-        } run_mode_;
         DelegateBridge *delegate_;
         Nes::Core::Cpu &cpu_;
         BreakpointManager bpm_;
+
+        enum RunMode {
+            STEP_OVER,
+            STEP_INTO,
+            RUN_UNTIL,
+            CONTINUE,
+            PAUSED,
+        } run_mode_;
+        bool step_done_;
+        int call_depth_;
+        int last_bp_;
+        uint16_t until_addr_; // a single shot break point
     };
 }
 

@@ -1776,7 +1776,7 @@
 			isa = PBXGroup;
 			children = (
 				941BA81D1605708C008D96D2 /* core */,
-				941BA81C16057026008D96D2 /* debug */,
+				941BA81C16057026008D96D2 /* bridge */,
 				946496EE15F26E7D002B488B /* Input */,
 				946496E715F25F7D002B488B /* Audio */,
 			);
@@ -1876,7 +1876,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		941BA81C16057026008D96D2 /* debug */ = {
+		941BA81C16057026008D96D2 /* bridge */ = {
 			isa = PBXGroup;
 			children = (
 				941BA82A1605DE0F008D96D2 /* DebuggerBridge.h */,
@@ -1885,7 +1885,7 @@
 				941BA9271608CAE2008D96D2 /* DebuggerDelegateBridge.h */,
 				941BA9261608CAE2008D96D2 /* DebuggerDelegateBridge.mm */,
 			);
-			name = debug;
+			name = bridge;
 			sourceTree = "<group>";
 		};
 		941BA81D1605708C008D96D2 /* core */ = {
@@ -1930,8 +1930,8 @@
 			isa = PBXGroup;
 			children = (
 				94E90DF1161A1172003A9351 /* CommandRunner.h */,
-				94E90DF2161A1172003A9351 /* CommandParser.rl */,
 				94E90DF3161A1172003A9351 /* CommandParser.h */,
+				94E90DF2161A1172003A9351 /* CommandParser.rl */,
 			);
 			name = Console;
 			sourceTree = "<group>";

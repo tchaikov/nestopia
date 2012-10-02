@@ -283,7 +283,9 @@ namespace {
 
 namespace Debug {
     Debugger::Debugger(Nes::Core::Machine& machine)
-    : cpu_(machine.cpu)
+    : cpu_(machine.cpu),
+      run_mode_(STEP_INTO),
+      call_depth_(0)
     {
         set_cpu(&cpu_);
     }
@@ -355,22 +357,6 @@ namespace Debug {
         }
     }
 
-    NES_HOOK(Debugger, checkNextOpcode) {
-        cpu_op_exec(cpu_.pc);
-    }
-
-    void
-    Debugger::attach()
-    {
-        cpu_.AddHook(Nes::Core::Hook(this, &Debugger::Hook_checkNextOpcode));
-    }
-
-    void
-    Debugger::detach()
-    {
-        cpu_.RemoveHook(Nes::Core::Hook(this, &Debugger::Hook_checkNextOpcode));
-    }
-
     int
     Debugger::set_breakpoint(uint16_t addr, AccessMode mode)
     {
@@ -400,23 +386,105 @@ namespace Debug {
     }
 
     void
-    Debugger::cpu_op_exec(uint16_t pc)
+    Debugger::next() {
+        step_done_ = false;
+        run_mode_ = STEP_OVER;
+    }
+
+    void
+    Debugger::step_into() {
+        step_done_ = false;
+        run_mode_ = STEP_INTO;
+    }
+
+    void
+    Debugger::pause() {
+        run_mode_ = PAUSED;
+    }
+
+    void
+    Debugger::resume() {
+        run_mode_ = CONTINUE;
+    }
+
+    void
+    Debugger::until(uint16_t address) {
+        until_addr_ = address;
+        step_done_ = false;
+        run_mode_ = RUN_UNTIL;
+    }
+
+    bool
+    Debugger::done_with_next() {
+        // run current opcode, but stop before running the next one
+        Opcode* opcode = opcodes[cpu_.map.Peek8(cpu_.pc)];
+        call_depth_ += opcode->flow_control_type();
+        step_done_ = (call_depth_ == 0);
+        return true;
+    }
+
+    bool
+    Debugger::done_with_step() {
+        return true;
+    }
+
+    bool
+    Debugger::done_with_finish() {
+        Opcode* opcode = opcodes[cpu_.map.Peek8(cpu_.pc)];
+        return opcode->flow_control_type() == -1;
+    }
+
+    bool
+    Debugger::done_with_until() {
+        return cpu_.pc == until_addr_;
+    }
+
+    bool
+    Debugger::done_with_bp() {
+        int index = check_with_breakpoints(cpu_.pc);
+        if (index == -1) {
+            return false;
+        } else {
+            last_bp_ = index;
+            return true;
+        }
+    }
+
+    bool
+    Debugger::should_exec()
     {
+        if (run_mode_ == PAUSED)
+            return false;
+
+        if (step_done_) {
+            // the STEP_OVER state is a transient state, once it
+            // the emulator, it just evaporates.
+            // this also applies to STEP_INTO and RUN_UNTIL
+            step_done_ = false;
+            run_mode_ = PAUSED;
+            return false;
+        }
         switch (run_mode_) {
-            case STEP_INTO:
             case STEP_OVER:
-                return delegate_->will_step_to(pc);
+                step_done_ = done_with_next();
+                break;
+            case STEP_INTO:
+                step_done_ = done_with_step();
+                break;
             case RUN_UNTIL:
-            {
-                int index = check_with_breakpoints(pc);
-                if (index >= 0) {
-                    return delegate_->will_trigger_breakpoint(pc, index);
+                step_done_ = done_with_until();
+                if (step_done_) {
+                    break;
                 }
-            }
+                // fall thru
+            case CONTINUE:
+                step_done_ = done_with_bp();
                 break;
             default:
+                // WTF ?
                 break;
         }
+        return true;
     }
 
     int
@@ -439,6 +507,4 @@ namespace Debug {
         uint hex = cpu_.map.Peek8(pc++);
         return opcodes[hex]->decode(pc);
     }
-
-    int check_with_breakpoints(uint16_t pc);
 }

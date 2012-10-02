@@ -48,10 +48,11 @@ extern NSString *const NESUnlimitedSprites;
 extern NSString *const NESEmulatorDidPauseNotification;
 
 
-
 #pragma mark -
 
 @class OERingBuffer;
+
+typedef BOOL (^ExecCondition)(void);
 
 @interface NESGameCore : NSObject <NESSystemResponderClient>
 {
@@ -99,6 +100,7 @@ extern NSString *const NESEmulatorDidPauseNotification;
 @property(readonly) IntSize bufferSize;
 
 @property(weak)     id<RenderDelegate>  renderDelegate;
+@property(copy)     ExecCondition execCondition;
 
 - (void)executeFrame;
 
@@ -110,7 +112,7 @@ extern NSString *const NESEmulatorDidPauseNotification;
 - (void)stopEmulation;
 - (void)startEmulation;
 
-- (BOOL)loadFileAtPath: (NSString*) path;
+- (BOOL)loadFileAtPath:(NSString*) path;
 
 - (BOOL)lockVideo:(void *)video;
 - (void)unlockVideo:(void *)video;
