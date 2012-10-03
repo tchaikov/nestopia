@@ -199,8 +199,9 @@
 - (void)repeatLastCommand {
     if (_lastCommand) {
         [_commandParser parse:_lastCommand];
+    } else {
+        [self printPrompt];
     }
-    [self printPrompt];
 }
 
 #pragma mark -
@@ -249,16 +250,16 @@
     if (@selector(insertNewline:) == commandSelector) {
 
         NSUInteger textLength = textView.string.length;
-        if (textLength > committedLength) {
-            [textView setSelectedRange:NSMakeRange(textLength, 0)];
-            NSString *command = [[textView.string substringFromIndex:committedLength] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            [textView insertText:@"\n"];
-            textLength++;
-            committedLength = textLength;
-            if (command.length > 0) {
-                _lastCommand = command;
-            }
+        [textView setSelectedRange:NSMakeRange(textLength, 0)];
+        NSString *command = [[textView.string substringFromIndex:committedLength] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        [textView insertText:@"\n"];
+        textLength++;
+        committedLength = textLength;
+        if (command.length > 0) {
+            _lastCommand = command;
             [_commandParser parse:command];
+        } else {
+            [self repeatLastCommand];
         }
         retval = YES;
     }

@@ -116,13 +116,7 @@
   bytes = (xdigit{2})+ >mark_begin %save_bytes;
   search = 'search' sp+ bytes @search;
 
-  # repeat
-  action repeat {
-    [self.commandRunner repeatLastCommand];
-  }
-
-  main := (empty @repeat |
-           print_var |
+  main := (print_var |
            set |
            breakp |
            next |
