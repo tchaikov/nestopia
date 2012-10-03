@@ -358,33 +358,31 @@ NSString* fName;
     if ([mainWindow isKeyWindow]) {
         switch (usageId) {
             case 82:
-                [self.gameCore didReleaseNESButton:NESButtonUp forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonUp forPlayer:1];
                 break;
             case 79:
-                [self.gameCore didReleaseNESButton:NESButtonRight forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonRight forPlayer:1];
                 break;
             case 81:
-                [self.gameCore didReleaseNESButton:NESButtonDown forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonDown forPlayer:1];
                 break;
             case 80:
-                [self.gameCore didReleaseNESButton:NESButtonLeft forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonLeft forPlayer:1];
                 break;
             case 4:
-                [self.gameCore didReleaseNESButton:NESButtonA forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonA forPlayer:1];
                 break;
             case 22:
-                [self.gameCore didReleaseNESButton:NESButtonB forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonB forPlayer:1];
                 break;
             case 40:
-                [self.gameCore didReleaseNESButton:NESButtonStart forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonStart forPlayer:1];
                 break;    
             case 49:
-                [self.gameCore didReleaseNESButton:NESButtonSelect forPlayer:0];
+                [self.gameCore didReleaseNESButton:NESButtonSelect forPlayer:1];
                 break;
         }
     }
-     NSLog(@"Keyboard log: %d",usageId);
-    //   [self addEvent: @"Key Down" usageId: usageId];
 }
 
 - (void)ddhidKeyboard: (DDHidKeyboard *) keyboard
@@ -396,28 +394,28 @@ NSString* fName;
         switch(usageId)
         {
             case 82:
-                [self.gameCore didPushNESButton:NESButtonUp forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonUp forPlayer:1];
                 break;
             case 79:
-                [self.gameCore didPushNESButton:NESButtonRight forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonRight forPlayer:1];
                 break;
             case 81:
-                [self.gameCore didPushNESButton:NESButtonDown forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonDown forPlayer:1];
                 break;
             case 80:
-                [self.gameCore didPushNESButton:NESButtonLeft forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonLeft forPlayer:1];
                 break;
             case 4:
-                [self.gameCore didPushNESButton:NESButtonA forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonA forPlayer:1];
                 break;
             case 22:
-                [self.gameCore didPushNESButton:NESButtonB forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonB forPlayer:1];
                 break;
             case 40:
-                [self.gameCore didPushNESButton:NESButtonStart forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonStart forPlayer:1];
                 break;
             case 49:
-                [self.gameCore didPushNESButton:NESButtonSelect forPlayer:0];
+                [self.gameCore didPushNESButton:NESButtonSelect forPlayer:1];
                 break;
         }
     }

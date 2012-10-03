@@ -31,8 +31,6 @@
 
 @interface OpenNestopiaInputController : NSObject
 {
-	IBOutlet NSArrayController * mPad1Controls;
-	
     IBOutlet NSArrayController * mKeyboardsController;
     IBOutlet NSArrayController * mKeyboardEventsController;
 	IBOutlet NestopiaView * nestopiaView;
