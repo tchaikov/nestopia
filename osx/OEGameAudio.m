@@ -124,7 +124,6 @@ OSStatus RenderCallback(void                       *in,
     if(self != nil)
     {
         gameCore = core;
-        [self createGraph];
     }
     
     return self;
