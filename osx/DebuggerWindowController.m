@@ -215,7 +215,7 @@
                                                         blue:1
                                                        alpha:1]
                              range:range];
-    NSLog(@"range = %ld, %ld", range.location, range.length);
+    NSLog(@"pc = %#06lx", self.gameCore.pc);
     committedLength = self.consoleView.string.length;
 }
 
