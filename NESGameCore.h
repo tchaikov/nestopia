@@ -46,7 +46,7 @@ extern NSString *const NESHue;
 extern NSString *const NESUnlimitedSprites;
 
 extern NSString *const NESEmulatorDidPauseNotification;
-
+extern NSString *const NESEmulatorDidResumeNotification;
 
 #pragma mark -
 

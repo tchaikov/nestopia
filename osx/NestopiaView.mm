@@ -136,12 +136,44 @@ NSString* fName;
     }
     
     fullscreen = NO;
-    //NSLog(@"init");
+
+    [self subscribeNotifications];
     return self;
+}
+
+- (void)dealloc {
+    [self unsubscribeNotifications];
 }
 
 #pragma mark -
 #pragma mark emulation control
+
+- (void)unsubscribeNotifications {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self.resumedObserver];
+    [center removeObserver:self.pausedObserver];
+}
+
+- (void)subscribeNotifications {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
+    self.pausedObserver =
+        [center addObserverForName:NESEmulatorDidPauseNotification
+                            object:nil
+                             queue:mainQueue
+                        usingBlock:^(NSNotification *note) {
+                            NSLog(@"received pause message");
+                            toolbarItem.image = [NSImage imageNamed:@"play-icon-32"];
+                        }];
+    self.resumedObserver =
+        [center addObserverForName:NESEmulatorDidResumeNotification
+                            object:nil
+                             queue:mainQueue
+                        usingBlock:^(NSNotification *note) {
+                            NSLog(@"received resume message");
+                            toolbarItem.image = [NSImage imageNamed:@"pause-icon-32"];
+                        }];
+}
 
 - (IBAction)togglePlayPause:(id)sender
 {
@@ -154,7 +186,6 @@ NSString* fName;
 
 - (void)pause:(id)sender
 {
-    toolbarItem.image = [NSImage imageNamed:@"play-icon-32"];
     _gameCore.pauseEmulation = YES;
     /// TODO: update debugger window
 }

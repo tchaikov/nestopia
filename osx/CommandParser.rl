@@ -87,6 +87,11 @@
   }
   until = 'until' @until;
 
+  action resume {
+    [self.commandRunner resume];
+  }
+  conti = ('c' | 'continue') @resume;
+
   # display
   action display {
     [self.commandRunner display:saved_expr];
@@ -122,6 +127,7 @@
            next |
            until |
            step |
+           conti |
            display |
            undisplay |
            search);

@@ -21,6 +21,7 @@
 - (void)next;
 - (void)stepIn;
 - (void)until;
+- (void)resume;
 - (void)display:(NSString *)var;
 - (void)undisplay:(NSUInteger)index;
 - (void)searchBytes:(NSData *)bytes;

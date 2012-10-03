@@ -18,6 +18,7 @@
 
 @interface DebuggerWindowController ()
 @property(nonatomic) id pausedObserver;
+@property(nonatomic) id resumedObserver;
 @end
 
 @implementation DebuggerWindowController
@@ -60,7 +61,9 @@
     if (self.gameCore.pauseEmulation) {
         // already paused
         [self pausedAtPc:self.gameCore.pc withPrompt:YES];
-        [self attachToGameCore:self.gameCore];
+        if (!self.pausedObserver) {
+            [self attachToGameCore:self.gameCore];
+        }
     }
 }
 
@@ -83,17 +86,30 @@
     [self printStoppedByBreakpoint:breakpoint at:pc];
 }
 
-- (void)printConsole:(NSString *)msg {
-    [self.consoleView print:msg];
+- (void)printConsole:(NSString *)fmt, ...
+{
+    va_list args;
+    va_start(args, fmt);
+    NSString *msg =
+    [[NSString alloc] initWithFormat:fmt arguments:args];
+    va_end(args);
+    [self.consoleView insertText:msg];
+    [self.consoleView insertNewline:self];
+    NSRange range = NSMakeRange(committedLength, msg.length);
+    [self.consoleView setFont:[NSFont debugConsoleOutputFont]
+                        range:range];
+    committedLength = self.consoleView.string.length;
 }
 
 #pragma mark -
 #pragma mark private
 - (void)pausedAtPc:(NSUInteger)pc withPrompt:(BOOL)prompt {
-    [_disassembledController updateWithPc:pc];
-    [_displayController update];
-    if (prompt) {
-        [self printPrompt];
+    @synchronized(self) {
+        [_disassembledController updateWithPc:pc];
+        [_displayController update];
+        if (prompt) {
+            [self printPrompt];
+        }
     }
 }
 
@@ -107,9 +123,17 @@
                         usingBlock:^(NSNotification *note) {
                             NSLog(@"received pause message");
                             NESGameCore *gameCore = [note object];
-                            [self attachToGameCore:gameCore];
                             [self pausedAtPc:gameCore.pc withPrompt:YES];
                         }];
+    self.resumedObserver =
+        [center addObserverForName:NESEmulatorDidResumeNotification
+                            object:nil
+                             queue:mainQueue
+                        usingBlock:^(NSNotification *note) {
+                            NSLog(@"received resume message");
+                            [self printConsole:@"Emulator resuming"];
+                        }];
+
     gameCore.execCondition = ^ {
         return [self.debugger shouldExec];
     };
@@ -122,6 +146,7 @@
     gameCore.execCondition = nil;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self.pausedObserver];
+    [center removeObserver:self.resumedObserver];
 }
 
 #pragma mark -
@@ -129,7 +154,7 @@
 - (void)printVar:(NSUInteger)address {
     uint8_t value = [self.debugger peek8:address];
     // this is fake $(n) variable 8P
-    [self print:@"$%d = %d", _printCount, value];
+    [self printConsole:@"$%d = %d", _printCount, value];
 }
 
 - (void)set:(uint16_t)address withValue:(uint8_t)value {
@@ -139,7 +164,7 @@
 
 - (void)setBreakpoint:(Breakpoint *)bp {
     int index = [self.debugger setBreakpoint:bp];
-    [self print:@"Breakpoint %d: %@", index, bp];
+    [self printConsole:@"Breakpoint %d: %@", index, bp];
 }
 
 - (void)removeBreakpoint:(NSUInteger)index {
@@ -162,25 +187,34 @@
 
 - (void)checkBreakpointAt:(NSUInteger)index {
     if (![self.debugger breakpointAtIndex:index]) {
-        [self print:@"No breakpoint number %d", index];
+        [self printConsole:@"No breakpoint number %d", index];
     } else {
-        [self print:@"Ops"];
+        [self printConsole:@"Ops"];
     }
 }
 
 - (void)next {
+    self.gameCore.pauseEmulation = NO;
     [self.debugger next];
 }
 
 - (void)stepIn {
+    self.gameCore.pauseEmulation = NO;
     [self.debugger stepInto];
 }
 
 - (void)until {
+    self.gameCore.pauseEmulation = NO;
     [self.debugger until:self.gameCore.pc];
 }
 
+- (void)resume {
+    self.gameCore.pauseEmulation = NO;
+    [self.debugger resume];
+}
+
 - (void)untilHitAddress:(NSUInteger)address {
+    self.gameCore.pauseEmulation = NO;
     [self.debugger until:address];
 }
 
@@ -228,14 +262,17 @@
     committedLength = self.consoleView.string.length;
 }
 
-- (void)print:(NSString *)fmt, ...
-{
-    va_list args;
-    va_start(args, fmt);
-    NSString *msg =
-        [[NSString alloc] initWithFormat:fmt arguments:args];
-    va_end(args);
-    [self insertText:msg];
+- (void)runCommand:(NSString *)command {
+    if (command.length > 0) {
+        _lastCommand = command;
+        [_commandParser parse:command];
+        if (_commandParser.error) {
+            [self printConsole:@"Undefined command: \"%@\".", command];
+            [self printPrompt];
+        }
+    } else {
+        [self repeatLastCommand];
+    }
 }
 
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
@@ -255,12 +292,7 @@
         [textView insertText:@"\n"];
         textLength++;
         committedLength = textLength;
-        if (command.length > 0) {
-            _lastCommand = command;
-            [_commandParser parse:command];
-        } else {
-            [self repeatLastCommand];
-        }
+        [self runCommand:command];
         retval = YES;
     }
     return retval;

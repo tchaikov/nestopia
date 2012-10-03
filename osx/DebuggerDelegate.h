@@ -19,6 +19,6 @@
 /// convenient method in case debugger wanna say something.
 /// if we really want stick to the MVC strictly, this method should not exist at
 /// all...
-- (void)printConsole:(NSString *)msg;
+- (void)printConsole:(NSString *)msg,...;
 
 @end

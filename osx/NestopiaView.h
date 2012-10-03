@@ -28,6 +28,8 @@ NSLock *soundLock;
 
 @property (nonatomic, readonly) NESGameCore *gameCore;
 @property (assign) BOOL loadedRom;
+@property (nonatomic) id pausedObserver;
+@property (nonatomic) id resumedObserver;
 
 - (void)drawRect:(NSRect)frameRect;
 - (void)setFrame:(NSRect)frame;

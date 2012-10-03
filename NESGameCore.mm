@@ -63,12 +63,6 @@ extern "C" {
 NSUInteger NESControlValues[] = { Nes::Api::Input::Controllers::Pad::UP, Nes::Api::Input::Controllers::Pad::DOWN, Nes::Api::Input::Controllers::Pad::LEFT, Nes::Api::Input::Controllers::Pad::RIGHT, Nes::Api::Input::Controllers::Pad::A, Nes::Api::Input::Controllers::Pad::B, Nes::Api::Input::Controllers::Pad::START, Nes::Api::Input::Controllers::Pad::SELECT
 };
 
-
-@interface NESGameCore () {
-    BOOL wasPaused;
-}
-@end
-
 @implementation NESGameCore
 
 @synthesize videoBuffer = videoBuffer;
@@ -719,13 +713,16 @@ static int Heights[2] =
 }
 
 - (BOOL)shouldExec {
+    if (self.pauseEmulation)
+        return NO;
     if (self.execCondition) {
         return self.execCondition();
     }
-    return !self.pauseEmulation;
+    return YES;
 }
 
 NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotification";
+NSString *const NESEmulatorDidResumeNotification = @"NESEmulatorDidResumeNotification";
 
 - (NSUInteger)pc
 {
@@ -747,13 +744,14 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
     OESetThreadRealtime(gameInterval, .007, .03); // guessed from bsnes
     
     //[NSTimer PSY_scheduledTimerWithTimeInterval:gameInterval repeats:YES usingBlock:^(NSTimer *timer){
-    wasPaused = NO;
+    BOOL wasPaused = !isRunning, isPaused = !isRunning;
     while (!shouldStop) {
         gameTime += gameInterval;
         @autoreleasepool {            
             willSkipFrame = (frameCounter != frameSkip);
-            
-            if ([self shouldExec]) {
+            wasPaused = isPaused;
+            isPaused = ![self shouldExec];
+            if (!isPaused) {
                 //OEPerfMonitorObserve(@"executeFrame", gameInterval, ^{
                 [self.renderDelegate willExecute];
                 
@@ -761,7 +759,6 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
                 
                 [self.renderDelegate didExecute];
                 //});
-                wasPaused = NO;
             }
             if (frameCounter >= frameSkip) {
                 frameCounter = 0;
@@ -769,15 +766,25 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
                 frameCounter++;
             }
         }
-        if (!wasPaused && self.pauseEmulation) {
+
+        if (!wasPaused && isPaused) {
             NSNotification *notif = [NSNotification notificationWithName:NESEmulatorDidPauseNotification
                                                                   object:self];
             [[NSNotificationQueue defaultQueue] enqueueNotification:notif
                                                        postingStyle:NSPostNow
-                                                       coalesceMask:NSNotificationCoalescingOnName
+                                                       coalesceMask:(NSNotificationCoalescingOnName|
+                                                                     NSNotificationCoalescingOnSender)
                                                            forModes:@[NSDefaultRunLoopMode]];
             NSLog(@"paused at %#06lx", self.pc);
-            wasPaused = TRUE;
+        } else if (wasPaused && !isPaused) {
+            NSNotification *notif = [NSNotification notificationWithName:NESEmulatorDidResumeNotification
+                                                                  object:self];
+            [[NSNotificationQueue defaultQueue] enqueueNotification:notif
+                                                       postingStyle:NSPostNow
+                                                       coalesceMask:(NSNotificationCoalescingOnName|
+                                                                     NSNotificationCoalescingOnSender)
+                                                           forModes:@[NSDefaultRunLoopMode]];
+            NSLog(@"resumed at %#06lx", self.pc);
         }
         //OEPerfMonitorObserve(@"CFRunLoop", gameInterval, ^{
         CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, 0);
