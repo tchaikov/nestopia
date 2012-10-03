@@ -773,7 +773,9 @@ NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotificat
             NSNotification *notif = [NSNotification notificationWithName:NESEmulatorDidPauseNotification
                                                                   object:self];
             [[NSNotificationQueue defaultQueue] enqueueNotification:notif
-                                                       postingStyle:NSPostWhenIdle];
+                                                       postingStyle:NSPostNow
+                                                       coalesceMask:NSNotificationNoCoalescing
+                                                           forModes:@[NSDefaultRunLoopMode]];
             NSLog(@"paused at %#06lx", self.pc);
             wasPaused = TRUE;
         }

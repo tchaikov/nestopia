@@ -17,7 +17,7 @@
 
 
 @interface DebuggerWindowController ()
-
+@property(nonatomic) id pausedObserver;
 @end
 
 @implementation DebuggerWindowController
@@ -42,10 +42,6 @@
 }
 
 - (void)awakeFromNib {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(emulatorPaused:)
-                                                 name:NESEmulatorDidPauseNotification
-                                               object:nil];
     _disassembledController =
         [[DisassembledTableController alloc] initWithNibName:@"DisassembledTableController" bundle:nil];
     [_disassembledView addSubview:_disassembledController.view];
@@ -68,14 +64,10 @@
     }
 }
 
-#pragma mark -
-- (void)emulatorPaused:(NSNotification *)note {
-    NSLog(@"received pause message");
-    NESGameCore *gameCore = [note object];
-    [self pausedAtPc:gameCore.pc withPrompt:YES];
-    [self attachToGameCore:gameCore];
+- (void)close {
+    [super close];
+    [self detachFromGameCore:self.gameCore];
 }
-
 #pragma mark -
 #pragma mark DebuggerDelegate
 
@@ -106,6 +98,18 @@
 }
 
 - (void)attachToGameCore:(NESGameCore *)gameCore {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
+    self.pausedObserver =
+        [center addObserverForName:NESEmulatorDidPauseNotification
+                            object:nil
+                             queue:mainQueue
+                        usingBlock:^(NSNotification *note) {
+                            NSLog(@"received pause message");
+                            NESGameCore *gameCore = [note object];
+                            [self attachToGameCore:gameCore];
+                            [self pausedAtPc:gameCore.pc withPrompt:YES];
+                        }];
     gameCore.execCondition = ^ {
         return [self.debugger shouldExec];
     };
@@ -116,6 +120,8 @@
 - (void)detachFromGameCore:(NESGameCore *)gameCore {
     [self.debugger resume];
     gameCore.execCondition = nil;
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self.pausedObserver];
 }
 
 #pragma mark -
@@ -253,7 +259,6 @@
                 _lastCommand = command;
             }
             [_commandParser parse:command];
-            [self printPrompt];
         }
         retval = YES;
     }
