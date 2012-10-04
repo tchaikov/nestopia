@@ -18,8 +18,10 @@
 @class DebuggerBridge;
 @class NESGameCore;
 
-@interface DebuggerWindowController : NSWindowController<DebuggerDelegate,
-NSTextViewDelegate, CommandRunner> {
+@interface DebuggerWindowController : NSWindowController<NSWindowDelegate,
+                                                         NSTextViewDelegate,
+                                                         DebuggerDelegate,
+                                                         CommandRunner> {
 @private
     NSUInteger committedLength;
     CommandParser* _commandParser;

@@ -84,12 +84,12 @@
 
 - (IBAction)openDebugWindow:(NSMenuItem *)sender
 {
-    if (self.debugerWindowController.window.isVisible) {
-        [self.debugerWindowController close];
+    if (self.debuggerWindowController.window.isVisible) {
+        [self.debuggerWindowController close];
         sender.title = @"Show Debug Console";
     } else {
-        self.debugerWindowController.gameCore = self.nesView.gameCore;
-        [self.debugerWindowController showWindow:self];
+        self.debuggerWindowController.gameCore = self.nesView.gameCore;
+        [self.debuggerWindowController showWindow:self];
         sender.title = @"Hide Debug Console";
     }
 }

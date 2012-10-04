@@ -14,7 +14,7 @@
 
 @property (assign) IBOutlet NSWindow *mainWindow;
 @property (assign) IBOutlet NestopiaView *nesView;
-@property (assign) IBOutlet DebuggerWindowController *debugerWindowController;
+@property (assign) IBOutlet DebuggerWindowController *debuggerWindowController;
 
 - (IBAction)openPreferencesWindow:(id)sender;
 - (IBAction)openDebugWindow:(id)sender;

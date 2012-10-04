@@ -1858,7 +1858,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				94D42D98160F5299002935C8 /* MainMenu.xib */,
 				0DECB3670C3E24C3000279A6 /* images */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -1991,6 +1990,7 @@
 			children = (
 				9468703515F6418A0049AA2C /* DebuggerWindowController.h */,
 				9468703615F6418A0049AA2C /* DebuggerWindowController.m */,
+				94D42D98160F5299002935C8 /* MainMenu.xib */,
 			);
 			name = DebuggerWindow;
 			sourceTree = "<group>";
