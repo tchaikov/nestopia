@@ -62,6 +62,7 @@ typedef BOOL (^ExecCondition)(void);
     BOOL                   frameFinished;
     BOOL                   willSkipFrame;
     
+    BOOL                   isRunningChanged;
     BOOL                   isRunning;
     BOOL                   shouldStop;
 

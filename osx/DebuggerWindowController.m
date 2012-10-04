@@ -67,10 +67,10 @@
     }
 }
 
-- (void)close {
-    [super close];
+- (void)windowWillClose:(NSNotification *)notification {
     [self detachFromGameCore:self.gameCore];
 }
+
 #pragma mark -
 #pragma mark DebuggerDelegate
 
@@ -138,7 +138,8 @@
         return [self.debugger shouldExec];
     };
     [self.debugger pause];
-    gameCore.pauseEmulation = YES;
+//    if (!gameCore.pauseEmulation)
+//        gameCore.pauseEmulation = YES;
 }
 
 - (void)detachFromGameCore:(NESGameCore *)gameCore {
@@ -194,17 +195,17 @@
 }
 
 - (void)next {
-    self.gameCore.pauseEmulation = NO;
+//    self.gameCore.pauseEmulation = NO;
     [self.debugger next];
 }
 
 - (void)stepIn {
-    self.gameCore.pauseEmulation = NO;
+//    self.gameCore.pauseEmulation = NO;
     [self.debugger stepInto];
 }
 
 - (void)until {
-    self.gameCore.pauseEmulation = NO;
+//    self.gameCore.pauseEmulation = NO;
     [self.debugger until:self.gameCore.pc];
 }
 

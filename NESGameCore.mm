@@ -622,6 +622,7 @@ static int Heights[2] =
 
 - (void)setPauseEmulation:(BOOL)flag
 {
+    isRunningChanged = TRUE;
     if(flag) isRunning = NO;
     else     isRunning = YES;
 }
@@ -679,6 +680,7 @@ static int Heights[2] =
 - (void)startEmulation
 {
     if(!isRunning) {
+        isRunningChanged = FALSE;
         isRunning  = YES;
         shouldStop = NO;
         
@@ -693,6 +695,7 @@ static int Heights[2] =
 
 - (void)stopEmulation
 {
+    isRunningChanged = FALSE;
     shouldStop = YES;
     isRunning  = NO;
     Nes::Api::Machine machine(*emu);
@@ -713,12 +716,14 @@ static int Heights[2] =
 }
 
 - (BOOL)shouldExec {
-    if (self.pauseEmulation)
-        return NO;
+    if (isRunningChanged) {
+        return !self.pauseEmulation;
+    }
     if (self.execCondition) {
         return self.execCondition();
+    } else {
+        return !self.pauseEmulation;
     }
-    return YES;
 }
 
 NSString *const NESEmulatorDidPauseNotification = @"NESEmulatorDidPauseNotification";
@@ -767,7 +772,8 @@ NSString *const NESEmulatorDidResumeNotification = @"NESEmulatorDidResumeNotific
             }
         }
 
-        if (!wasPaused && isPaused) {
+        if (!wasPaused && isPaused && !isRunning) {
+            isRunningChanged = FALSE;
             NSNotification *notif = [NSNotification notificationWithName:NESEmulatorDidPauseNotification
                                                                   object:self];
             [[NSNotificationQueue defaultQueue] enqueueNotification:notif
@@ -776,7 +782,8 @@ NSString *const NESEmulatorDidResumeNotification = @"NESEmulatorDidResumeNotific
                                                                      NSNotificationCoalescingOnSender)
                                                            forModes:@[NSDefaultRunLoopMode]];
             NSLog(@"paused at %#06lx", self.pc);
-        } else if (wasPaused && !isPaused) {
+        } else if (wasPaused && !isPaused && isRunningChanged) {
+            isRunningChanged = FALSE;
             NSNotification *notif = [NSNotification notificationWithName:NESEmulatorDidResumeNotification
                                                                   object:self];
             [[NSNotificationQueue defaultQueue] enqueueNotification:notif
